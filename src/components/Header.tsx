@@ -4,9 +4,9 @@ import logo from "@/assets/logo-clickad.png";
 export const Header = () => {
   return (
     <header className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-lg border-b border-primary/10">
-      <div className="container px-6 h-20 flex items-center justify-between">
+      <div className="container px-6 h-52 md:h-56 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <img src={logo} alt="ClickAd Media" className="h-14 md:h-16 w-auto" />
+          <img src={logo} alt="ClickAd Media" className="h-42 md:h-48 w-auto" />
         </div>
         
         <nav className="hidden md:flex items-center gap-8">
@@ -21,6 +21,9 @@ export const Header = () => {
           </a>
           <a href="#pricing" className="text-sm font-medium hover:text-primary transition-colors">
             Pricing
+          </a>
+          <a href="/about" className="text-sm font-medium hover:text-primary transition-colors">
+            About
           </a>
         </nav>
         
