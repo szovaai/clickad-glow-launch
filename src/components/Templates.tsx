@@ -3,6 +3,12 @@ import commercialCleaning from "@/assets/templates/commercial-cleaning.png";
 import airDuctCleaning from "@/assets/templates/air-duct-cleaning.png";
 import windshieldRepair from "@/assets/templates/windshield-repair.png";
 import hotTubInstallation from "@/assets/templates/hot-tub-installation.png";
+import sprinklerIrrigation from "@/assets/templates/sprinkler-irrigation.png";
+import orthodontist from "@/assets/templates/orthodontist.png";
+import drywallContractor from "@/assets/templates/drywall-contractor.png";
+import asbestosRemoval from "@/assets/templates/asbestos-removal.png";
+import windowTinting from "@/assets/templates/window-tinting.png";
+import petInsurance from "@/assets/templates/pet-insurance.png";
 
 const templates = [
   {
@@ -24,6 +30,36 @@ const templates = [
     name: "Hot Tub Installation",
     image: hotTubInstallation,
     industry: "Home Services"
+  },
+  {
+    name: "Sprinkler & Irrigation",
+    image: sprinklerIrrigation,
+    industry: "Lawn Care & Irrigation"
+  },
+  {
+    name: "Orthodontist",
+    image: orthodontist,
+    industry: "Dental & Healthcare"
+  },
+  {
+    name: "Drywall Contractor",
+    image: drywallContractor,
+    industry: "Construction Services"
+  },
+  {
+    name: "Asbestos Removal",
+    image: asbestosRemoval,
+    industry: "Environmental Services"
+  },
+  {
+    name: "Window Tinting",
+    image: windowTinting,
+    industry: "Auto & Home Services"
+  },
+  {
+    name: "Pet Insurance",
+    image: petInsurance,
+    industry: "Insurance Services"
   }
 ];
 
@@ -36,11 +72,11 @@ export const Templates = () => {
             Template Examples
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Industry-specific designs ready to customize for your business
+            And much more—we can fit any service-based industry website
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+        <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6 mb-12">
           {templates.map((template, index) => (
             <div
               key={index}
