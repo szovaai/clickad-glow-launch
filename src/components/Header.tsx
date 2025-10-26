@@ -6,7 +6,7 @@ export const Header = () => {
     <header className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-lg border-b border-primary/10">
       <div className="container px-6 h-20 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <img src={logo} alt="ClickAd Media" className="h-10 w-auto" />
+          <img src={logo} alt="ClickAd Media" className="h-14 md:h-16 w-auto" />
         </div>
         
         <nav className="hidden md:flex items-center gap-8">
