@@ -47,7 +47,7 @@ const About = () => {
   return (
     <div className="min-h-screen">
       <Header />
-      <main className="pt-52 md:pt-56">
+      <main className="pt-26 md:pt-28">
         {/* Hero Section */}
         <section className="py-20 md:py-32">
           <div className="container px-6">

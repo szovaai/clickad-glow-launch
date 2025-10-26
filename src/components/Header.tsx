@@ -4,9 +4,9 @@ import logo from "@/assets/logo-clickad.png";
 export const Header = () => {
   return (
     <header className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-lg border-b border-primary/10">
-      <div className="container px-6 h-52 md:h-56 flex items-center justify-between">
+      <div className="container px-6 h-26 md:h-28 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <img src={logo} alt="ClickAd Media" className="h-42 md:h-48 w-auto" />
+          <img src={logo} alt="ClickAd Media" className="h-21 md:h-24 w-auto" />
         </div>
         
         <nav className="hidden md:flex items-center gap-8">
