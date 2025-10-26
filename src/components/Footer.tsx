@@ -7,10 +7,13 @@ export const Footer = () => {
         <div className="grid md:grid-cols-4 gap-8 mb-8">
           {/* Brand */}
           <div className="md:col-span-2 space-y-4">
-            <img src={logo} alt="ClickAd Media" className="h-10 w-auto" />
+            <img src={logo} alt="ClickAd Media - Calgary Website Design" className="h-10 w-auto" />
             <p className="text-sm text-muted-foreground max-w-sm">
-              We build conversion machines that turn traffic into paying customers. 
-              Big-agency quality without the agency fluff.
+              Calgary-based website design agency for service businesses. 
+              We build conversion machines that turn traffic into paying customers.
+            </p>
+            <p className="text-sm text-primary font-medium">
+              Proudly serving Calgary, Alberta, and surrounding areas
             </p>
           </div>
           

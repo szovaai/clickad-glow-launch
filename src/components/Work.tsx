@@ -44,10 +44,10 @@ export const Work = () => {
       <div className="container px-6 relative z-10">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4 glow-text">
-            Real Results for Real Businesses
+            Real Results for Calgary & Alberta Businesses
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            See how we've transformed local service websites into conversion machines
+            See how we've transformed Calgary and Alberta service websites into conversion machines
           </p>
         </div>
 

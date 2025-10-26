@@ -25,10 +25,10 @@ export const Benefits = () => {
       <div className="container px-6">
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
           <h2 className="text-4xl md:text-5xl font-heading font-bold">
-            What You Get
+            What Calgary Service Businesses Get
           </h2>
           <p className="text-xl text-muted-foreground">
-            A complete system designed to convert traffic into revenue
+            Professional website design solutions for Calgary-based service companies
           </p>
         </div>
         

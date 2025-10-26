@@ -9,7 +9,7 @@ export const Hero = () => {
       <div className="absolute inset-0 z-0">
         <img 
           src={heroImage} 
-          alt="Abstract neon-green core with connection lines over a dark grid" 
+          alt="Calgary website design services - modern professional web design for service businesses" 
           className="w-full h-full object-cover opacity-40"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-background/80 to-background" />
@@ -22,13 +22,12 @@ export const Hero = () => {
       <div className="container relative z-10 px-6 py-20">
         <div className="max-w-4xl mx-auto text-center space-y-8 animate-fade-in">
           <h1 className="text-5xl md:text-7xl font-heading font-bold leading-tight">
-            Launch a Lead-Generating Website That{" "}
+            Calgary Website Design for Service Based Businesses That{" "}
             <span className="text-primary glow-text">Works as Hard as You Do</span>
           </h1>
           
           <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto">
-            We build conversion machines that turn traffic into paying customers. 7-Day Launch guarantee. 
-            Big-agency quality without the agency fluff.
+            Calgary's trusted website design agency for service-based businesses. We build conversion machines that turn traffic into paying customers. 7-Day Launch guarantee. Serving Calgary & Alberta.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
