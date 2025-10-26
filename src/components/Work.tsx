@@ -4,6 +4,7 @@ import kwikKerb from "@/assets/portfolio/kwik-kerb.png";
 import truecanPower from "@/assets/portfolio/truecan-power.png";
 import westlights from "@/assets/portfolio/westlights.png";
 import caminoChemicals from "@/assets/portfolio/camino-chemicals.png";
+import kiDevelopment from "@/assets/portfolio/ki-development.png";
 
 const projects = [
   {
@@ -33,6 +34,13 @@ const projects = [
     image: caminoChemicals,
     url: "https://caminochemicals.com",
     metrics: "Industrial-grade web platform delivered"
+  },
+  {
+    name: "KI Development Solutions",
+    industry: "Home Renovation & Interior Design",
+    image: kiDevelopment,
+    url: "https://kidevelopmentsolutions.com",
+    metrics: "Premium renovation showcase delivered"
   }
 ];
 
