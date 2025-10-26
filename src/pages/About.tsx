@@ -90,16 +90,16 @@ const About = () => {
               
               <div className="prose prose-invert max-w-none space-y-6 text-lg text-foreground/90">
                 <p>
-                  We started ClickAd Media because we were tired of seeing businesses throw money at "pretty" websites that didn't convert. We saw trade professionals and service businesses struggling with agencies that didn't understand their world.
+                  We started ClickAd Media because we were tired of seeing businesses throw money at "pretty" websites that didn't convert. We saw service-based businesses—from healthcare to home services, insurance to professional trades—struggling with agencies that didn't understand their world.
                 </p>
                 <p>
-                  The traditional agency model is broken. Months of back-and-forth, bloated budgets, and websites that look good but don't book jobs. We knew there had to be a better way.
+                  The traditional agency model is broken. Months of back-and-forth, bloated budgets, and websites that look good but don't convert. We knew there had to be a better way.
                 </p>
                 <p>
                   So we built it. A system that combines rapid deployment, conversion-focused design, and intelligent automation. We don't just build websites—we engineer digital systems that work as hard as you do.
                 </p>
                 <p>
-                  Today, we're laser-focused on one thing: helping trades and service businesses dominate their local markets with websites that actually drive revenue. No fluff, no wasted time, just results.
+                  Today, we're laser-focused on one thing: helping service-based businesses dominate their markets with websites that actually drive revenue. From orthodontists to insurance agencies, pet services to contractors—no fluff, no wasted time, just results.
                 </p>
               </div>
             </div>

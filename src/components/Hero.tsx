@@ -22,12 +22,12 @@ export const Hero = () => {
       <div className="container relative z-10 px-6 py-20">
         <div className="max-w-4xl mx-auto text-center space-y-8 animate-fade-in">
           <h1 className="text-5xl md:text-7xl font-heading font-bold leading-tight">
-            Launch a Job-Booking Website That{" "}
+            Launch a Lead-Generating Website That{" "}
             <span className="text-primary glow-text">Works as Hard as You Do</span>
           </h1>
           
           <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto">
-            We build conversion machines that turn traffic into paying clients. 7-Day Launch guarantee. 
+            We build conversion machines that turn traffic into paying customers. 7-Day Launch guarantee. 
             Big-agency quality without the agency fluff.
           </p>
           

@@ -1,9 +1,9 @@
 import tradeProfessional from "@/assets/trade-professional.jpg";
 
 const stats = [
-  { value: "300%", label: "Avg Increase in Job Bookings" },
+  { value: "300%", label: "Avg Increase in Bookings" },
   { value: "7 Days", label: "From Start to Launch" },
-  { value: "98%", label: "Client Satisfaction Rate" },
+  { value: "98%", label: "Customer Satisfaction Rate" },
   { value: "24/7", label: "Lead Capture System" },
 ];
 
@@ -59,7 +59,7 @@ export const Results = () => {
               "ClickAd Media built us a website that actually works. We've tripled our online bookings 
               and the phone hasn't stopped ringing."
               <footer className="text-sm text-muted-foreground mt-2 not-italic">
-                — Mike R., Roofing Contractor
+                — Dr. Sarah K., Orthodontist
               </footer>
             </blockquote>
           </div>

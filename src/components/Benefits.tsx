@@ -5,12 +5,12 @@ const benefits = [
   {
     icon: Zap,
     title: "Conversion Site",
-    description: "Every pixel optimized to turn visitors into booked jobs. Mobile-first design that works flawlessly across all devices.",
+    description: "Every pixel optimized to turn visitors into booked appointments. Mobile-first design that works flawlessly across all devices.",
   },
   {
     icon: Target,
     title: "AI Follow-Up Stack",
-    description: "Automated client communication that nurtures leads 24/7. Never miss a potential customer again.",
+    description: "Automated customer communication that nurtures leads 24/7. Never miss a potential customer again.",
   },
   {
     icon: BarChart3,

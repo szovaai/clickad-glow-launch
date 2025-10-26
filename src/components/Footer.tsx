@@ -9,7 +9,7 @@ export const Footer = () => {
           <div className="md:col-span-2 space-y-4">
             <img src={logo} alt="ClickAd Media" className="h-10 w-auto" />
             <p className="text-sm text-muted-foreground max-w-sm">
-              We build conversion machines that turn traffic into paying clients. 
+              We build conversion machines that turn traffic into paying customers. 
               Big-agency quality without the agency fluff.
             </p>
           </div>

@@ -15,12 +15,12 @@ export const CTA = () => {
           
           <h2 className="text-4xl md:text-6xl font-heading font-bold leading-tight">
             Ready to Turn Traffic Into{" "}
-            <span className="text-primary glow-text">Paying Clients</span>?
+            <span className="text-primary glow-text">Paying Customers</span>?
           </h2>
           
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Book a 10-minute demo call and see exactly how we'll build your conversion machine. 
-            No fluff. No pressure. Just a clear plan to get more jobs.
+            No fluff. No pressure. Just a clear plan to grow your business.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
