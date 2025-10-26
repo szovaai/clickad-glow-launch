@@ -3,6 +3,7 @@ import { ExternalLink } from "lucide-react";
 import kwikKerb from "@/assets/portfolio/kwik-kerb.png";
 import truecanPower from "@/assets/portfolio/truecan-power.png";
 import westlights from "@/assets/portfolio/westlights.png";
+import caminoChemicals from "@/assets/portfolio/camino-chemicals.png";
 
 const projects = [
   {
@@ -25,6 +26,13 @@ const projects = [
     image: westlights,
     url: "https://westlights.ca",
     metrics: "Seasonal booking system launched"
+  },
+  {
+    name: "Camino Chemicals",
+    industry: "Industrial Chemicals & Detergents",
+    image: caminoChemicals,
+    url: "https://caminochemicals.com",
+    metrics: "Industrial-grade web platform delivered"
   }
 ];
 
