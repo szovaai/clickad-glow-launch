@@ -54,14 +54,6 @@ export const Results = () => {
                 </div>
               ))}
             </div>
-            
-            <blockquote className="border-l-4 border-primary pl-6 py-2 italic text-foreground/90">
-              "ClickAd Media built us a website that actually works. We've tripled our online bookings 
-              and the phone hasn't stopped ringing."
-              <footer className="text-sm text-muted-foreground mt-2 not-italic">
-                — Dr. Sarah K., Orthodontist
-              </footer>
-            </blockquote>
           </div>
         </div>
       </div>
