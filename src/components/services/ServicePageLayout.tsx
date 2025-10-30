@@ -1,7 +1,7 @@
 import { ReactNode, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ChevronRight } from "lucide-react";
-import Header from "@/components/Header";
+import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 
 interface ServicePageLayoutProps {
@@ -43,7 +43,7 @@ export function ServicePageLayout({
       if (!schemaScript) {
         schemaScript = document.createElement('script');
         schemaScript.id = scriptId;
-        schemaScript.type = 'application/ld+json';
+        (schemaScript as HTMLScriptElement).type = 'application/ld+json';
         document.head.appendChild(schemaScript);
       }
       schemaScript.textContent = JSON.stringify(schema);

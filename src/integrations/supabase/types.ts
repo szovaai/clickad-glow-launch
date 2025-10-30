@@ -141,6 +141,51 @@ export type Database = {
           },
         ]
       }
+      loom_videos: {
+        Row: {
+          company_type: string | null
+          created_at: string | null
+          featured: boolean | null
+          id: string
+          industry: string | null
+          loom_embed_id: string
+          loom_url: string
+          published_at: string | null
+          quick_wins: string[] | null
+          thumbnail_url: string | null
+          title: string
+          view_count: number | null
+        }
+        Insert: {
+          company_type?: string | null
+          created_at?: string | null
+          featured?: boolean | null
+          id?: string
+          industry?: string | null
+          loom_embed_id: string
+          loom_url: string
+          published_at?: string | null
+          quick_wins?: string[] | null
+          thumbnail_url?: string | null
+          title: string
+          view_count?: number | null
+        }
+        Update: {
+          company_type?: string | null
+          created_at?: string | null
+          featured?: boolean | null
+          id?: string
+          industry?: string | null
+          loom_embed_id?: string
+          loom_url?: string
+          published_at?: string | null
+          quick_wins?: string[] | null
+          thumbnail_url?: string | null
+          title?: string
+          view_count?: number | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

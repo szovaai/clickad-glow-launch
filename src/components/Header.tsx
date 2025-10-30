@@ -11,10 +11,10 @@ export const Header = () => {
   const navLinks = [
     { href: "/#services", label: "Services" },
     { href: "/#work", label: "Work" },
+    { href: "/loom-library", label: "Free Audits" },
     { href: "/#process", label: "Process" },
     { href: "/#pricing", label: "Pricing" },
     { href: "/about", label: "About" },
-    { href: "/audit", label: "Free Audit" },
   ];
 
   return (
