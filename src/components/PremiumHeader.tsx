@@ -135,6 +135,7 @@ function TopNav() {
               ["Pricing", "#pricing"],
               ["FAQ", "#faq"],
               ["About", "/about"],
+              ["Resume", "/resume"],
             ].map(([label, href]) => (
               <a
                 key={label}
@@ -181,6 +182,7 @@ function TopNav() {
                     ["Pricing", "#pricing"],
                     ["FAQ", "#faq"],
                     ["About", "/about"],
+                    ["Resume", "/resume"],
                   ].map(([label, href]) => (
                     <a
                       key={label}
