@@ -63,7 +63,7 @@ export default function PremiumHeader() {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.05, duration: 0.6 }}
-              className="mt-5 text-4xl font-semibold leading-[1.05] tracking-[-0.02em] text-white sm:text-5xl md:text-6xl"
+              className="mt-5 text-4xl font-semibold leading-[1.05] tracking-[-0.02em] text-foreground sm:text-5xl md:text-6xl"
             >
               Websites that <span className="text-primary glow-text">work as hard</span> as you do.
             </motion.h1>
@@ -72,7 +72,7 @@ export default function PremiumHeader() {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1, duration: 0.6 }}
-              className="mt-5 max-w-xl text-balance text-muted-foreground"
+              className="mt-5 max-w-xl text-balance text-foreground/70"
             >
               Conversion‑first design, blazingly fast performance, and a results dashboard you'll actually use. Built in 7 days, backed by a 90‑day improvement plan.
             </motion.p>
@@ -94,7 +94,7 @@ export default function PremiumHeader() {
               >
                 See real results
               </a>
-              <div className="flex items-center gap-1 text-muted-foreground">
+              <div className="flex items-center gap-1 text-foreground/60">
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} className="h-4 w-4 fill-primary text-primary" />
                 ))}
@@ -330,16 +330,16 @@ function HeroShowcase() {
     <div className="relative rounded-3xl border border-border bg-gradient-to-b from-card/50 to-card/0 p-2 shadow-2xl shadow-primary/5">
       <div className="rounded-2xl border border-border bg-background/60 p-6 backdrop-blur">
         <div className="grid gap-3 sm:grid-cols-2">
-          <div className="aspect-[4/3] rounded-xl bg-gradient-to-br from-primary/20 to-primary/5" />
+          <div className="aspect-[4/3] rounded-xl bg-gradient-to-br from-primary/30 to-primary/10" />
           <div className="grid gap-3">
-            <div className="h-24 rounded-xl bg-muted/50" />
-            <div className="h-24 rounded-xl bg-muted/50" />
-            <div className="h-24 rounded-xl bg-muted/50" />
+            <div className="h-24 rounded-xl bg-card/80" />
+            <div className="h-24 rounded-xl bg-card/80" />
+            <div className="h-24 rounded-xl bg-card/80" />
           </div>
         </div>
         <div className="mt-4 grid grid-cols-3 gap-2">
           {[...Array(6)].map((_, i) => (
-            <div key={i} className="h-14 rounded-lg bg-muted/50" />
+            <div key={i} className="h-14 rounded-lg bg-card/80" />
           ))}
         </div>
       </div>
