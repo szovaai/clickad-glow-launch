@@ -98,7 +98,7 @@ export default function PremiumHeader() {
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} className="h-4 w-4 fill-primary text-primary" />
                 ))}
-                <span className="ml-1 text-xs">18+ local case studies</span>
+                <span className="ml-1 text-xs">5 local case studies • Serving Calgary service businesses</span>
               </div>
             </motion.div>
           </div>
