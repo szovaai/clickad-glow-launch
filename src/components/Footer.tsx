@@ -13,9 +13,6 @@ export const Footer = () => {
               Calgary-based website design agency for service businesses. 
               We build conversion machines that turn traffic into paying customers.
             </p>
-            <p className="text-sm text-primary font-medium">
-              Proudly serving Calgary, Alberta, and surrounding areas
-            </p>
             <div className="flex flex-col gap-2 mt-4">
               <a 
                 href="tel:587-575-9416" 

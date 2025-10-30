@@ -103,32 +103,28 @@ const Resume = () => {
               <div className="mb-12 border-l-2 border-primary pl-6">
                 <div className="mb-4">
                   <h3 className="text-2xl font-bold">Senior Website Account & Project Manager</h3>
-                  <p className="text-lg text-muted-foreground">Rev Elate Digital / Freelance (Remote)</p>
-                  <p className="text-sm text-muted-foreground">2020 – Present</p>
+                  <p className="text-lg text-muted-foreground">ClickAdMedia.co (Freelance, Remote)</p>
+                  <p className="text-sm text-muted-foreground">2023 – Present</p>
                 </div>
                 <p className="mb-4 text-muted-foreground">
-                  Lead cross-functional teams shipping enterprise-grade websites for SaaS, agency, and technical-service brands. Own end-to-end lifecycle across discovery, requirements, UX/UI, development, QA, and launch while managing scope, budget, and risks.
+                  Lead cross-functional teams to ship enterprise-grade websites for SaaS, agency, and technical-services brands. Own the lifecycle across discovery, requirements, UX/UI, development, QA, and launch while managing scope, budget, and risks.
                 </p>
                 <ul className="space-y-2 text-muted-foreground">
                   <li className="flex gap-2">
                     <span className="text-primary">•</span>
-                    <span>Gather goals and technical requirements; convert into actionable tickets and timelines (Trello, Slack)</span>
+                    <span>Translate goals and technical requirements into tickets, milestones, and timelines (ClickUp/Trello/Slack)</span>
                   </li>
                   <li className="flex gap-2">
                     <span className="text-primary">•</span>
-                    <span>Coordinate developers, designers, and SEO specialists; run standups, reviews, and stakeholder demos</span>
+                    <span>Coordinate devs/designers/SEO; run standups, sprint reviews, stakeholder demos, and UAT</span>
                   </li>
                   <li className="flex gap-2">
                     <span className="text-primary">•</span>
-                    <span>Implement analytics & tracking (GTM/GA4), dashboards, and post-launch growth plans (SEO/CRO/Content)</span>
+                    <span>Implement analytics (GTM/GA4), dashboards, and post-launch growth plans (SEO/CRO/content)</span>
                   </li>
                   <li className="flex gap-2">
                     <span className="text-primary">•</span>
-                    <span>Build AI-accelerated workflows and client microsite prototypes using Lovable.dev</span>
-                  </li>
-                  <li className="flex gap-2">
-                    <span className="text-primary">•</span>
-                    <span>Maintained 100% on-time delivery across 12+ large builds while increasing retention and upsells</span>
+                    <span>Build AI-accelerated microsites and workflows with Lovable.dev + Supabase; reduce time-to-launch</span>
                   </li>
                 </ul>
               </div>
@@ -136,21 +132,37 @@ const Resume = () => {
               {/* Experience 2 */}
               <div className="mb-12 border-l-2 border-muted-foreground/30 pl-6">
                 <div className="mb-4">
-                  <h3 className="text-2xl font-bold">Website Project Lead / Digital Strategy Consultant</h3>
-                  <p className="text-lg text-muted-foreground">ClickAd Media / SiteFoundry Pro</p>
-                  <p className="text-sm text-muted-foreground">2016 – 2020</p>
+                  <h3 className="text-2xl font-bold">QA Software Analyst</h3>
+                  <p className="text-lg text-muted-foreground">MediaJel (Remote)</p>
+                  <p className="text-sm text-muted-foreground">2021 – 2023</p>
                 </div>
                 <p className="mb-4 text-muted-foreground">
-                  Managed multi-site programs for construction, manufacturing, and local services. Ran discovery and requirements, aligned stakeholders, and launched CMS and eCommerce builds that moved key metrics.
+                  Owned manual QA and bug analysis across multiple web apps and marketing tools; collaborated with engineers and product to raise product quality and ship reliably.
                 </p>
                 <ul className="space-y-2 text-muted-foreground">
                   <li className="flex gap-2">
                     <span className="text-primary">•</span>
-                    <span>Implemented WordPress/Webflow & WooCommerce/Shopify builds with CRM/email integrations</span>
+                    <span>Investigated and reproduced defects with clear steps to reproduce, logs, and visual evidence (screenshots/HAR)</span>
                   </li>
                   <li className="flex gap-2">
                     <span className="text-primary">•</span>
-                    <span>Directed QA, UAT, and handoff; set up SOPs and maintenance plans</span>
+                    <span>Assessed severity/priority; triaged in Jira; partnered with engineering on root-cause analysis and verification of fixes</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <span className="text-primary">•</span>
+                    <span>Designed and executed regression suites; maintained smoke tests for each release</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <span className="text-primary">•</span>
+                    <span>Performed cross-browser/device testing (Chrome, Firefox, Safari, Edge; iOS/Android) and validated analytics events (GTM/GA4)</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <span className="text-primary">•</span>
+                    <span>Conducted API testing with Postman; used basic SQL for data validation across environments</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <span className="text-primary">•</span>
+                    <span>Collaborated with Product on acceptance criteria and suggested UX/feature improvements informed by QA findings</span>
                   </li>
                 </ul>
               </div>
