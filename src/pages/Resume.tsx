@@ -167,16 +167,30 @@ const Resume = () => {
                 </ul>
               </div>
 
-              {/* Featured Project */}
-              <div className="rounded-xl border border-primary/20 bg-primary/5 p-6">
-                <h3 className="mb-3 flex items-center gap-2 text-xl font-bold">
-                  <ExternalLink className="h-5 w-5 text-primary" />
-                  Featured Enterprise Project
-                </h3>
-                <h4 className="mb-2 font-semibold">SiteFoundry Pro (Enterprise CMS & Lead Gen Platform)</h4>
-                <p className="text-muted-foreground">
-                  Project lead across discovery → launch; coordinated design, development, and SEO teams; integrated GA4/GTM, CRM, and performance reporting. Result: accelerated builds and smoother handoffs; created a repeatable framework for future multi-site deployments.
+              {/* Experience 3 */}
+              <div className="mb-12 border-l-2 border-muted-foreground/30 pl-6">
+                <div className="mb-4">
+                  <h3 className="text-2xl font-bold">Website Project Lead / Digital Strategy Consultant</h3>
+                  <p className="text-lg text-muted-foreground">SiteFoundry Pro / ClickAd Media</p>
+                  <p className="text-sm text-muted-foreground">2025</p>
+                </div>
+                <p className="mb-4 text-muted-foreground">
+                  Managed multi-site programs for construction, manufacturing, and local services. Ran discovery, aligned stakeholders, and launched CMS/eCommerce builds tied to business KPIs.
                 </p>
+                <ul className="space-y-2 text-muted-foreground">
+                  <li className="flex gap-2">
+                    <span className="text-primary">•</span>
+                    <span>Implemented WordPress/Webflow & WooCommerce/Shopify with CRM/email integrations</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <span className="text-primary">•</span>
+                    <span>Directed QA, UAT, and handoff; established SOPs/maintenance plans to convert launches into retainers</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <span className="text-primary">•</span>
+                    <span>Led SEO foundations (site architecture, internal linking, technical hygiene) and CRO tests</span>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
