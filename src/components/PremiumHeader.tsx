@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { TrendingUp, BarChart3, Search, Smartphone, Zap, Shield, Target } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -123,7 +124,7 @@ function TopNav() {
       <div className="mx-auto max-w-7xl px-4 py-3">
         <div className="flex items-center justify-between rounded-2xl border border-border bg-background/40 px-4 py-2 backdrop-blur-xl shadow-lg">
           <div className="flex items-center gap-3">
-            <img src={logo} alt="ClickAd Media" className="h-12 w-auto" />
+            <img src={logo} alt="ClickAd Media" className="h-16 w-auto" />
           </div>
 
           <div className="hidden items-center gap-6 md:flex">
@@ -134,6 +135,7 @@ function TopNav() {
               ["Pricing", "#pricing"],
               ["FAQ", "#faq"],
               ["About", "/about"],
+              ["Resume", "/resume"],
             ].map(([label, href]) => (
               <a
                 key={label}
@@ -180,6 +182,7 @@ function TopNav() {
                     ["Pricing", "#pricing"],
                     ["FAQ", "#faq"],
                     ["About", "/about"],
+                    ["Resume", "/resume"],
                   ].map(([label, href]) => (
                     <a
                       key={label}
@@ -330,16 +333,37 @@ function HeroShowcase() {
     <div className="relative rounded-3xl border border-border bg-gradient-to-b from-card/50 to-card/0 p-2 shadow-2xl shadow-primary/5">
       <div className="rounded-2xl border border-border bg-background/60 p-6 backdrop-blur">
         <div className="grid gap-3 sm:grid-cols-2">
-          <div className="aspect-[4/3] rounded-xl bg-gradient-to-br from-primary/30 to-primary/10" />
+          <div className="aspect-[4/3] rounded-xl bg-gradient-to-br from-primary/30 to-primary/10 flex items-center justify-center">
+            <TrendingUp className="h-16 w-16 text-primary/60" />
+          </div>
           <div className="grid gap-3">
-            <div className="h-24 rounded-xl bg-card/80" />
-            <div className="h-24 rounded-xl bg-card/80" />
-            <div className="h-24 rounded-xl bg-card/80" />
+            <div className="h-24 rounded-xl bg-card/80 border border-border/50 p-4 flex flex-col justify-between">
+              <div className="text-xs text-muted-foreground">Conversion Rate</div>
+              <div className="text-2xl font-bold text-primary">+320%</div>
+            </div>
+            <div className="h-24 rounded-xl bg-card/80 border border-border/50 p-4 flex flex-col justify-between">
+              <div className="text-xs text-muted-foreground">Load Time</div>
+              <div className="text-2xl font-bold text-foreground">0.8s</div>
+            </div>
+            <div className="h-24 rounded-xl bg-card/80 border border-border/50 p-4 flex flex-col justify-between">
+              <div className="text-xs text-muted-foreground">Pages Built</div>
+              <div className="text-2xl font-bold text-foreground">12+</div>
+            </div>
           </div>
         </div>
         <div className="mt-4 grid grid-cols-3 gap-2">
-          {[...Array(6)].map((_, i) => (
-            <div key={i} className="h-14 rounded-lg bg-card/80" />
+          {[
+            { icon: BarChart3, label: "Analytics" },
+            { icon: Search, label: "SEO" },
+            { icon: Smartphone, label: "Mobile" },
+            { icon: Zap, label: "Speed" },
+            { icon: Shield, label: "Security" },
+            { icon: Target, label: "CRO" },
+          ].map((item, i) => (
+            <div key={i} className="h-14 rounded-lg bg-card/80 border border-border/50 flex flex-col items-center justify-center gap-1">
+              <item.icon className="h-4 w-4 text-primary/70" />
+              <span className="text-[10px] text-muted-foreground">{item.label}</span>
+            </div>
           ))}
         </div>
       </div>
