@@ -1,5 +1,6 @@
 import { Zap, Target, BarChart3 } from "lucide-react";
 import { Card } from "@/components/ui/card";
+import { motion } from "framer-motion";
 
 const benefits = [
   {
@@ -34,10 +35,16 @@ export const Benefits = () => {
         
         <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {benefits.map((benefit, index) => (
-            <Card 
+            <motion.div
               key={index}
-              className="p-8 bg-card/50 backdrop-blur-sm border-primary/10 hover:border-primary/30 transition-all duration-300 hover:shadow-[0_0_30px_hsl(var(--primary)/0.2)] group"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1, duration: 0.5 }}
             >
+              <Card 
+                className="p-8 bg-card/50 backdrop-blur-sm border-primary/10 hover:border-primary/30 transition-all duration-300 hover:shadow-[0_0_30px_hsl(var(--primary)/0.2)] group h-full"
+              >
               <div className="mb-6 w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
                 <benefit.icon className="w-7 h-7 text-primary" />
               </div>
@@ -47,7 +54,8 @@ export const Benefits = () => {
               <p className="text-muted-foreground leading-relaxed">
                 {benefit.description}
               </p>
-            </Card>
+              </Card>
+            </motion.div>
           ))}
         </div>
       </div>

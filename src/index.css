@@ -101,4 +101,26 @@ All colors MUST be HSL.
   .bg-radial-glow {
     background: var(--gradient-radial);
   }
+
+  /* Premium gradient overlays */
+  .gradient-mesh {
+    background: radial-gradient(at 27% 37%, hsla(156, 100%, 50%, 0.12) 0px, transparent 50%),
+                radial-gradient(at 97% 21%, hsla(243, 96%, 70%, 0.12) 0px, transparent 50%),
+                radial-gradient(at 52% 99%, hsla(156, 100%, 50%, 0.08) 0px, transparent 50%);
+  }
+
+  /* Glassmorphism effects */
+  .glass {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* Premium shadows */
+  .shadow-premium {
+    box-shadow: 
+      0 0 0 1px rgba(255, 255, 255, 0.08),
+      0 20px 50px -12px rgba(0, 0, 0, 0.5),
+      0 0 60px -15px hsl(var(--primary) / 0.15);
+  }
 }
