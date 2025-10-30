@@ -239,6 +239,7 @@ const Resume = () => {
                 "WooCommerce",
                 "Supabase",
                 "Lovable.dev",
+                "ChatGPT",
                 "Make",
                 "N8N",
                 "Zapier",
