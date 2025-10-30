@@ -64,5 +64,25 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    
+    <!-- Trakrly Analytics -->
+    <script defer src="https://trkr.run/p.js" data-site="CLICKADMEDIA"></script>
+    <script>
+      window.addEventListener('load', function() {
+        // Track audit form submissions
+        window.trackAuditSubmit = function() {
+          if (typeof trkr !== 'undefined') {
+            trkr.event('audit_submitted');
+          }
+        };
+        
+        // Track quote form submissions
+        window.trackQuoteSubmit = function() {
+          if (typeof trkr !== 'undefined') {
+            trkr.event('quote_submitted');
+          }
+        };
+      });
+    </script>
   </body>
 </html>

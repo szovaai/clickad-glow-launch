@@ -1,1 +1,4 @@
 project_id = "rfydswsdjwfgmzdqwhhb"
+
+[functions.send-audit-notification]
+verify_jwt = false

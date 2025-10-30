@@ -45,6 +45,7 @@ export const Footer = () => {
           <div>
             <h3 className="font-heading font-semibold mb-4">Services</h3>
             <ul className="space-y-2 text-sm">
+              <li><a href="/audit" className="text-muted-foreground hover:text-primary transition-colors">Free Audit</a></li>
               <li><a href="#launch" className="text-muted-foreground hover:text-primary transition-colors">7-Day Launch</a></li>
               <li><a href="#custom" className="text-muted-foreground hover:text-primary transition-colors">Custom Build</a></li>
               <li><a href="#seo" className="text-muted-foreground hover:text-primary transition-colors">SEO & Performance</a></li>

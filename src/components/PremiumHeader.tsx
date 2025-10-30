@@ -221,6 +221,7 @@ function QuoteCta({ children, asChild = false }: { children: React.ReactNode; as
 
 function QuoteForm() {
   const [selected, setSelected] = React.useState<string[]>([]);
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
 
   function toggleService(name: string) {
     setSelected((prev) =>
@@ -228,20 +229,102 @@ function QuoteForm() {
     );
   }
 
-  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setIsSubmitting(true);
+
     const fd = new FormData(e.currentTarget);
     const payload = Object.fromEntries(fd.entries());
 
-    // TODO: Connect to backend (Supabase/Resend/Make.com)
-    console.log("Quote payload", { ...payload, services: selected });
-    
-    // Success feedback
-    alert("Thanks! Your request was received. We'll reach out within 1 business day.");
-    
-    // Reset form
-    e.currentTarget.reset();
-    setSelected([]);
+    try {
+      const { supabase } = await import("@/integrations/supabase/client");
+      const { getUTMFromSession } = await import("@/lib/utm");
+
+      const utmParams = getUTMFromSession();
+
+      // 1. Create company record
+      const { data: company, error: companyError } = await supabase
+        .from("companies")
+        .insert({
+          name: payload.company as string || "Unknown Company",
+          city: "Calgary",
+          province: "AB",
+        })
+        .select()
+        .single();
+
+      if (companyError) throw companyError;
+
+      // 2. Create contact record
+      const nameParts = (payload.name as string).split(" ");
+      const firstName = nameParts[0];
+      const lastName = nameParts.slice(1).join(" ") || null;
+
+      const { data: contact, error: contactError } = await supabase
+        .from("contacts")
+        .insert({
+          company_id: company.id,
+          first_name: firstName,
+          last_name: lastName,
+          email: payload.email as string,
+          phone: payload.phone as string || null,
+        })
+        .select()
+        .single();
+
+      if (contactError) throw contactError;
+
+      // 3. Create audit record
+      const { data: audit, error: auditError } = await supabase
+        .from("audits")
+        .insert({
+          company_id: company.id,
+          notes: `Budget: ${payload.budget}, Timeline: ${payload.timeline}, Services: ${selected.join(", ")}. Message: ${payload.message || ""}`,
+          status: "new",
+          utm_source: utmParams.utm_source || null,
+          utm_medium: utmParams.utm_medium || null,
+          utm_campaign: utmParams.utm_campaign || null,
+          utm_term: utmParams.utm_term || null,
+          utm_content: utmParams.utm_content || null,
+        })
+        .select()
+        .single();
+
+      if (auditError) throw auditError;
+
+      // 4. Send email notification
+      const { error: emailError } = await supabase.functions.invoke(
+        "send-audit-notification",
+        {
+          body: {
+            companyName: company.name,
+            contactName: payload.name as string,
+            email: payload.email as string,
+            phone: payload.phone as string,
+            notes: `Budget: ${payload.budget}, Timeline: ${payload.timeline}, Services: ${selected.join(", ")}. ${payload.message || ""}`,
+            auditId: audit.id,
+          },
+        }
+      );
+
+      if (emailError) {
+        console.error("Email notification error:", emailError);
+      }
+
+      // 5. Track with Trakrly
+      if (typeof window !== "undefined" && (window as any).trackQuoteSubmit) {
+        (window as any).trackQuoteSubmit();
+      }
+
+      alert("Thanks! Your request was received. We'll reach out within 1 business day.");
+      e.currentTarget.reset();
+      setSelected([]);
+    } catch (error) {
+      console.error("Error submitting quote:", error);
+      alert("There was an error submitting your request. Please try again or contact us directly.");
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -322,7 +405,9 @@ function QuoteForm() {
 
       <div className="flex items-center justify-between pt-2">
         <p className="text-xs text-muted-foreground">By submitting, you agree to our Terms & Privacy.</p>
-        <Button type="submit" variant="glow" className="rounded-xl">Send Request</Button>
+        <Button type="submit" variant="glow" className="rounded-xl" disabled={isSubmitting}>
+          {isSubmitting ? "Sending..." : "Send Request"}
+        </Button>
       </div>
     </form>
   );
