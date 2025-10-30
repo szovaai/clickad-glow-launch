@@ -224,26 +224,27 @@ const Resume = () => {
             <div className="mx-auto max-w-4xl">
               <h2 className="mb-8 text-3xl font-bold">Tools & Platforms</h2>
               <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
-                {[
-                  "Trello",
-                  "Slack",
-                  "ClickUp",
-                  "Notion",
-                  "Google Tag Manager",
-                  "GA4",
-                  "Search Console",
-                  "SEMrush",
-                  "WordPress",
-                  "Webflow",
-                  "Shopify",
-                  "WooCommerce",
-                  "Supabase",
-                  "Lovable.dev",
-                  "Make",
-                  "Zapier",
-                  "Canva",
-                  "Systeme.io",
-                ].map((tool, i) => (
+              {[
+                "Trello",
+                "Slack",
+                "ClickUp",
+                "Notion",
+                "Google Tag Manager",
+                "GA4",
+                "Search Console",
+                "SEMrush",
+                "WordPress",
+                "Webflow",
+                "Shopify",
+                "WooCommerce",
+                "Supabase",
+                "Lovable.dev",
+                "Make",
+                "N8N",
+                "Zapier",
+                "Canva",
+                "Systeme.io",
+              ].map((tool, i) => (
                   <div
                     key={i}
                     className="rounded-lg border border-border bg-card p-3 text-center text-sm font-medium transition-all hover:border-primary/50 hover:shadow-md"
