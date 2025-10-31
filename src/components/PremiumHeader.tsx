@@ -54,7 +54,7 @@ export default function PremiumHeader() {
 
       <Navigation />
 
-      <section className="relative mx-auto max-w-6xl px-4 pt-12 pb-20">
+      <section className="relative mx-auto max-w-6xl px-4 pt-2 md:pt-4 pb-16">
         <div className="grid items-center gap-10 md:grid-cols-[1.1fr_0.9fr]">
           <div>
             <motion.div
@@ -71,7 +71,7 @@ export default function PremiumHeader() {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.05, duration: 0.6 }}
-              className="mt-5 text-4xl font-bold leading-[1.05] tracking-[-0.02em] text-foreground sm:text-5xl md:text-6xl"
+              className="mt-2 text-4xl font-bold leading-[1.05] tracking-[-0.02em] text-foreground sm:text-5xl md:text-6xl"
             >
               WE BUILD <span className="text-primary glow-text">CONVERSION MACHINES</span>
             </motion.h1>
