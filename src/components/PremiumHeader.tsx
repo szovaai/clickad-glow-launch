@@ -54,7 +54,7 @@ export default function PremiumHeader() {
 
       <Navigation />
 
-      <section className="relative mx-auto max-w-6xl px-4 pt-20 pb-20">
+      <section className="relative mx-auto max-w-6xl px-4 pt-12 pb-20">
         <div className="grid items-center gap-10 md:grid-cols-[1.1fr_0.9fr]">
           <div>
             <motion.div
