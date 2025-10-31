@@ -72,7 +72,7 @@ export default function PremiumHeader() {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.05, duration: 0.6 }}
-              className="mt-2 text-4xl font-bold leading-[1.05] tracking-[-0.02em] text-foreground sm:text-5xl md:text-6xl"
+              className="mt-2 text-3xl font-bold leading-[1.05] tracking-[-0.02em] text-foreground sm:text-5xl md:text-6xl"
             >
               WE BUILD <span className="text-primary glow-text">CONVERSION MACHINES</span>
             </motion.h1>
