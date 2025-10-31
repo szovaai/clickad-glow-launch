@@ -54,7 +54,7 @@ export default function PremiumHeader() {
 
       <TopNav />
 
-      <section className="relative mx-auto max-w-6xl px-4 pt-32 pb-20 md:pt-40">
+      <section className="relative mx-auto max-w-6xl px-4 pt-24 pb-20 md:pt-28">
         <div className="grid items-center gap-10 md:grid-cols-[1.1fr_0.9fr]">
           <div>
             <motion.div
@@ -131,7 +131,7 @@ function TopNav() {
       <div className="mx-auto max-w-7xl px-4 py-3">
         <div className="flex items-center justify-between rounded-2xl border border-border bg-background/40 px-4 py-2 backdrop-blur-xl shadow-lg">
           <div className="flex items-center gap-3">
-            <img src={logo} alt="ClickAd Media" className="h-16 w-auto" />
+            <img src={logo} alt="ClickAd Media" className="h-10 w-auto" />
           </div>
 
           <div className="hidden items-center gap-6 md:flex">
