@@ -1,4 +1,4 @@
-import { Header } from "@/components/Header";
+import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -39,15 +39,15 @@ const beliefs = [
 
 const metrics = [
   { value: "10+", label: "Years Industry Experience" },
-  { value: "150+", label: "Projects Delivered" },
+  { value: "50+", label: "Happy Clients" },
   { value: "100%", label: "Custom Solutions" },
 ];
 
 const About = () => {
   return (
     <div className="min-h-screen">
-      <Header />
-      <main className="pt-26 md:pt-28">
+      <Navigation />
+      <main className="pt-32">
         {/* Hero Section */}
         <section className="py-20 md:py-32">
           <div className="container px-6">

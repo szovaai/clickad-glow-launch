@@ -1,12 +1,12 @@
 import { Button } from "@/components/ui/button";
-import { Header } from "@/components/Header";
+import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { Download, Mail, Phone, MapPin, ExternalLink } from "lucide-react";
 
 const Resume = () => {
   return (
     <div className="min-h-screen bg-background">
-      <Header />
+      <Navigation />
       
       <main className="pt-32 pb-16">
         {/* Hero Section */}

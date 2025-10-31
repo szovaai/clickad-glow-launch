@@ -29,8 +29,8 @@ import {
 } from "@/components/ui/sheet";
 import { Checkbox } from "@/components/ui/checkbox";
 import { cn } from "@/lib/utils";
-import { Star, Sparkles, Menu } from "lucide-react";
-import logo from "@/assets/logo-clickad.png";
+import { Star, Sparkles } from "lucide-react";
+import { Navigation } from "@/components/Navigation";
 
 const services = [
   "Website (Design + Build)",
@@ -52,9 +52,9 @@ export default function PremiumHeader() {
         <Noise />
       </div>
 
-      <TopNav />
+      <Navigation />
 
-      <section className="relative mx-auto max-w-6xl px-4 pt-16 pb-20 md:pt-20">
+      <section className="relative mx-auto max-w-6xl px-4 pt-32 pb-20">
         <div className="grid items-center gap-10 md:grid-cols-[1.1fr_0.9fr]">
           <div>
             <motion.div
@@ -125,87 +125,6 @@ export default function PremiumHeader() {
   );
 }
 
-function TopNav() {
-  return (
-    <div className="fixed inset-x-0 top-0 z-50">
-      <div className="mx-auto max-w-7xl px-4 py-3">
-        <div className="flex items-center justify-between rounded-2xl border border-border bg-background/40 px-4 py-2 backdrop-blur-xl shadow-lg">
-          <div className="flex items-center gap-3">
-            <img src={logo} alt="ClickAd Media" className="h-12 w-auto" />
-          </div>
-
-          <div className="hidden items-center gap-6 md:flex">
-            {[
-              ["Work", "#work"],
-              ["Templates", "#templates"],
-              ["Process", "#process"],
-              ["Pricing", "#pricing"],
-              ["FAQ", "#faq"],
-              ["About", "/about"],
-            ].map(([label, href]) => (
-              <a
-                key={label}
-                href={href}
-                className="text-sm text-muted-foreground transition hover:text-foreground"
-              >
-                {label}
-              </a>
-            ))}
-          </div>
-
-          {/* Desktop quote trigger */}
-          <div className="hidden md:flex items-center gap-2">
-            <QuoteCta>
-              <Button variant="glow" className="h-10 rounded-xl px-4 text-sm">
-                Get a Quote
-              </Button>
-            </QuoteCta>
-          </div>
-
-          {/* Mobile menu */}
-          <div className="flex md:hidden items-center gap-2">
-            <QuoteCta asChild>
-              <Button variant="glow" size="sm" className="rounded-xl">
-                Quote
-              </Button>
-            </QuoteCta>
-            
-            <Sheet>
-              <SheetTrigger asChild>
-                <Button variant="ghost" size="icon">
-                  <Menu className="h-5 w-5" />
-                </Button>
-              </SheetTrigger>
-              <SheetContent side="left" className="w-[280px]">
-                <SheetHeader className="text-left mb-6">
-                  <SheetTitle>Menu</SheetTitle>
-                </SheetHeader>
-                <nav className="flex flex-col gap-4">
-                  {[
-                    ["Work", "#work"],
-                    ["Templates", "#templates"],
-                    ["Process", "#process"],
-                    ["Pricing", "#pricing"],
-                    ["FAQ", "#faq"],
-                    ["About", "/about"],
-                  ].map(([label, href]) => (
-                    <a
-                      key={label}
-                      href={href}
-                      className="text-base text-muted-foreground transition hover:text-foreground py-2"
-                    >
-                      {label}
-                    </a>
-                  ))}
-                </nav>
-              </SheetContent>
-            </Sheet>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 export function QuoteCta({ children, asChild = false }: { children: React.ReactNode; asChild?: boolean }) {
   return (

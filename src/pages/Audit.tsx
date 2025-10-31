@@ -24,7 +24,7 @@ import {
 import { toast } from "sonner";
 import { auditFormSchema, type AuditFormData } from "@/lib/validation";
 import { captureUTMParams, saveUTMToSession, getUTMFromSession } from "@/lib/utm";
-import { Header } from "@/components/Header";
+import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { Loader2 } from "lucide-react";
 
@@ -157,8 +157,8 @@ const Audit = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Header />
-      <main className="flex-1 py-16 px-4">
+      <Navigation />
+      <main className="flex-1 pt-32 pb-16 px-4">
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-12">
             <h1 className="text-4xl font-bold mb-4">Get Your Free 5-Minute Website Audit</h1>

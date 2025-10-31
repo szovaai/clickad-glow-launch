@@ -1,7 +1,7 @@
 import { ReactNode, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ChevronRight } from "lucide-react";
-import { Header } from "@/components/Header";
+import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 
 interface ServicePageLayoutProps {
@@ -52,10 +52,10 @@ export function ServicePageLayout({
 
   return (
     <div className="min-h-screen">
-      <Header />
+      <Navigation />
       
       {/* Breadcrumbs */}
-      <nav className="bg-background border-b" aria-label="breadcrumb">
+      <nav className="bg-background border-b pt-24" aria-label="breadcrumb">
         <div className="container mx-auto px-4 py-3">
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li><Link to="/" className="hover:text-foreground transition-colors">Home</Link></li>

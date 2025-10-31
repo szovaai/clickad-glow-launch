@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Header } from "@/components/Header";
+import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { LoomLibraryGrid } from "@/components/loom/LoomLibraryGrid";
 import { Button } from "@/components/ui/button";
@@ -62,10 +62,10 @@ export default function LoomLibrary() {
 
   return (
     <div className="min-h-screen">
-      <Header />
+      <Navigation />
 
       {/* Hero Section */}
-      <section className="relative py-20 overflow-hidden border-b">
+      <section className="relative pt-32 pb-20 overflow-hidden border-b">
         <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-background to-background" />
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl mx-auto text-center space-y-6">

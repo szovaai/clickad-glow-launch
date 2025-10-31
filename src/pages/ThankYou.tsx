@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Header } from "@/components/Header";
+import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { CheckCircle2, Clock, Video, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -17,8 +17,8 @@ const ThankYou = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Header />
-      <main className="flex-1 py-16 px-4">
+      <Navigation />
+      <main className="flex-1 pt-32 pb-16 px-4">
         <div className="max-w-4xl mx-auto">
           {/* Hero Section */}
           <div className="text-center mb-16">
