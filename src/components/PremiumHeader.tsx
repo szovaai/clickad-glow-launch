@@ -73,7 +73,7 @@ export default function PremiumHeader() {
               transition={{ delay: 0.05, duration: 0.6 }}
               className="mt-5 text-4xl font-semibold leading-[1.05] tracking-[-0.02em] text-foreground sm:text-5xl md:text-6xl"
             >
-              Websites that <span className="text-primary glow-text">work as hard</span> as you do.
+              Conversion-Ready Websites for <span className="text-primary glow-text">Calgary's Hardest Working</span> Service Pros
             </motion.h1>
 
             <motion.p
@@ -207,7 +207,7 @@ function TopNav() {
   );
 }
 
-function QuoteCta({ children, asChild = false }: { children: React.ReactNode; asChild?: boolean }) {
+export function QuoteCta({ children, asChild = false }: { children: React.ReactNode; asChild?: boolean }) {
   return (
     <Sheet>
       <SheetTrigger asChild={asChild}>{children}</SheetTrigger>
@@ -564,10 +564,29 @@ function HeroLeadForm() {
   };
 
   return (
-    <div className="glass rounded-2xl p-8 border border-primary/20">
+    <motion.div
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.5, delay: 0.7 }}
+      className="glass rounded-2xl p-8 border border-primary/20 shadow-premium"
+    >
       <div className="mb-6">
-        <h3 className="text-2xl font-bold text-foreground mb-2">Get Started Today</h3>
-        <p className="text-muted-foreground">Tell us about your project and we'll get back to you within 24 hours.</p>
+        <h3 className="text-2xl font-bold text-foreground mb-3 glow-text">
+          Get a Custom Website That Pays for Itself in 90 Days
+        </h3>
+        <p className="text-sm text-muted-foreground mb-4">
+          We'll design, write, and launch a conversion-focused site for your service business—free consultation included.
+        </p>
+        
+        {/* 5-Star Rating */}
+        <div className="flex items-center gap-2 mb-2">
+          {[...Array(5)].map((_, i) => (
+            <Star key={i} className="w-4 h-4 fill-primary text-primary" />
+          ))}
+        </div>
+        <p className="text-xs text-muted-foreground">
+          Rated 5 Stars by Calgary Business Owners
+        </p>
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
@@ -642,18 +661,29 @@ function HeroLeadForm() {
         <Button
           type="submit"
           disabled={isSubmitting}
-          className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
+          variant="glow"
+          className="w-full group"
           size="lg"
         >
-          {isSubmitting ? "Submitting..." : "Get My Free Audit"}
-          {!isSubmitting && <ArrowRight className="ml-2 h-4 w-4" />}
+          {isSubmitting ? "Submitting..." : (
+            <>
+              Get Your Free Quote
+              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </>
+          )}
         </Button>
 
-        <p className="text-xs text-muted-foreground text-center">
+        {/* Urgency Message */}
+        <div className="mt-4 flex items-center justify-center gap-2 text-sm text-muted-foreground">
+          <Zap className="w-4 h-4 text-primary" />
+          <span>We only take 3 new builds/month. Secure your spot today.</span>
+        </div>
+
+        <p className="text-xs text-muted-foreground text-center mt-2">
           No spam. We respect your privacy.
         </p>
       </form>
-    </div>
+    </motion.div>
   );
 }
 
