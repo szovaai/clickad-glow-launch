@@ -9,7 +9,7 @@ export interface Testimonial {
 
 export const testimonials: Testimonial[] = [
   {
-    quote: "TrueCan Power doubled their leads in 45 days after switching to ClickAdMedia.",
+    quote: "Working with ClickAdMedia has significantly improved our online presence and lead quality.",
     author: "James T.",
     role: "Owner",
     company: "TrueCan Power",

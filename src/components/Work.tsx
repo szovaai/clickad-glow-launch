@@ -13,7 +13,7 @@ const projects = [
     industry: "Landscaping & Concrete Edging",
     image: kwikKerb,
     url: "https://kwikkerbfortmcmurray.com",
-    metrics: "300% increase in quote requests"
+    metrics: "Significant increase in quote requests"
   },
   {
     name: "Truecan Power",

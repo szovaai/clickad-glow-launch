@@ -48,7 +48,7 @@ export const Hero = () => {
             </div>
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 bg-primary rounded-full" />
-              <span>300% Avg Increase</span>
+              <span>Proven Results</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 bg-primary rounded-full" />

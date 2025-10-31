@@ -92,30 +92,30 @@ export const BeforeAfterSlider = () => {
             <div className="text-center p-6 rounded-xl border border-border bg-card">
               <div className="flex items-center justify-center gap-2 mb-2">
                 <TrendingUp className="w-6 h-6 text-primary" />
-                <span className="text-3xl font-bold text-primary">210%</span>
+                <span className="text-2xl font-bold text-primary">More Quality Leads</span>
               </div>
-              <p className="text-sm text-muted-foreground">More Leads</p>
+              <p className="text-sm text-muted-foreground">Consistent lead generation</p>
             </div>
             <div className="text-center p-6 rounded-xl border border-border bg-card">
               <div className="flex items-center justify-center gap-2 mb-2">
                 <TrendingUp className="w-6 h-6 text-primary" />
-                <span className="text-3xl font-bold text-primary">60 Days</span>
+                <span className="text-2xl font-bold text-primary">Fast Results</span>
               </div>
-              <p className="text-sm text-muted-foreground">To Full ROI</p>
+              <p className="text-sm text-muted-foreground">Quick turnaround times</p>
             </div>
             <div className="text-center p-6 rounded-xl border border-border bg-card">
               <div className="flex items-center justify-center gap-2 mb-2">
                 <TrendingUp className="w-6 h-6 text-primary" />
-                <span className="text-3xl font-bold text-primary">+4.2%</span>
+                <span className="text-2xl font-bold text-primary">Higher Conversion</span>
               </div>
-              <p className="text-sm text-muted-foreground">Conversion Rate</p>
+              <p className="text-sm text-muted-foreground">Improved conversion rates</p>
             </div>
           </div>
 
           <div className="mt-8 text-center">
             <p className="text-lg font-semibold mb-2">TrueCan Power — Electrical Services</p>
             <p className="text-muted-foreground">
-              "Our phone hasn't stopped ringing. This website paid for itself in the first month."
+              "This website has been a great investment for our business."
             </p>
           </div>
         </div>
