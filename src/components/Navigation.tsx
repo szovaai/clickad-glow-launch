@@ -1,8 +1,14 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Menu } from "lucide-react";
+import { Menu, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import logo from "@/assets/logo-clickad.png";
 
 export const Navigation = () => {
@@ -12,10 +18,13 @@ export const Navigation = () => {
     { href: "/#services", label: "Services" },
     { href: "/#work", label: "Work" },
     { href: "/#templates", label: "Templates" },
-    { href: "/loom-library", label: "Free Audits" },
     { href: "/#process", label: "Process" },
     { href: "/#pricing", label: "Pricing" },
-    { href: "/about", label: "About" },
+  ];
+
+  const companyLinks = [
+    { href: "/about", label: "About Us" },
+    { href: "/loom-library", label: "Free Audits" },
   ];
 
   return (
@@ -38,6 +47,22 @@ export const Navigation = () => {
                 {link.label}
               </a>
             ))}
+            
+            <DropdownMenu>
+              <DropdownMenuTrigger className="flex items-center gap-1 text-sm font-medium transition-colors hover:text-primary outline-none">
+                Company
+                <ChevronDown className="h-4 w-4" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="bg-background border-border z-50">
+                {companyLinks.map((link) => (
+                  <DropdownMenuItem key={link.href} asChild>
+                    <a href={link.href} className="cursor-pointer">
+                      {link.label}
+                    </a>
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
 
           <div className="flex items-center gap-4">
