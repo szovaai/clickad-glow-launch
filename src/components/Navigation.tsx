@@ -19,7 +19,6 @@ export const Navigation = () => {
     { href: "/#work", label: "Work" },
     { href: "/#templates", label: "Templates" },
     { href: "/#process", label: "Process" },
-    { href: "/#pricing", label: "Pricing" },
   ];
 
   const companyLinks = [
