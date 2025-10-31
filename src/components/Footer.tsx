@@ -8,7 +8,7 @@ export const Footer = () => {
         <div className="grid md:grid-cols-4 gap-8 mb-8">
           {/* Brand */}
           <div className="md:col-span-2 space-y-4">
-            <img src={logo} alt="ClickAd Media - Calgary Website Design" className="h-[100px] w-auto" />
+            <img src={logo} alt="ClickAd Media - Calgary Website Design" className="h-8 w-auto" />
             <p className="text-sm text-muted-foreground max-w-sm">
               Calgary-based website design agency for service businesses. 
               We build conversion machines that turn traffic into paying customers.

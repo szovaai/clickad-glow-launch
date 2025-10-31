@@ -131,7 +131,7 @@ function TopNav() {
       <div className="mx-auto max-w-7xl px-4 py-3">
         <div className="flex items-center justify-between rounded-2xl border border-border bg-background/40 px-4 py-2 backdrop-blur-xl shadow-lg">
           <div className="flex items-center gap-3">
-            <img src={logo} alt="ClickAd Media" className="h-[200px] w-auto" />
+            <img src={logo} alt="ClickAd Media" className="h-12 w-auto" />
           </div>
 
           <div className="hidden items-center gap-6 md:flex">

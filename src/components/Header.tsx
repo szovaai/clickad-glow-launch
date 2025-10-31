@@ -21,7 +21,7 @@ export const Header = () => {
     <header className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-lg border-b border-primary/10">
       <div className="container px-6 h-26 md:h-28 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2">
-          <img src={logo} alt="ClickAd Media" className="h-[210px] md:h-[240px] w-auto" />
+          <img src={logo} alt="ClickAd Media" className="h-10 md:h-12 w-auto" />
         </Link>
         
         <nav className="hidden md:flex items-center gap-8">
