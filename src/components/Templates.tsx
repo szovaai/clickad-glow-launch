@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 import commercialCleaning from "@/assets/templates/commercial-cleaning.png";
 import airDuctCleaning from "@/assets/templates/air-duct-cleaning.png";
 import windshieldRepair from "@/assets/templates/windshield-repair.png";
@@ -136,8 +137,8 @@ export const Templates = () => {
         </div>
 
         <div className="text-center mt-16">
-          <Button variant="glow" size="lg">
-            Request Your Custom Template
+          <Button variant="glow" size="lg" asChild>
+            <Link to="/audit">Request Your Custom Template</Link>
           </Button>
         </div>
       </div>

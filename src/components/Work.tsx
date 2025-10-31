@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ExternalLink } from "lucide-react";
+import { Link } from "react-router-dom";
 import kwikKerb from "@/assets/portfolio/kwik-kerb.png";
 import truecanPower from "@/assets/portfolio/truecan-power.png";
 import westlights from "@/assets/portfolio/westlights.png";
@@ -95,8 +96,8 @@ export const Work = () => {
         </div>
 
         <div className="text-center">
-          <Button variant="glow" size="lg">
-            See How We Can Transform Your Business
+          <Button variant="glow" size="lg" asChild>
+            <Link to="/audit">See How We Can Transform Your Business</Link>
           </Button>
         </div>
       </div>

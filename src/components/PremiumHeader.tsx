@@ -12,6 +12,7 @@ import { heroLeadFormSchema, type HeroLeadFormData } from "@/lib/validation";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 import { getUTMFromSession } from "@/lib/utm";
+import { scrollToSection } from "@/lib/navigation";
 import {
   Select,
   SelectContent,
@@ -96,12 +97,12 @@ export default function PremiumHeader() {
                   Get a Quote <ArrowRight className="h-4 w-4" />
                 </Button>
               </QuoteCta>
-              <a
-                href="#work"
-                className="inline-flex h-12 items-center rounded-xl border border-border bg-card/50 px-5 text-sm text-foreground backdrop-blur transition hover:bg-card"
+              <button
+                onClick={() => scrollToSection('work')}
+                className="inline-flex h-12 items-center rounded-xl border border-border bg-card/50 px-5 text-sm text-foreground backdrop-blur transition hover:bg-card cursor-pointer"
               >
                 See real results
-              </a>
+              </button>
               <div className="flex items-center gap-1 text-foreground/60">
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} className="h-4 w-4 fill-primary text-primary" />

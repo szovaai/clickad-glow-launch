@@ -10,20 +10,22 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import logo from "@/assets/logo-clickad.png";
+import { scrollToSection } from "@/lib/navigation";
 
 export const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const navLinks = [
-    { href: "/#services", label: "Services" },
-    { href: "/#work", label: "Work" },
-    { href: "/#templates", label: "Templates" },
-    { href: "/#process", label: "Process" },
+    { href: "#services", label: "Services" },
+    { href: "#work", label: "Work" },
+    { href: "#templates", label: "Templates" },
+    { href: "#process", label: "Process" },
   ];
 
   const companyLinks = [
     { href: "/about", label: "About Us" },
     { href: "/loom-library", label: "Free Audits" },
+    { href: "/pricing", label: "Pricing" },
   ];
 
   return (
@@ -41,7 +43,12 @@ export const Navigation = () => {
               <a
                 key={link.href}
                 href={link.href}
-                className="text-sm font-medium transition-colors hover:text-primary"
+                onClick={(e) => {
+                  e.preventDefault();
+                  const hash = link.href.replace('#', '');
+                  scrollToSection(hash);
+                }}
+                className="text-sm font-medium transition-colors hover:text-primary cursor-pointer"
               >
                 {link.label}
               </a>
@@ -55,9 +62,9 @@ export const Navigation = () => {
               <DropdownMenuContent className="bg-background border-border z-50">
                 {companyLinks.map((link) => (
                   <DropdownMenuItem key={link.href} asChild>
-                    <a href={link.href} className="cursor-pointer">
+                    <Link to={link.href} className="cursor-pointer">
                       {link.label}
-                    </a>
+                    </Link>
                   </DropdownMenuItem>
                 ))}
               </DropdownMenuContent>
@@ -81,11 +88,26 @@ export const Navigation = () => {
                     <a
                       key={link.href}
                       href={link.href}
-                      className="text-lg font-medium hover:text-primary transition-colors"
-                      onClick={() => setIsOpen(false)}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        const hash = link.href.replace('#', '');
+                        scrollToSection(hash);
+                        setIsOpen(false);
+                      }}
+                      className="text-lg font-medium hover:text-primary transition-colors cursor-pointer"
                     >
                       {link.label}
                     </a>
+                  ))}
+                  {companyLinks.map((link) => (
+                    <Link
+                      key={link.href}
+                      to={link.href}
+                      onClick={() => setIsOpen(false)}
+                      className="text-lg font-medium text-muted-foreground hover:text-primary transition-colors"
+                    >
+                      {link.label}
+                    </Link>
                   ))}
                   <Button variant="glow" asChild className="w-full mt-4">
                     <Link to="/audit" onClick={() => setIsOpen(false)}>

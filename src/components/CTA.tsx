@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Calendar } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export const CTA = () => {
   return (
@@ -24,13 +25,15 @@ export const CTA = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
-            <Button variant="glow" size="lg" className="group">
-              <Calendar className="mr-2" />
-              Book Your Demo Call
-              <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
+            <Button variant="glow" size="lg" className="group" asChild>
+              <Link to="/audit">
+                <Calendar className="mr-2" />
+                Book Your Demo Call
+                <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
+              </Link>
             </Button>
-            <Button variant="outline" size="lg">
-              See Pricing
+            <Button variant="outline" size="lg" asChild>
+              <Link to="/pricing">See Pricing</Link>
             </Button>
           </div>
           

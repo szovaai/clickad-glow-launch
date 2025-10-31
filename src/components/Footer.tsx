@@ -1,5 +1,7 @@
 import logo from "@/assets/logo-clickad.png";
 import { Phone, Mail } from "lucide-react";
+import { Link } from "react-router-dom";
+import { scrollToSection } from "@/lib/navigation";
 
 export const Footer = () => {
   return (
@@ -35,21 +37,44 @@ export const Footer = () => {
           <div>
             <h3 className="font-heading font-semibold mb-4">Company</h3>
             <ul className="space-y-2 text-sm">
-              <li><a href="#about" className="text-muted-foreground hover:text-primary transition-colors">About</a></li>
-              <li><a href="#work" className="text-muted-foreground hover:text-primary transition-colors">Case Studies</a></li>
-              <li><a href="#process" className="text-muted-foreground hover:text-primary transition-colors">Our Process</a></li>
-              <li><a href="#contact" className="text-muted-foreground hover:text-primary transition-colors">Contact</a></li>
+              <li><Link to="/about" className="text-muted-foreground hover:text-primary transition-colors">About</Link></li>
+              <li>
+                <a 
+                  href="#work" 
+                  onClick={(e) => { e.preventDefault(); scrollToSection('work'); }}
+                  className="text-muted-foreground hover:text-primary transition-colors cursor-pointer"
+                >
+                  Case Studies
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="#process" 
+                  onClick={(e) => { e.preventDefault(); scrollToSection('process'); }}
+                  className="text-muted-foreground hover:text-primary transition-colors cursor-pointer"
+                >
+                  Our Process
+                </a>
+              </li>
+              <li><Link to="/audit" className="text-muted-foreground hover:text-primary transition-colors">Contact</Link></li>
             </ul>
           </div>
           
           <div>
             <h3 className="font-heading font-semibold mb-4">Resources</h3>
             <ul className="space-y-2 text-sm">
-              <li><a href="/audit" className="text-muted-foreground hover:text-primary transition-colors">Free Audit</a></li>
-              <li><a href="/loom-library" className="text-muted-foreground hover:text-primary transition-colors">Audit Examples</a></li>
-              <li><a href="#launch" className="text-muted-foreground hover:text-primary transition-colors">7-Day Launch</a></li>
-              <li><a href="#custom" className="text-muted-foreground hover:text-primary transition-colors">Custom Build</a></li>
-              <li><a href="#seo" className="text-muted-foreground hover:text-primary transition-colors">SEO & Performance</a></li>
+              <li><Link to="/audit" className="text-muted-foreground hover:text-primary transition-colors">Free Audit</Link></li>
+              <li><Link to="/loom-library" className="text-muted-foreground hover:text-primary transition-colors">Audit Examples</Link></li>
+              <li><Link to="/pricing" className="text-muted-foreground hover:text-primary transition-colors">Pricing</Link></li>
+              <li>
+                <a 
+                  href="#services" 
+                  onClick={(e) => { e.preventDefault(); scrollToSection('services'); }}
+                  className="text-muted-foreground hover:text-primary transition-colors cursor-pointer"
+                >
+                  Services
+                </a>
+              </li>
             </ul>
           </div>
         </div>
