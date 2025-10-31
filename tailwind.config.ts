@@ -65,7 +65,7 @@ export default {
       },
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
-        heading: ['Space Grotesk', 'sans-serif'],
+        heading: ['Poppins', 'sans-serif'],
       },
       keyframes: {
         "accordion-down": {
@@ -81,8 +81,8 @@ export default {
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
         "glow-pulse": {
-          "0%, 100%": { boxShadow: "0 0 20px hsl(var(--neon-mint) / 0.3)" },
-          "50%": { boxShadow: "0 0 40px hsl(var(--neon-mint) / 0.6), 0 0 60px hsl(var(--neon-mint) / 0.3)" },
+          "0%, 100%": { boxShadow: "0 0 20px hsl(var(--electric-blue) / 0.3)" },
+          "50%": { boxShadow: "0 0 40px hsl(var(--electric-blue) / 0.6), 0 0 60px hsl(var(--electric-blue) / 0.3)" },
         },
         "slide-in-right": {
           "0%": { transform: "translateX(100%)", opacity: "0" },

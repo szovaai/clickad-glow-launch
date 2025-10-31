@@ -8,7 +8,7 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* ClickAd Media Dark Theme - Neon Mint Agency */
+    /* ClickAd Media Dark Theme - Electric Blue Agency */
     --background: 0 0% 4%;
     --foreground: 0 0% 100%;
 
@@ -18,8 +18,8 @@ All colors MUST be HSL.
     --popover: 0 0% 6%;
     --popover-foreground: 0 0% 100%;
 
-    /* Neon Mint Primary - #00FF88 */
-    --primary: 156 100% 50%;
+    /* Electric Blue Primary - #3B82F6 */
+    --primary: 217 91% 60%;
     --primary-foreground: 0 0% 4%;
     
     /* Charcoal Secondary */
@@ -29,7 +29,7 @@ All colors MUST be HSL.
     --muted: 0 0% 15%;
     --muted-foreground: 0 0% 60%;
 
-    --accent: 156 100% 50%;
+    --accent: 217 91% 60%;
     --accent-foreground: 0 0% 4%;
 
     --destructive: 0 84% 60%;
@@ -37,22 +37,22 @@ All colors MUST be HSL.
 
     --border: 0 0% 15%;
     --input: 0 0% 15%;
-    --ring: 156 100% 50%;
+    --ring: 217 91% 60%;
 
     --radius: 0.75rem;
 
     /* Custom ClickAd tokens */
     --jet-black: 0 0% 4%;
     --charcoal: 0 0% 10%;
-    --neon-mint: 156 100% 50%;
+    --electric-blue: 217 91% 60%;
     
     /* Glow effects */
-    --glow-primary: 156 100% 50%;
+    --glow-primary: 217 91% 60%;
     --glow-radius: 28px;
     
     /* Gradients */
-    --gradient-radial: radial-gradient(circle at center, hsl(var(--neon-mint) / 0.15) 0%, transparent 70%);
-    --gradient-border: linear-gradient(135deg, hsl(var(--neon-mint) / 0.3), transparent);
+    --gradient-radial: radial-gradient(circle at center, hsl(var(--electric-blue) / 0.15) 0%, transparent 70%);
+    --gradient-border: linear-gradient(135deg, hsl(var(--electric-blue) / 0.3), transparent);
     
     /* Animations */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -75,18 +75,18 @@ All colors MUST be HSL.
   }
   
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
   }
 }
 
 @layer utilities {
   .glow-text {
-    text-shadow: 0 0 20px hsl(var(--neon-mint) / 0.5);
+    text-shadow: 0 0 20px hsl(var(--electric-blue) / 0.5);
   }
   
   .glow-border {
-    box-shadow: 0 0 20px hsl(var(--neon-mint) / 0.3);
+    box-shadow: 0 0 20px hsl(var(--electric-blue) / 0.3);
   }
   
   .glow-hover {
@@ -94,7 +94,7 @@ All colors MUST be HSL.
   }
   
   .glow-hover:hover {
-    box-shadow: 0 0 30px hsl(var(--neon-mint) / 0.5), 0 0 60px hsl(var(--neon-mint) / 0.2);
+    box-shadow: 0 0 30px hsl(var(--electric-blue) / 0.5), 0 0 60px hsl(var(--electric-blue) / 0.2);
     transform: translateY(-2px);
   }
   
@@ -104,9 +104,9 @@ All colors MUST be HSL.
 
   /* Premium gradient overlays */
   .gradient-mesh {
-    background: radial-gradient(at 27% 37%, hsla(156, 100%, 50%, 0.12) 0px, transparent 50%),
+    background: radial-gradient(at 27% 37%, hsla(217, 91%, 60%, 0.12) 0px, transparent 50%),
                 radial-gradient(at 97% 21%, hsla(243, 96%, 70%, 0.12) 0px, transparent 50%),
-                radial-gradient(at 52% 99%, hsla(156, 100%, 50%, 0.08) 0px, transparent 50%);
+                radial-gradient(at 52% 99%, hsla(217, 91%, 60%, 0.08) 0px, transparent 50%);
   }
 
   /* Glassmorphism effects */
