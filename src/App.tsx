@@ -9,6 +9,7 @@ import About from "./pages/About";
 import Audit from "./pages/Audit";
 import ThankYou from "./pages/ThankYou";
 import Resume from "./pages/Resume";
+import Pricing from "./pages/Pricing";
 import NotFound from "./pages/NotFound";
 import CalgaryElectricianWebsites from "./pages/services/CalgaryElectricianWebsites";
 import CalgaryRenovationWebsites from "./pages/services/CalgaryRenovationWebsites";
@@ -34,6 +35,7 @@ const AppRoutes = () => {
           <Route path="/audit" element={<Audit />} />
           <Route path="/thank-you" element={<ThankYou />} />
           <Route path="/resume" element={<Resume />} />
+          <Route path="/pricing" element={<Pricing />} />
           <Route path="/services/calgary-electrician-websites" element={<CalgaryElectricianWebsites />} />
           <Route path="/services/calgary-renovation-contractor-websites" element={<CalgaryRenovationWebsites />} />
           <Route path="/services/calgary-industrial-manufacturing-websites" element={<CalgaryIndustrialWebsites />} />

@@ -20,7 +20,7 @@ const packages = [
   },
   {
     name: "DFY Lite",
-    price: "$1,997",
+    price: "$997",
     description: "7-day launch - Everything in DIY, done for you",
     features: [
       "Everything in DIY Template",
@@ -33,22 +33,6 @@ const packages = [
       "7-Day Launch or $500 Back guarantee",
     ],
     popular: true,
-  },
-  {
-    name: "DFY Pro",
-    price: "$4,997",
-    description: "Full-service solution with advanced automation",
-    features: [
-      "Everything in DFY Lite",
-      "Facebook leads capture + CRM",
-      "AI voice follow-up (3 follow-ups + 1 call tracking)",
-      "Monthly reporting + optimization",
-      "Landing page A/B testing",
-      "Quarterly strategy sessions",
-      "Priority support + direct access",
-      "Launch guarantee + 30-day optimization trial",
-    ],
-    popular: false,
   },
 ];
 
