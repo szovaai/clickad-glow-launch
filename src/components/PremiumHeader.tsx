@@ -4,7 +4,14 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { TrendingUp, BarChart3, Search, Smartphone, Zap, Shield, Target } from "lucide-react";
+import { TrendingUp, BarChart3, Search, Smartphone, Zap, Shield, Target, ArrowRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { heroLeadFormSchema, type HeroLeadFormData } from "@/lib/validation";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "@/hooks/use-toast";
+import { getUTMFromSession } from "@/lib/utm";
 import {
   Select,
   SelectContent,
@@ -22,7 +29,7 @@ import {
 } from "@/components/ui/sheet";
 import { Checkbox } from "@/components/ui/checkbox";
 import { cn } from "@/lib/utils";
-import { ArrowRight, Star, Sparkles, Menu } from "lucide-react";
+import { Star, Sparkles, Menu } from "lucide-react";
 import logo from "@/assets/logo-clickad.png";
 
 const services = [
@@ -110,7 +117,7 @@ export default function PremiumHeader() {
             transition={{ delay: 0.2, duration: 0.6 }}
             className="relative"
           >
-            <HeroShowcase />
+            <HeroLeadForm />
           </motion.div>
         </div>
       </section>
@@ -408,6 +415,245 @@ function QuoteForm() {
         </Button>
       </div>
     </form>
+  );
+}
+
+function HeroLeadForm() {
+  const navigate = useNavigate();
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
+  const [hasStarted, setHasStarted] = React.useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setValue,
+    watch,
+  } = useForm<HeroLeadFormData>({
+    resolver: zodResolver(heroLeadFormSchema),
+  });
+
+  const budget = watch("budget");
+
+  React.useEffect(() => {
+    // Track form view
+    if (window.Trakrly) {
+      window.Trakrly.click({ event: 'hero_form_view' });
+    }
+  }, []);
+
+  const handleFormStart = () => {
+    if (!hasStarted) {
+      setHasStarted(true);
+      if (window.Trakrly) {
+        window.Trakrly.click({ event: 'hero_form_start' });
+      }
+    }
+  };
+
+  const onSubmit = async (data: HeroLeadFormData) => {
+    setIsSubmitting(true);
+    
+    try {
+      // Extract company name from full name (first word)
+      const companyName = data.name.split(' ')[0] + "'s Business";
+      
+      // Create company record
+      const { data: company, error: companyError } = await supabase
+        .from('companies')
+        .insert({
+          name: companyName,
+        })
+        .select()
+        .single();
+
+      if (companyError) throw companyError;
+
+      // Create contact record
+      const { data: contact, error: contactError } = await supabase
+        .from('contacts')
+        .insert({
+          first_name: data.name,
+          email: data.email,
+          company_id: company.id,
+        })
+        .select()
+        .single();
+
+      if (contactError) throw contactError;
+
+      // Get UTM params
+      const utmParams = getUTMFromSession();
+
+      // Create audit record with project details and budget in notes
+      const notes = [
+        data.projectDetails ? `Project: ${data.projectDetails}` : '',
+        `Budget: ${data.budget}`,
+      ].filter(Boolean).join('\n');
+
+      const { data: audit, error: auditError } = await supabase
+        .from('audits')
+        .insert({
+          company_id: company.id,
+          notes: notes,
+          utm_source: utmParams.utm_source,
+          utm_medium: utmParams.utm_medium,
+          utm_campaign: utmParams.utm_campaign,
+          utm_term: utmParams.utm_term,
+          utm_content: utmParams.utm_content,
+        })
+        .select()
+        .single();
+
+      if (auditError) throw auditError;
+
+      // Send notification email
+      const { error: emailError } = await supabase.functions.invoke('send-audit-notification', {
+        body: {
+          companyName: company.name,
+          contactName: data.name,
+          email: data.email,
+          phone: '',
+          website: '',
+          industry: '',
+          notes: notes,
+        },
+      });
+
+      if (emailError) {
+        console.error('Email notification error:', emailError);
+      }
+
+      // Track conversion
+      if (window.Trakrly) {
+        window.Trakrly.click({
+          event: 'hero_form_submitted',
+          budget: data.budget,
+          has_project_details: !!data.projectDetails,
+        });
+      }
+
+      toast({
+        title: "Request Received!",
+        description: "We'll be in touch within 24 hours.",
+      });
+
+      // Redirect to thank you page
+      setTimeout(() => {
+        navigate('/thank-you');
+      }, 1000);
+
+    } catch (error: any) {
+      console.error('Form submission error:', error);
+      
+      if (window.Trakrly) {
+        window.Trakrly.click({
+          event: 'hero_form_error',
+          error: error.message,
+        });
+      }
+
+      toast({
+        title: "Submission Error",
+        description: "Please try again or contact us directly at jason@clickad.media",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <div className="glass rounded-2xl p-8 border border-primary/20">
+      <div className="mb-6">
+        <h3 className="text-2xl font-bold text-foreground mb-2">Get Started Today</h3>
+        <p className="text-muted-foreground">Tell us about your project and we'll get back to you within 24 hours.</p>
+      </div>
+
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+        <div>
+          <Label htmlFor="name" className="text-foreground">Name *</Label>
+          <Input
+            id="name"
+            {...register("name")}
+            onFocus={handleFormStart}
+            disabled={isSubmitting}
+            className="mt-1.5 bg-background/50 border-border"
+            placeholder="John Doe"
+          />
+          {errors.name && (
+            <p className="text-sm text-destructive mt-1">{errors.name.message}</p>
+          )}
+        </div>
+
+        <div>
+          <Label htmlFor="email" className="text-foreground">Email *</Label>
+          <Input
+            id="email"
+            type="email"
+            {...register("email")}
+            onFocus={handleFormStart}
+            disabled={isSubmitting}
+            className="mt-1.5 bg-background/50 border-border"
+            placeholder="john@example.com"
+          />
+          {errors.email && (
+            <p className="text-sm text-destructive mt-1">{errors.email.message}</p>
+          )}
+        </div>
+
+        <div>
+          <Label htmlFor="projectDetails" className="text-foreground">Project Details</Label>
+          <Textarea
+            id="projectDetails"
+            {...register("projectDetails")}
+            onFocus={handleFormStart}
+            disabled={isSubmitting}
+            className="mt-1.5 bg-background/50 border-border min-h-[80px]"
+            placeholder="Brief description of what you need..."
+          />
+          {errors.projectDetails && (
+            <p className="text-sm text-destructive mt-1">{errors.projectDetails.message}</p>
+          )}
+        </div>
+
+        <div>
+          <Label htmlFor="budget" className="text-foreground">Budget Range *</Label>
+          <Select
+            onValueChange={(value) => setValue("budget", value)}
+            disabled={isSubmitting}
+            value={budget}
+          >
+            <SelectTrigger className="mt-1.5 bg-background/50 border-border">
+              <SelectValue placeholder="Select your budget" />
+            </SelectTrigger>
+            <SelectContent className="bg-popover border-border z-50">
+              <SelectItem value="$500-$1k">$500 - $1,000</SelectItem>
+              <SelectItem value="$1k-$5k">$1,000 - $5,000</SelectItem>
+              <SelectItem value="$5k+">$5,000+</SelectItem>
+              <SelectItem value="Not sure yet">Not sure yet</SelectItem>
+            </SelectContent>
+          </Select>
+          {errors.budget && (
+            <p className="text-sm text-destructive mt-1">{errors.budget.message}</p>
+          )}
+        </div>
+
+        <Button
+          type="submit"
+          disabled={isSubmitting}
+          className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
+          size="lg"
+        >
+          {isSubmitting ? "Submitting..." : "Get My Free Audit"}
+          {!isSubmitting && <ArrowRight className="ml-2 h-4 w-4" />}
+        </Button>
+
+        <p className="text-xs text-muted-foreground text-center">
+          No spam. We respect your privacy.
+        </p>
+      </form>
+    </div>
   );
 }
 
