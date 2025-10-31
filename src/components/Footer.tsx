@@ -17,13 +17,6 @@ export const Footer = () => {
             </p>
             <div className="flex flex-col gap-2 mt-4">
               <a 
-                href="tel:587-575-9416" 
-                className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-2"
-              >
-                <Phone className="h-4 w-4" />
-                587-575-9416
-              </a>
-              <a 
                 href="mailto:szovajason@gmail.com" 
                 className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-2"
               >

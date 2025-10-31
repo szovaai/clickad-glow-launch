@@ -1,7 +1,7 @@
 export const electricianContent = {
   meta: {
     title: "Calgary Electrician Website Design | Get More Emergency Calls | ClickAd Media",
-    description: "Calgary electrician websites that convert. More emergency calls, quote requests & panel upgrade leads. Pay only if you love the preview. 587-575-9416",
+    description: "Calgary electrician websites that convert. More emergency calls, quote requests & panel upgrade leads. Pay only if you love the preview.",
   },
   hero: {
     title: "Calgary Electrician Website Design That Books More Jobs",
@@ -84,7 +84,6 @@ export const electricianContent = {
     "provider": {
       "@type": "Organization",
       "name": "ClickAd Media",
-      "telephone": "587-575-9416",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Calgary",

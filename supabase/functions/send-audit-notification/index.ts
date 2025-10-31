@@ -64,7 +64,7 @@ const handler = async (req: Request): Promise<Response> => {
           <li>Watch for my Loom (check spam if you don't see it)</li>
           <li>Book a quick 15-min call if you want to move forward</li>
         </ol>
-        <p>Questions? Just reply to this email or call <strong>587-575-9416</strong>.</p>
+        <p>Questions? Just reply to this email.</p>
         <p>—Jason Szova<br>ClickAd Media</p>
       `,
     });

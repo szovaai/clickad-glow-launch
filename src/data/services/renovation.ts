@@ -1,7 +1,7 @@
 export const renovationContent = {
   meta: {
     title: "Calgary Renovation Contractor Websites | More Kitchen & Bathroom Leads | ClickAd Media",
-    description: "Calgary renovation websites that sell projects. Showcase your portfolio, get quote requests, rank on Google. Pay only if you love it. 587-575-9416",
+    description: "Calgary renovation websites that sell projects. Showcase your portfolio, get quote requests, rank on Google. Pay only if you love it.",
   },
   hero: {
     title: "Calgary Renovation Websites That Win More Projects",
@@ -84,7 +84,6 @@ export const renovationContent = {
     "provider": {
       "@type": "Organization",
       "name": "ClickAd Media",
-      "telephone": "587-575-9416",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Calgary",

@@ -1,7 +1,7 @@
 export const industrialContent = {
   meta: {
     title: "Calgary Industrial & Manufacturing Website Design | B2B Lead Generation | ClickAd Media",
-    description: "Industrial websites for Calgary manufacturers. Spec sheets, certifications, RFQ forms that convert. B2B-focused, mobile-ready. 587-575-9416",
+    description: "Industrial websites for Calgary manufacturers. Spec sheets, certifications, RFQ forms that convert. B2B-focused, mobile-ready.",
   },
   hero: {
     title: "Calgary Industrial Website Design That Wins Contracts",
@@ -84,7 +84,6 @@ export const industrialContent = {
     "provider": {
       "@type": "Organization",
       "name": "ClickAd Media",
-      "telephone": "587-575-9416",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Calgary",

@@ -112,7 +112,7 @@ const ThankYou = () => {
           <div className="text-center mt-12">
             <p className="text-muted-foreground mb-2">Questions? Need to change something?</p>
             <p className="font-semibold">
-              Call <a href="tel:587-575-9416" className="text-primary hover:underline">587-575-9416</a> or email{" "}
+              Email{" "}
               <a href="mailto:szovajason@gmail.com" className="text-primary hover:underline">szovajason@gmail.com</a>
             </p>
           </div>

@@ -219,7 +219,7 @@ const Audit = () => {
                     <FormItem>
                       <FormLabel>Phone</FormLabel>
                       <FormControl>
-                        <Input type="tel" placeholder="587-575-9416" {...field} />
+                        <Input type="tel" placeholder="(403) 555-1234" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>

@@ -26,12 +26,6 @@ const Resume = () => {
                   <span>Calgary, Canada • Remote</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Phone className="h-4 w-4" />
-                  <a href="tel:587-575-9416" className="hover:text-primary transition-colors">
-                    587-575-9416
-                  </a>
-                </div>
-                <div className="flex items-center gap-2">
                   <Mail className="h-4 w-4" />
                   <a href="mailto:szovajason@gmail.com" className="hover:text-primary transition-colors">
                     szovajason@gmail.com
