@@ -186,6 +186,75 @@ export type Database = {
         }
         Relationships: []
       }
+      pixel_events: {
+        Row: {
+          ad_id: string | null
+          adgroup_id: string | null
+          campaign_id: string | null
+          created_at: string | null
+          creative_id: string | null
+          event_type: string
+          extra: Json | null
+          id: string
+          placement: string | null
+          referrer: string | null
+          session_id: string
+          tt_content: string | null
+          ttclid: string | null
+          url: string
+          utm_campaign: string | null
+          utm_content: string | null
+          utm_medium: string | null
+          utm_source: string | null
+          utm_term: string | null
+          visitor_id: string
+        }
+        Insert: {
+          ad_id?: string | null
+          adgroup_id?: string | null
+          campaign_id?: string | null
+          created_at?: string | null
+          creative_id?: string | null
+          event_type: string
+          extra?: Json | null
+          id?: string
+          placement?: string | null
+          referrer?: string | null
+          session_id: string
+          tt_content?: string | null
+          ttclid?: string | null
+          url: string
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+          visitor_id: string
+        }
+        Update: {
+          ad_id?: string | null
+          adgroup_id?: string | null
+          campaign_id?: string | null
+          created_at?: string | null
+          creative_id?: string | null
+          event_type?: string
+          extra?: Json | null
+          id?: string
+          placement?: string | null
+          referrer?: string | null
+          session_id?: string
+          tt_content?: string | null
+          ttclid?: string | null
+          url?: string
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+          visitor_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

@@ -135,9 +135,14 @@ const Audit = () => {
         // Don't fail the submission if email fails - data is saved
       }
 
-      // 5. Track with Trakrly
-      if (typeof window !== "undefined" && (window as any).trackAuditSubmit) {
-        (window as any).trackAuditSubmit();
+      // 5. Track audit submission with Trakrly
+      if (window.Trakrly) {
+        window.Trakrly.click({
+          event: 'audit_submitted',
+          company_name: data.companyName,
+          industry: data.industry,
+          has_website: !!data.website,
+        });
       }
 
       // 6. Navigate to thank you page

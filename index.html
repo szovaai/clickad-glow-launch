@@ -65,24 +65,26 @@
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
     
-    <!-- Trakrly Analytics -->
-    <script defer src="https://trkr.run/p.js" data-site="CLICKADMEDIA"></script>
+    <!-- Trakrly Custom Pixel -->
     <script>
-      window.addEventListener('load', function() {
-        // Track audit form submissions
-        window.trackAuditSubmit = function() {
-          if (typeof trkr !== 'undefined') {
-            trkr.event('audit_submitted');
-          }
-        };
-        
-        // Track quote form submissions
-        window.trackQuoteSubmit = function() {
-          if (typeof trkr !== 'undefined') {
-            trkr.event('quote_submitted');
-          }
-        };
-      });
+!function(){
+  const ED='https://mxtflaaccdpfvhulhuvp.supabase.co/functions/v1';
+  const S=localStorage, KVID='cm_vid', KSID='cm_sid';
+  const vid=S.getItem(KVID)|| (S.setItem(KVID, crypto.randomUUID()), S.getItem(KVID));
+  const sid=S.getItem(KSID)|| (S.setItem(KSID, crypto.randomUUID()), S.getItem(KSID));
+  const u=new URL(location.href);
+  const U=['utm_source','utm_medium','utm_campaign','utm_term','utm_content','ad_id','creative_id','placement','ttclid','tt_content','campaign_id','adgroup_id'];
+  function pack(type, extra){
+    const o={type, url:location.href, ref:document.referrer, vid, sid};
+    U.forEach(k=>o[k]=u.searchParams.get(k)||null);
+    return Object.assign(o, extra||{});
+  }
+  function send(type, extra){
+    fetch(ED+'/pixel-collect',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(pack(type,extra))}).catch(()=>{});
+  }
+  window.Trakrly={pv:()=>send('pageview'), click:(e)=>send('click',e)};
+  Trakrly.pv();
+}();
     </script>
   </body>
 </html>
