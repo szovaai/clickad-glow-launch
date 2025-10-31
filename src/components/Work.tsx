@@ -66,11 +66,11 @@ export const Work = () => {
               key={index}
               className="group relative rounded-lg border border-border bg-card overflow-hidden transition-all duration-300 hover:border-primary/50 glow-hover"
             >
-              <div className="relative overflow-hidden bg-muted" style={{ minHeight: '300px', maxHeight: '400px' }}>
+              <div className="relative overflow-hidden bg-muted aspect-[4/3]">
                 <img
                   src={project.image}
                   alt={`${project.name} website screenshot`}
-                  className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
               </div>
               
