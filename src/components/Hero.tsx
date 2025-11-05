@@ -1,10 +1,10 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Zap } from "lucide-react";
 import heroImage from "@/assets/hero-core-grid.jpg";
 
 export const Hero = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-26 md:pt-28">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 md:pt-24">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <img 
@@ -21,13 +21,18 @@ export const Hero = () => {
       {/* Content */}
       <div className="container relative z-10 px-6 py-20">
         <div className="max-w-4xl mx-auto text-center space-y-8 animate-fade-in">
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm">
+            <Zap className="h-4 w-4 text-primary" />
+            <span className="text-sm font-medium">Calgary • Service Businesses • 7-Day Launch</span>
+          </div>
+          
           <h1 className="text-5xl md:text-7xl font-heading font-bold leading-tight">
-            Calgary Website Design for Service Based Businesses That{" "}
-            <span className="text-primary glow-text">Works as Hard as You Do</span>
+            WE BUILD <span className="text-primary glow-text">CONVERSION MACHINES</span>
           </h1>
           
           <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto">
-            Calgary's trusted website design agency for service-based businesses. We build conversion machines that turn traffic into paying customers. 7-Day Launch guarantee. Serving Calgary & Alberta.
+            Not just websites. We architect AI-powered digital ecosystems that turn clicks into customers and visitors into revenue.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
