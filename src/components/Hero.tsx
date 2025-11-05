@@ -4,7 +4,7 @@ import heroImage from "@/assets/hero-core-grid.jpg";
 
 export const Hero = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 md:pt-24">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 md:pt-20">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <img 
@@ -19,7 +19,7 @@ export const Hero = () => {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-radial-glow opacity-60 blur-3xl pointer-events-none" />
       
       {/* Content */}
-      <div className="container relative z-10 px-6 py-20">
+      <div className="container relative z-10 px-6 pt-8 pb-20">
         <div className="max-w-4xl mx-auto text-center space-y-8 animate-fade-in">
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm">
