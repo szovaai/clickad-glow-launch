@@ -4,7 +4,7 @@ import heroImage from "@/assets/hero-core-grid.jpg";
 
 export const Hero = () => {
   return (
-    <section className="relative min-h-screen flex items-start justify-center overflow-hidden pt-24 md:pt-28">
+    <section className="relative min-h-screen flex items-start justify-center overflow-hidden pt-20 md:pt-24">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <img 
