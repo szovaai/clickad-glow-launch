@@ -11,6 +11,7 @@ import Audit from "./pages/Audit";
 import ThankYou from "./pages/ThankYou";
 import Resume from "./pages/Resume";
 import Pricing from "./pages/Pricing";
+import Legal from "./pages/Legal";
 import NotFound from "./pages/NotFound";
 import CalgaryElectricianWebsites from "./pages/services/CalgaryElectricianWebsites";
 import CalgaryRenovationWebsites from "./pages/services/CalgaryRenovationWebsites";
@@ -46,6 +47,7 @@ const AppRoutes = () => {
           <Route path="/calgary-website-design" element={<CalgaryWebsiteDesign />} />
           <Route path="/loom-library" element={<LoomLibrary />} />
           <Route path="/packages/ultimate-suite" element={<UltimateSuite />} />
+          <Route path="/legal" element={<Legal />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
