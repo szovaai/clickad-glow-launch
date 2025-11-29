@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { ChatbotWidget } from "@/components/chatbot/ChatbotWidget";
+import { trackPageView } from "@/lib/analytics";
 import Index from "./pages/Index";
 import About from "./pages/About";
 import Audit from "./pages/Audit";
@@ -27,10 +28,13 @@ const AppRoutes = () => {
   const location = useLocation();
 
   useEffect(() => {
-    // Track pageview on route change
+    // Track pageview with Trakrly
     if (window.Trakrly) {
       window.Trakrly.pv();
     }
+
+    // Track pageview with GA4
+    trackPageView(location.pathname);
   }, [location.pathname]);
 
   return (

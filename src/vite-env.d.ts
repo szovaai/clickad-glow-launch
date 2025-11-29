@@ -7,4 +7,6 @@ interface TrakrlyAPI {
 
 interface Window {
   Trakrly?: TrakrlyAPI;
+  gtag?: (...args: any[]) => void;
+  dataLayer?: any[];
 }

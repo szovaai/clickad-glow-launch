@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
+import { trackFormSubmission } from "@/lib/analytics";
 
 const leadSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100),
@@ -33,6 +34,11 @@ export const HeroLeadForm = () => {
       });
 
       if (error) throw error;
+
+      // Track form submission with GA4
+      trackFormSubmission('hero_lead_form', {
+        has_phone: !!data.phone,
+      });
 
       toast.success("Thanks! We'll be in touch soon.");
       reset();
