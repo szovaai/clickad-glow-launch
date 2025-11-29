@@ -25,7 +25,7 @@ export const testimonials: Testimonial[] = [
     rating: 5
   },
   {
-    quote: "Finally, a website that actually brings in customers instead of just sitting there looking pretty.",
+    quote: "The website does a great job showing our curbing work and making it easy for homeowners to request quotes. More residential projects coming through now.",
     author: "Wes H",
     role: "Owner",
     company: "Kwik Kerb Fort MacMurray",
