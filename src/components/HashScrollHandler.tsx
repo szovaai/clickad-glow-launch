@@ -1,6 +1,11 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
+const getHeaderHeight = () => {
+  const header = document.querySelector('header');
+  return header ? header.offsetHeight + 20 : 100; // Add 20px padding
+};
+
 export const HashScrollHandler = () => {
   const location = useLocation();
 
@@ -10,7 +15,7 @@ export const HashScrollHandler = () => {
       setTimeout(() => {
         const element = document.getElementById(sectionId);
         if (element) {
-          const offset = 100; // Account for fixed header
+          const offset = getHeaderHeight();
           const top = element.getBoundingClientRect().top + window.pageYOffset - offset;
           window.scrollTo({ top, behavior: 'smooth' });
         }
