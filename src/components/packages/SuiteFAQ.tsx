@@ -6,12 +6,12 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-export const SuiteFAQ = () => {
-  const faqs = [
-    {
-      question: "What's the typical timeline from start to launch?",
-      answer: "Most projects are completed within 4 weeks. This includes discovery (30 minutes), strategy & design (Week 1), development (Weeks 2-3), and launch & training (Week 4). Complex projects may take longer, which we'll discuss during the discovery call."
-    },
+// Export FAQ data for schema generation
+export const suiteFAQs = [
+  {
+    question: "What's the typical timeline from start to launch?",
+    answer: "Most projects are completed within 4 weeks. This includes discovery (30 minutes), strategy & design (Week 1), development (Weeks 2-3), and launch & training (Week 4). Complex projects may take longer, which we'll discuss during the discovery call."
+  },
     {
       question: "Can I see examples of your work?",
       answer: "Absolutely! We have a portfolio showcasing our work for Calgary businesses across various industries including electricians, renovation contractors, and industrial companies. You can view our work in the portfolio section or request specific examples during your strategy call."
@@ -36,8 +36,9 @@ export const SuiteFAQ = () => {
       question: "What makes this package different from template websites?",
       answer: "Unlike template websites, every aspect of your site is custom-designed to reflect your unique brand and business goals. You get professional copywriting, a branding package, strategic design, and 3 months of hands-on support—not just a one-size-fits-all template."
     }
-  ];
+];
 
+export const SuiteFAQ = () => {
   return (
     <section id="faq" className="py-20 md:py-32 bg-gradient-to-b from-background/50 to-background">
       <div className="container mx-auto px-4">
@@ -64,7 +65,7 @@ export const SuiteFAQ = () => {
           className="max-w-3xl mx-auto"
         >
           <Accordion type="single" collapsible className="space-y-4">
-            {faqs.map((faq, index) => (
+            {suiteFAQs.map((faq, index) => (
               <AccordionItem
                 key={index}
                 value={`item-${index}`}

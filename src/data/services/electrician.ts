@@ -77,20 +77,40 @@ export const electricianContent = {
       answer: "Pay only if you love the preview. After the free audit, we'll quote a flat fee—no hidden costs, no ongoing charges.",
     },
   ],
-  schema: {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    "serviceType": "Electrician Website Design",
-    "provider": {
-      "@type": "Organization",
-      "name": "ClickAd Media",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Calgary",
-        "addressRegion": "AB",
-        "addressCountry": "CA",
+  schema: [
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "serviceType": "Electrician Website Design",
+      "provider": {
+        "@type": "Organization",
+        "name": "ClickAd Media",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Calgary",
+          "addressRegion": "AB",
+          "addressCountry": "CA",
+        },
       },
+      "areaServed": "Calgary, AB",
     },
-    "areaServed": "Calgary, AB",
-  },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.clickadmedia.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Calgary Electrician Websites",
+          "item": "https://www.clickadmedia.com/calgary-electrician-websites"
+        }
+      ]
+    }
+  ],
 };

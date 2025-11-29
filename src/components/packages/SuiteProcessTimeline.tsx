@@ -1,14 +1,14 @@
 import { motion } from "framer-motion";
 import { Phone, Lightbulb, Code, Rocket, HeadphonesIcon } from "lucide-react";
 
-export const SuiteProcessTimeline = () => {
-  const steps = [
-    {
-      icon: Phone,
-      title: "Discovery Call",
-      duration: "30 Minutes",
-      description: "We learn about your business, goals, and ideal customers to create a tailored strategy."
-    },
+// Export steps data for schema generation
+export const suiteProcessSteps = [
+  {
+    icon: Phone,
+    title: "Discovery Call",
+    duration: "30 Minutes",
+    description: "We learn about your business, goals, and ideal customers to create a tailored strategy."
+  },
     {
       icon: Lightbulb,
       title: "Strategy & Design",
@@ -33,8 +33,9 @@ export const SuiteProcessTimeline = () => {
       duration: "3 Months",
       description: "We're here when you need us with priority support and minor updates included."
     }
-  ];
+];
 
+export const SuiteProcessTimeline = () => {
   return (
     <section id="process" className="py-20 md:py-32 bg-gradient-to-b from-background/50 to-background">
       <div className="container mx-auto px-4">
@@ -54,7 +55,7 @@ export const SuiteProcessTimeline = () => {
         </motion.div>
 
         <div className="max-w-4xl mx-auto">
-          {steps.map((step, index) => {
+          {suiteProcessSteps.map((step, index) => {
             const Icon = step.icon;
             return (
               <motion.div
@@ -66,7 +67,7 @@ export const SuiteProcessTimeline = () => {
                 className="relative flex gap-6 pb-12 last:pb-0"
               >
                 {/* Timeline Line */}
-                {index !== steps.length - 1 && (
+                {index !== suiteProcessSteps.length - 1 && (
                   <div className="absolute left-6 top-16 bottom-0 w-0.5 bg-gradient-to-b from-primary/50 to-primary/10" />
                 )}
 

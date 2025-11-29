@@ -34,24 +34,53 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "ProfessionalService",
+      "@type": "Organization",
       "name": "ClickAd Media",
-      "description": "Calgary website design for service-based businesses",
+      "legalName": "ClickAd Media",
       "url": "https://www.clickadmedia.com",
+      "logo": "https://www.clickadmedia.com/logo.png",
+      "foundingDate": "2014",
+      "description": "Calgary website design agency specializing in conversion-focused websites for service-based businesses",
       "areaServed": {
-        "@type": "City",
+        "@type": "Place",
         "name": "Calgary",
-        "containedIn": {
-          "@type": "State",
-          "name": "Alberta",
-          "containedIn": {
-            "@type": "Country",
-            "name": "Canada"
-          }
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Calgary",
+          "addressRegion": "AB",
+          "addressCountry": "CA"
         }
+      },
+      "knowsAbout": ["Website Design", "Web Development", "SEO", "Conversion Optimization", "Local SEO", "Digital Marketing"],
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Calgary",
+        "addressRegion": "AB",
+        "addressCountry": "CA"
       },
       "serviceType": ["Website Design", "Web Development", "Digital Marketing", "SEO Services"],
       "priceRange": "$$"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "ClickAd Media",
+      "url": "https://www.clickadmedia.com",
+      "description": "Calgary website design for service-based businesses",
+      "publisher": {
+        "@type": "Organization",
+        "name": "ClickAd Media"
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://www.clickadmedia.com/?s={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
     }
     </script>
     <meta property="og:title" content="Calgary Website Design for Service Based Businesses | ClickAd Media">

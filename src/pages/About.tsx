@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Zap, Target, Layers, TrendingUp, Brain, Wrench } from "lucide-react";
+import { SEOHead } from "@/components/SEOHead";
+import { generateAboutPageSchema } from "@/lib/schema";
 
 const beliefs = [
   {
@@ -45,8 +47,17 @@ const metrics = [
 ];
 
 const About = () => {
+  const schemas = [generateAboutPageSchema()];
+
   return (
     <div className="min-h-screen">
+      <SEOHead
+        title="About ClickAd Media | Calgary's Conversion-Focused Web Design Agency"
+        description="Learn about ClickAd Media's mission to build conversion machines, not just websites. 10+ years of experience helping Calgary service businesses dominate their markets."
+        canonical="https://www.clickadmedia.com/about"
+        keywords="about ClickAd Media, Calgary web design agency, conversion-focused websites"
+        schemas={schemas}
+      />
       <Navigation />
       <main className="pt-8 md:pt-12">
         {/* Hero Section */}

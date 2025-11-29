@@ -4,6 +4,8 @@ import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { LoomLibraryGrid } from "@/components/loom/LoomLibraryGrid";
 import { Button } from "@/components/ui/button";
+import { SEOHead } from "@/components/SEOHead";
+import { generateCollectionPageSchema } from "@/lib/schema";
 
 declare global {
   interface Window {
@@ -14,30 +16,12 @@ declare global {
 }
 
 export default function LoomLibrary() {
-  useEffect(() => {
-    // Set meta tags
-    document.title = "Free Calgary Website Audits | 60-Second Video Reviews | ClickAd Media";
-    
-    let metaDesc = document.querySelector('meta[name="description"]');
-    if (!metaDesc) {
-      metaDesc = document.createElement('meta');
-      metaDesc.setAttribute('name', 'description');
-      document.head.appendChild(metaDesc);
-    }
-    metaDesc.setAttribute(
-      'content',
-      'Watch free 60-second website audits of Calgary trade businesses. See real improvements we\'d make to electrician, renovation, and industrial websites.'
-    );
-
-    // Track page view
-    if (window.trakrly) {
-      window.trakrly.track("loom_library_viewed", {
-        page: "/loom-library",
-      });
-    }
-
-    // Add Schema.org markup
-    const schema = {
+  const schemas = [
+    generateCollectionPageSchema(
+      "Calgary Website Audit Videos",
+      "Free 60-second website audits for Calgary trade businesses. Watch real improvements we'd make to electrician, renovation, and industrial websites."
+    ),
+    {
       "@context": "https://schema.org",
       "@type": "VideoGallery",
       "name": "Calgary Website Audit Videos",
@@ -45,23 +29,29 @@ export default function LoomLibrary() {
       "provider": {
         "@type": "Organization",
         "name": "ClickAd Media",
-        "url": "https://clickad.media"
+        "url": "https://www.clickadmedia.com"
       }
-    };
-
-    const scriptId = 'schema-org-jsonld';
-    let schemaScript = document.getElementById(scriptId);
-    if (!schemaScript) {
-      schemaScript = document.createElement('script');
-      schemaScript.id = scriptId;
-      document.head.appendChild(schemaScript);
     }
-    (schemaScript as HTMLScriptElement).type = 'application/ld+json';
-    schemaScript.textContent = JSON.stringify(schema);
+  ];
+
+  useEffect(() => {
+    // Track page view
+    if (window.trakrly) {
+      window.trakrly.track("loom_library_viewed", {
+        page: "/loom-library",
+      });
+    }
   }, []);
 
   return (
     <div className="min-h-screen">
+      <SEOHead
+        title="Free Calgary Website Audits | 60-Second Video Reviews | ClickAd Media"
+        description="Watch free 60-second website audits of Calgary trade businesses. See real improvements we'd make to electrician, renovation, and industrial websites."
+        canonical="https://www.clickadmedia.com/loom-library"
+        keywords="free website audit Calgary, website review, Calgary website analysis"
+        schemas={schemas}
+      />
       <Navigation />
 
       {/* Hero Section */}
