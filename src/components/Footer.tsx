@@ -1,7 +1,8 @@
 import logo from "@/assets/logo-clickad.png";
-import { Phone, Mail } from "lucide-react";
+import { Mail, Linkedin, Instagram, Twitter } from "lucide-react";
 import { Link } from "react-router-dom";
 import { scrollToSection } from "@/lib/navigation";
+import { Button } from "@/components/ui/button";
 
 export const Footer = () => {
   return (
@@ -31,15 +32,7 @@ export const Footer = () => {
             <h3 className="font-heading font-semibold mb-4">Company</h3>
             <ul className="space-y-2 text-sm">
               <li><Link to="/about" className="text-muted-foreground hover:text-primary transition-colors">About</Link></li>
-              <li>
-                <a 
-                  href="#work" 
-                  onClick={(e) => { e.preventDefault(); scrollToSection('work'); }}
-                  className="text-muted-foreground hover:text-primary transition-colors cursor-pointer"
-                >
-                  Case Studies
-                </a>
-              </li>
+              <li><Link to="/home" className="text-muted-foreground hover:text-primary transition-colors">Case Studies</Link></li>
               <li>
                 <a 
                   href="#process" 
@@ -61,23 +54,65 @@ export const Footer = () => {
               <li><Link to="/pricing" className="text-muted-foreground hover:text-primary transition-colors">Pricing</Link></li>
               <li>
                 <a 
-                  href="#services" 
-                  onClick={(e) => { e.preventDefault(); scrollToSection('services'); }}
+                  href="#included" 
+                  onClick={(e) => { e.preventDefault(); scrollToSection('included'); }}
                   className="text-muted-foreground hover:text-primary transition-colors cursor-pointer"
                 >
-                  Services
+                  What's Included
                 </a>
               </li>
             </ul>
           </div>
         </div>
         
+        {/* CTA Section */}
+        <div className="pt-8 border-t border-primary/10 mb-8">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-6 p-8 bg-gradient-to-r from-primary/5 to-primary/10 rounded-lg border border-primary/20">
+            <div>
+              <h3 className="font-heading font-semibold text-xl mb-2">Ready to Transform Your Website?</h3>
+              <p className="text-muted-foreground">Get your free audit and see how we can help you grow.</p>
+            </div>
+            <Link to="/audit">
+              <Button size="lg" className="shadow-lg shadow-primary/20">
+                Get Free Audit
+              </Button>
+            </Link>
+          </div>
+        </div>
+        
         {/* Bottom */}
         <div className="pt-8 border-t border-primary/10 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
           <p>&copy; 2025 ClickAd Media. All rights reserved.</p>
-          <div className="flex gap-6">
-            <a href="#privacy" className="hover:text-primary transition-colors">Privacy</a>
-            <a href="#terms" className="hover:text-primary transition-colors">Terms</a>
+          <div className="flex items-center gap-6">
+            <div className="flex gap-4">
+              <a 
+                href="https://linkedin.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="hover:text-primary transition-colors"
+                aria-label="LinkedIn"
+              >
+                <Linkedin className="h-5 w-5" />
+              </a>
+              <a 
+                href="https://instagram.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="hover:text-primary transition-colors"
+                aria-label="Instagram"
+              >
+                <Instagram className="h-5 w-5" />
+              </a>
+              <a 
+                href="https://twitter.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="hover:text-primary transition-colors"
+                aria-label="Twitter"
+              >
+                <Twitter className="h-5 w-5" />
+              </a>
+            </div>
           </div>
         </div>
       </div>
