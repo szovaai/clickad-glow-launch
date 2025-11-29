@@ -77,20 +77,40 @@ export const renovationContent = {
       answer: "Absolutely. We pull in your 5-star reviews and display them prominently. Social proof is critical for big-ticket services.",
     },
   ],
-  schema: {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    "serviceType": "Renovation Contractor Website Design",
-    "provider": {
-      "@type": "Organization",
-      "name": "ClickAd Media",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Calgary",
-        "addressRegion": "AB",
-        "addressCountry": "CA",
+  schema: [
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "serviceType": "Renovation Contractor Website Design",
+      "provider": {
+        "@type": "Organization",
+        "name": "ClickAd Media",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Calgary",
+          "addressRegion": "AB",
+          "addressCountry": "CA",
+        },
       },
+      "areaServed": "Calgary, AB",
     },
-    "areaServed": "Calgary, AB",
-  },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.clickadmedia.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Calgary Renovation Websites",
+          "item": "https://www.clickadmedia.com/calgary-renovation-websites"
+        }
+      ]
+    }
+  ],
 };

@@ -77,20 +77,40 @@ export const industrialContent = {
       answer: "100% B2B. We use technical language, engineering-focused design, and procurement-friendly layouts. No consumer fluff.",
     },
   ],
-  schema: {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    "serviceType": "Industrial & Manufacturing Website Design",
-    "provider": {
-      "@type": "Organization",
-      "name": "ClickAd Media",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Calgary",
-        "addressRegion": "AB",
-        "addressCountry": "CA",
+  schema: [
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "serviceType": "Industrial & Manufacturing Website Design",
+      "provider": {
+        "@type": "Organization",
+        "name": "ClickAd Media",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Calgary",
+          "addressRegion": "AB",
+          "addressCountry": "CA",
+        },
       },
+      "areaServed": "Calgary, AB",
     },
-    "areaServed": "Calgary, AB",
-  },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.clickadmedia.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Calgary Industrial Websites",
+          "item": "https://www.clickadmedia.com/calgary-industrial-websites"
+        }
+      ]
+    }
+  ],
 };

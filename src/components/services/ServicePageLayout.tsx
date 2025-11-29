@@ -12,7 +12,8 @@ interface ServicePageLayoutProps {
   heroImage: string;
   metaTitle: string;
   metaDescription: string;
-  schema?: object;
+  schema?: object | object[];
+  breadcrumbs?: { name: string; url: string }[];
 }
 
 export function ServicePageLayout({
@@ -24,6 +25,7 @@ export function ServicePageLayout({
   metaTitle,
   metaDescription,
   schema,
+  breadcrumbs,
 }: ServicePageLayoutProps) {
   useEffect(() => {
     document.title = metaTitle;
@@ -38,15 +40,20 @@ export function ServicePageLayout({
 
     // Add Schema.org JSON-LD
     if (schema) {
-      const scriptId = 'schema-org-jsonld';
-      let schemaScript = document.getElementById(scriptId);
-      if (!schemaScript) {
-        schemaScript = document.createElement('script');
-        schemaScript.id = scriptId;
-        (schemaScript as HTMLScriptElement).type = 'application/ld+json';
+      // Remove old schema scripts
+      const oldSchemas = document.querySelectorAll('script[type="application/ld+json"].service-page-schema');
+      oldSchemas.forEach((script) => script.remove());
+
+      const schemasArray = Array.isArray(schema) ? schema : [schema];
+      
+      schemasArray.forEach((schemaItem, index) => {
+        const schemaScript = document.createElement('script');
+        schemaScript.type = 'application/ld+json';
+        schemaScript.className = 'service-page-schema';
+        schemaScript.id = `service-schema-${index}`;
+        schemaScript.textContent = JSON.stringify(schemaItem);
         document.head.appendChild(schemaScript);
-      }
-      schemaScript.textContent = JSON.stringify(schema);
+      });
     }
   }, [metaTitle, metaDescription, schema]);
 

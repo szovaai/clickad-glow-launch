@@ -233,6 +233,24 @@ export const calgaryWebsiteDesignContent = {
           }
         }
       ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.clickadmedia.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Calgary Website Design",
+          "item": "https://www.clickadmedia.com/calgary-website-design"
+        }
+      ]
     }
   ],
 };
