@@ -17,6 +17,7 @@ import CalgaryRenovationWebsites from "./pages/services/CalgaryRenovationWebsite
 import CalgaryIndustrialWebsites from "./pages/services/CalgaryIndustrialWebsites";
 import CalgaryWebsiteDesign from "./pages/services/CalgaryWebsiteDesign";
 import LoomLibrary from "./pages/LoomLibrary";
+import UltimateSuite from "./pages/packages/UltimateSuite";
 
 const queryClient = new QueryClient();
 
@@ -32,7 +33,8 @@ const AppRoutes = () => {
 
   return (
     <Routes>
-          <Route path="/" element={<Index />} />
+          <Route path="/" element={<UltimateSuite />} />
+          <Route path="/home" element={<Index />} />
           <Route path="/about" element={<About />} />
           <Route path="/audit" element={<Audit />} />
           <Route path="/thank-you" element={<ThankYou />} />
