@@ -5,7 +5,7 @@ import { testimonials } from "@/data/testimonials";
 
 export const SuiteTestimonials = () => {
   return (
-    <section className="py-20 md:py-32">
+    <section id="testimonials" className="py-20 md:py-32">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

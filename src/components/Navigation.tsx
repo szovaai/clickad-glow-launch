@@ -16,13 +16,14 @@ export const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const navLinks = [
-    { href: "#services", label: "Services" },
-    { href: "#work", label: "Work" },
-    { href: "#templates", label: "Templates" },
+    { href: "#included", label: "What's Included" },
     { href: "#process", label: "Process" },
+    { href: "#testimonials", label: "Testimonials" },
+    { href: "#pricing", label: "Pricing" },
   ];
 
   const companyLinks = [
+    { href: "/home", label: "Our Work" },
     { href: "/about", label: "About Us" },
     { href: "/loom-library", label: "Free Audits" },
     { href: "/blog", label: "Blog" },
