@@ -17,7 +17,7 @@ export const testimonials: Testimonial[] = [
     rating: 5
   },
   {
-    quote: "Our phone hasn't stopped ringing since the new website launched. Best investment we've made.",
+    quote: "The new site clearly communicates what we do and why clients should choose us. We're getting better qualified leads from the website now.",
     author: "Wes H",
     role: "Operations Manager",
     company: "Westlights",
