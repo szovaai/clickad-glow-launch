@@ -236,3 +236,52 @@ export function generateCollectionPageSchema(
     }
   };
 }
+
+export function generateBlogPostSchema(
+  title: string,
+  description: string,
+  publishDate: string,
+  author: string,
+  url: string
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": title,
+    "description": description,
+    "datePublished": publishDate,
+    "dateModified": publishDate,
+    "author": {
+      "@type": "Person",
+      "name": author
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "ClickAd Media",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.clickadmedia.com/logo.png"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": url
+    }
+  };
+}
+
+export function generateBlogListingSchema(posts: Array<{ title: string; url: string; publishDate: string }>) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": "ClickAd Media Blog",
+    "description": "Calgary website design insights, SEO tips, and digital marketing strategies",
+    "url": "https://www.clickadmedia.com/blog",
+    "blogPost": posts.map(post => ({
+      "@type": "BlogPosting",
+      "headline": post.title,
+      "url": post.url,
+      "datePublished": post.publishDate
+    }))
+  };
+}

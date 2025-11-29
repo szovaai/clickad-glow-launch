@@ -52,6 +52,7 @@ export const Footer = () => {
               <li><Link to="/audit" className="text-muted-foreground hover:text-primary transition-colors">Free Audit</Link></li>
               <li><Link to="/loom-library" className="text-muted-foreground hover:text-primary transition-colors">Audit Examples</Link></li>
               <li><Link to="/pricing" className="text-muted-foreground hover:text-primary transition-colors">Pricing</Link></li>
+              <li><Link to="/blog" className="text-muted-foreground hover:text-primary transition-colors">Blog</Link></li>
               <li>
                 <a 
                   href="#included" 
