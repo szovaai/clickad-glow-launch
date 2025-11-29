@@ -27,7 +27,6 @@ export const Navigation = () => {
     { href: "/about", label: "About Us" },
     { href: "/loom-library", label: "Free Audits" },
     { href: "/blog", label: "Blog" },
-    { href: "/pricing", label: "Pricing" },
   ];
 
   return (
