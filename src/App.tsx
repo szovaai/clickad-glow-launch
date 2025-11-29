@@ -28,6 +28,13 @@ const AppRoutes = () => {
   const location = useLocation();
 
   useEffect(() => {
+    // Initialize web vitals on first mount
+    import('@/lib/webVitals').then(({ initWebVitals }) => {
+      initWebVitals();
+    }).catch(console.error);
+  }, []);
+
+  useEffect(() => {
     // Track pageview with Trakrly
     if (window.Trakrly) {
       window.Trakrly.pv();
