@@ -50,7 +50,7 @@ const About = () => {
       <Navigation />
       <main className="pt-8 md:pt-12">
         {/* Hero Section */}
-        <section className="py-20 md:py-32">
+        <section className="py-16 md:py-24">
           <div className="container px-6">
             <div className="max-w-4xl mx-auto text-center space-y-8">
               <h1 className="text-5xl md:text-7xl font-heading font-bold glow-text">
@@ -60,7 +60,7 @@ const About = () => {
                 Not just websites. We architect AI-powered digital ecosystems that turn clicks into customers and visitors into revenue.
               </p>
               
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-12">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-8">
                 {metrics.map((metric, index) => (
                   <Card key={index} className="p-8 bg-card/50 border-primary/20 backdrop-blur-sm">
                     <div className="text-4xl md:text-5xl font-heading font-bold text-primary mb-2">
@@ -77,7 +77,7 @@ const About = () => {
         </section>
 
         {/* Our Story */}
-        <section className="py-20 md:py-32 bg-card/30">
+        <section className="py-16 md:py-20 bg-card/30">
           <div className="container px-6">
             <div className="max-w-4xl mx-auto space-y-8">
               <div className="text-center space-y-4 mb-12">
@@ -108,9 +108,9 @@ const About = () => {
         </section>
 
         {/* What We Believe */}
-        <section className="py-20 md:py-32">
+        <section className="py-16 md:py-24">
           <div className="container px-6">
-            <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
+            <div className="text-center max-w-3xl mx-auto mb-12 space-y-4">
               <h2 className="text-4xl md:text-5xl font-heading font-bold">
                 What We Believe
               </h2>
@@ -144,7 +144,7 @@ const About = () => {
         </section>
 
         {/* Meet The Makers */}
-        <section className="py-20 md:py-32 bg-card/30">
+        <section className="py-16 md:py-20 bg-card/30">
           <div className="container px-6">
             <div className="max-w-4xl mx-auto text-center space-y-8">
               <h2 className="text-4xl md:text-5xl font-heading font-bold">
@@ -187,7 +187,7 @@ const About = () => {
         </section>
 
         {/* CTA */}
-        <section className="py-20 md:py-32">
+        <section className="py-16 md:py-24">
           <div className="container px-6">
             <div className="max-w-3xl mx-auto text-center space-y-8">
               <h2 className="text-4xl md:text-5xl font-heading font-bold">
