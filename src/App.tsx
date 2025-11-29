@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { ChatbotWidget } from "@/components/chatbot/ChatbotWidget";
 import { CookieConsent } from "@/components/CookieConsent";
+import { BackToTop } from "@/components/BackToTop";
 import Index from "./pages/Index";
 import About from "./pages/About";
 import Audit from "./pages/Audit";
@@ -65,6 +66,7 @@ const App = () => (
       </BrowserRouter>
       <ChatbotWidget />
       <CookieConsent />
+      <BackToTop />
     </TooltipProvider>
   </QueryClientProvider>
 );
