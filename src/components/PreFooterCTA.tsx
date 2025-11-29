@@ -51,11 +51,11 @@ export const PreFooterCTA = () => {
                   Call Now
                 </Button>
                 
-                <QuoteCta asChild>
-                  <Button variant="outline" size="lg" className="flex-1">
-                    <MessageSquare className="w-5 h-5 mr-2" />
+                <QuoteCta>
+                  <button className="flex-1 inline-flex items-center justify-center gap-2 rounded-lg border border-border bg-card/50 px-6 py-3 text-sm font-medium backdrop-blur transition hover:bg-card">
+                    <MessageSquare className="w-5 h-5" />
                     Send a Message
-                  </Button>
+                  </button>
                 </QuoteCta>
               </div>
 
