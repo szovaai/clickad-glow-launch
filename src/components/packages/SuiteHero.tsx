@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Check, Sparkles, TrendingUp, Shield } from "lucide-react";
 import { Link } from "react-router-dom";
+import { HeroLeadForm } from "@/components/HeroLeadForm";
 
 export const SuiteHero = () => {
   return (
@@ -16,12 +17,14 @@ export const SuiteHero = () => {
       
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 py-20 md:py-28">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center max-w-5xl mx-auto"
-        >
+        <div className="grid lg:grid-cols-2 gap-12 items-center max-w-7xl mx-auto">
+          {/* Left Column - Main Content */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-left"
+          >
           {/* Badge */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
@@ -75,7 +78,7 @@ export const SuiteHero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.5 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center mb-12"
+            className="flex flex-col sm:flex-row gap-4 mb-12"
           >
             <Button asChild variant="glow" size="lg">
               <Link to="/audit">Book Strategy Call</Link>
@@ -90,7 +93,7 @@ export const SuiteHero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}
-            className="flex flex-col sm:flex-row gap-6 justify-center items-center text-sm"
+            className="flex flex-col sm:flex-row gap-6 items-center text-sm"
           >
             <div className="flex items-center gap-2">
               <Check className="w-5 h-5 text-primary" />
@@ -105,7 +108,18 @@ export const SuiteHero = () => {
               <span className="text-muted-foreground">White Glove Support</span>
             </div>
           </motion.div>
-        </motion.div>
+          </motion.div>
+
+          {/* Right Column - Lead Form */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="lg:sticky lg:top-24"
+          >
+            <HeroLeadForm />
+          </motion.div>
+        </div>
       </div>
     </section>
   );
