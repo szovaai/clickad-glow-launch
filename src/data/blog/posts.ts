@@ -25,6 +25,7 @@ export const blogPosts: BlogPost[] = [
     author: "Jason Szova",
     publishDate: "2025-01-15",
     readTime: "8 min read",
+    featuredImage: "/src/assets/blog/website-cost-calgary.jpg",
     content: `
 ## Understanding Website Costs in Calgary's Market
 
@@ -195,6 +196,7 @@ Contact ClickAd Media for a free consultation and see exactly what a conversion-
     author: "Jason Szova",
     publishDate: "2025-01-20",
     readTime: "7 min read",
+    featuredImage: "/src/assets/blog/small-business-website.jpg",
     content: `
 ## The Calgary Small Business Reality
 
@@ -425,6 +427,7 @@ Get your free website audit and see exactly how a professional site could transf
     author: "Jason Szova",
     publishDate: "2025-01-25",
     readTime: "10 min read",
+    featuredImage: "/src/assets/blog/local-seo-guide.jpg",
     content: `
 ## Why Local SEO Matters for Calgary Businesses
 
@@ -826,6 +829,7 @@ Contact us for a free SEO audit of your Calgary business. We'll show you exactly
     author: "Jason Szova",
     publishDate: "2025-01-28",
     readTime: "9 min read",
+    featuredImage: "/src/assets/blog/choose-web-designer.jpg",
     content: `
 ## Why Your Choice of Web Designer Matters
 
@@ -1266,6 +1270,7 @@ Contact us today to schedule your free consultation.
     author: "Jason Szova",
     publishDate: "2025-02-01",
     readTime: "8 min read",
+    featuredImage: "/src/assets/blog/contractor-mistakes.jpg",
     content: `
 ## Why Calgary Contractors Struggle Online
 

@@ -9,6 +9,21 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useState } from "react";
 
+// Import blog featured images
+import websiteCostImage from "@/assets/blog/website-cost-calgary.jpg";
+import smallBusinessImage from "@/assets/blog/small-business-website.jpg";
+import localSeoImage from "@/assets/blog/local-seo-guide.jpg";
+import chooseDesignerImage from "@/assets/blog/choose-web-designer.jpg";
+import contractorMistakesImage from "@/assets/blog/contractor-mistakes.jpg";
+
+const imageMap: Record<string, string> = {
+  "/src/assets/blog/website-cost-calgary.jpg": websiteCostImage,
+  "/src/assets/blog/small-business-website.jpg": smallBusinessImage,
+  "/src/assets/blog/local-seo-guide.jpg": localSeoImage,
+  "/src/assets/blog/choose-web-designer.jpg": chooseDesignerImage,
+  "/src/assets/blog/contractor-mistakes.jpg": contractorMistakesImage,
+};
+
 const Blog = () => {
   const allPosts = getAllBlogPosts();
   const categories = getAllCategories();
@@ -35,13 +50,7 @@ const Blog = () => {
         description="Expert insights on Calgary website design, local SEO, web development, and digital marketing strategies for service-based businesses."
         canonical="https://www.clickadmedia.com/blog"
         schemas={[collectionSchema, breadcrumbSchema]}
-        keywords={[
-          "Calgary website design blog",
-          "Calgary SEO tips",
-          "web design Calgary",
-          "digital marketing Calgary",
-          "Calgary business website"
-        ]}
+        keywords="Calgary website design blog, Calgary SEO tips, web design Calgary, digital marketing Calgary, Calgary business website"
       />
 
       <div className="min-h-screen bg-background">
@@ -95,6 +104,15 @@ const Blog = () => {
                   to={`/blog/${post.slug}`}
                   className="group bg-card border border-border rounded-lg overflow-hidden hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10"
                 >
+                  {post.featuredImage && (
+                    <div className="aspect-video overflow-hidden">
+                      <img 
+                        src={imageMap[post.featuredImage] || post.featuredImage}
+                        alt={post.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                    </div>
+                  )}
                   <div className="p-6 space-y-4">
                     <div className="flex items-center gap-3 text-sm text-muted-foreground">
                       <Badge variant="secondary">{post.category}</Badge>
