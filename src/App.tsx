@@ -14,6 +14,8 @@ import ThankYou from "./pages/ThankYou";
 import Resume from "./pages/Resume";
 import Pricing from "./pages/Pricing";
 import Legal from "./pages/Legal";
+import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
 import NotFound from "./pages/NotFound";
 import CalgaryElectricianWebsites from "./pages/services/CalgaryElectricianWebsites";
 import CalgaryRenovationWebsites from "./pages/services/CalgaryRenovationWebsites";
@@ -50,6 +52,8 @@ const AppRoutes = () => {
           <Route path="/loom-library" element={<LoomLibrary />} />
           <Route path="/packages/ultimate-suite" element={<UltimateSuite />} />
           <Route path="/legal" element={<Legal />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:slug" element={<BlogPost />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
