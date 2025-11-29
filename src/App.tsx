@@ -17,6 +17,7 @@ import CalgaryRenovationWebsites from "./pages/services/CalgaryRenovationWebsite
 import CalgaryIndustrialWebsites from "./pages/services/CalgaryIndustrialWebsites";
 import CalgaryWebsiteDesign from "./pages/services/CalgaryWebsiteDesign";
 import LoomLibrary from "./pages/LoomLibrary";
+import UltimateSuite from "./pages/packages/UltimateSuite";
 
 const queryClient = new QueryClient();
 
@@ -43,6 +44,7 @@ const AppRoutes = () => {
           <Route path="/services/calgary-industrial-manufacturing-websites" element={<CalgaryIndustrialWebsites />} />
           <Route path="/calgary-website-design" element={<CalgaryWebsiteDesign />} />
           <Route path="/loom-library" element={<LoomLibrary />} />
+          <Route path="/packages/ultimate-suite" element={<UltimateSuite />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
