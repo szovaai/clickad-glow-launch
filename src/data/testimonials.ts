@@ -26,10 +26,10 @@ export const testimonials: Testimonial[] = [
   },
   {
     quote: "Finally, a website that actually brings in customers instead of just sitting there looking pretty.",
-    author: "Mike R.",
+    author: "Wes H",
     role: "Owner",
-    company: "Kwik Kerb Calgary",
-    location: "Calgary, AB",
+    company: "Kwik Kerb Fort MacMurray",
+    location: "Fort MacMurray, AB",
     rating: 5
   }
 ];
