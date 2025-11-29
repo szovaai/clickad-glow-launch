@@ -24,6 +24,7 @@ import {
 import { toast } from "sonner";
 import { auditFormSchema, type AuditFormData } from "@/lib/validation";
 import { captureUTMParams, saveUTMToSession, getUTMFromSession } from "@/lib/utm";
+import { trackFormSubmission } from "@/lib/analytics";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { Loader2 } from "lucide-react";
@@ -144,6 +145,13 @@ const Audit = () => {
           has_website: !!data.website,
         });
       }
+
+      // Track audit submission with GA4
+      trackFormSubmission('audit_form', {
+        industry: data.industry,
+        has_website: !!data.website,
+        has_phone: !!data.phone,
+      });
 
       // 6. Navigate to thank you page
       navigate("/thank-you");
