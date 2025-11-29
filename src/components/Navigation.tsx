@@ -16,10 +16,10 @@ export const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const navLinks = [
-    { href: "/home#services", label: "Services" },
-    { href: "/home#work", label: "Work" },
-    { href: "/home#templates", label: "Templates" },
-    { href: "/home#process", label: "Process" },
+    { href: "#services", label: "Services" },
+    { href: "#work", label: "Work" },
+    { href: "#templates", label: "Templates" },
+    { href: "#process", label: "Process" },
   ];
 
   const companyLinks = [
@@ -41,13 +41,18 @@ export const Navigation = () => {
 
           <div className="hidden items-center gap-6 md:flex">
             {navLinks.map((link) => (
-              <Link
+              <a
                 key={link.href}
-                to={link.href}
+                href={link.href}
+                onClick={(e) => {
+                  e.preventDefault();
+                  const hash = link.href.replace('#', '');
+                  scrollToSection(hash);
+                }}
                 className="text-sm font-medium transition-colors hover:text-primary cursor-pointer"
               >
                 {link.label}
-              </Link>
+              </a>
             ))}
             
             <DropdownMenu>
@@ -81,14 +86,19 @@ export const Navigation = () => {
               <SheetContent side="right">
                 <nav className="flex flex-col gap-4 mt-8">
                   {navLinks.map((link) => (
-                    <Link
+                    <a
                       key={link.href}
-                      to={link.href}
-                      onClick={() => setIsOpen(false)}
-                      className="text-lg font-medium hover:text-primary transition-colors"
+                      href={link.href}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        const hash = link.href.replace('#', '');
+                        scrollToSection(hash);
+                        setIsOpen(false);
+                      }}
+                      className="text-lg font-medium hover:text-primary transition-colors cursor-pointer"
                     >
                       {link.label}
-                    </Link>
+                    </a>
                   ))}
                   {companyLinks.map((link) => (
                     <Link

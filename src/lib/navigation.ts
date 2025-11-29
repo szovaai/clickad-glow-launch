@@ -2,15 +2,10 @@
  * Navigation utilities for smooth scrolling and hash navigation
  */
 
-const getHeaderHeight = () => {
-  const header = document.querySelector('header');
-  return header ? header.offsetHeight + 20 : 100; // Add 20px padding
-};
-
 export function scrollToSection(sectionId: string) {
   const element = document.getElementById(sectionId);
   if (element) {
-    const offset = getHeaderHeight();
+    const offset = 100; // Account for fixed header
     const top = element.getBoundingClientRect().top + window.pageYOffset - offset;
     window.scrollTo({ top, behavior: 'smooth' });
   }
