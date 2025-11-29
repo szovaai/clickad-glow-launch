@@ -9,6 +9,21 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import ReactMarkdown from "react-markdown";
 
+// Import blog featured images
+import websiteCostImage from "@/assets/blog/website-cost-calgary.jpg";
+import smallBusinessImage from "@/assets/blog/small-business-website.jpg";
+import localSeoImage from "@/assets/blog/local-seo-guide.jpg";
+import chooseDesignerImage from "@/assets/blog/choose-web-designer.jpg";
+import contractorMistakesImage from "@/assets/blog/contractor-mistakes.jpg";
+
+const imageMap: Record<string, string> = {
+  "/src/assets/blog/website-cost-calgary.jpg": websiteCostImage,
+  "/src/assets/blog/small-business-website.jpg": smallBusinessImage,
+  "/src/assets/blog/local-seo-guide.jpg": localSeoImage,
+  "/src/assets/blog/choose-web-designer.jpg": chooseDesignerImage,
+  "/src/assets/blog/contractor-mistakes.jpg": contractorMistakesImage,
+};
+
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
   const post = slug ? getBlogPostBySlug(slug) : undefined;
@@ -43,7 +58,7 @@ const BlogPost = () => {
         description={post.metaDescription}
         canonical={`https://www.clickadmedia.com/blog/${post.slug}`}
         schemas={[blogPostSchema, breadcrumbSchema]}
-        keywords={post.keywords}
+        keywords={post.keywords.join(", ")}
         ogType="article"
       />
 
@@ -62,6 +77,21 @@ const BlogPost = () => {
             </Link>
           </div>
         </section>
+
+        {/* Featured Image Hero */}
+        {post.featuredImage && (
+          <section className="pb-12 px-6">
+            <div className="container max-w-5xl">
+              <div className="aspect-video rounded-lg overflow-hidden border border-border shadow-lg shadow-primary/5">
+                <img 
+                  src={imageMap[post.featuredImage] || post.featuredImage}
+                  alt={post.title}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* Article Header */}
         <article className="pb-20 px-6">
