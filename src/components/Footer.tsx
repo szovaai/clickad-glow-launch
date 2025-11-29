@@ -86,8 +86,8 @@ export const Footer = () => {
         <div className="pt-8 border-t border-primary/10 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
           <p>&copy; 2025 ClickAd Media. All rights reserved.</p>
           <div className="flex gap-6">
-            <Link to="/about" className="hover:text-primary transition-colors">Privacy</Link>
-            <Link to="/about" className="hover:text-primary transition-colors">Terms</Link>
+            <Link to="/legal#privacy" className="hover:text-primary transition-colors">Privacy</Link>
+            <Link to="/legal#terms" className="hover:text-primary transition-colors">Terms</Link>
           </div>
         </div>
       </div>
