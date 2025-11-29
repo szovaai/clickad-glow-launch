@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { PackageNavigation } from "@/components/packages/PackageNavigation";
+import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { PackageHero } from "@/components/packages/PackageHero";
 import { PainPointsSection } from "@/components/packages/PainPointsSection";
@@ -22,7 +22,7 @@ export default function UltimateSuite() {
 
   return (
     <div className="min-h-screen">
-        <PackageNavigation />
+        <Navigation />
         
         <main>
           <PackageHero />
