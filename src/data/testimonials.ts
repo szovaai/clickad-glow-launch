@@ -18,10 +18,10 @@ export const testimonials: Testimonial[] = [
   },
   {
     quote: "Our phone hasn't stopped ringing since the new website launched. Best investment we've made.",
-    author: "Sarah M.",
+    author: "Wes H",
     role: "Operations Manager",
-    company: "Westlights Industrial",
-    location: "Calgary, AB",
+    company: "Westlights",
+    location: "Fort MacMurray, AB",
     rating: 5
   },
   {
