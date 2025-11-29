@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { ChatbotWidget } from "@/components/chatbot/ChatbotWidget";
 import { CookieConsent } from "@/components/CookieConsent";
 import { BackToTop } from "@/components/BackToTop";
+import { HashScrollHandler } from "@/components/HashScrollHandler";
 import Index from "./pages/Index";
 import About from "./pages/About";
 import Audit from "./pages/Audit";
@@ -66,6 +67,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <HashScrollHandler />
         <AppRoutes />
       </BrowserRouter>
       <ChatbotWidget />
