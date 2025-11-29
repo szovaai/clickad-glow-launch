@@ -8,7 +8,7 @@ export const Footer = () => {
   return (
     <footer className="border-t border-primary/10 bg-secondary/30">
       <div className="container px-6 py-12">
-        <div className="grid md:grid-cols-4 gap-8 mb-8">
+        <div className="grid md:grid-cols-5 gap-8 mb-8">
           {/* Brand */}
           <div className="md:col-span-2 space-y-4">
             <img src={logo} alt="ClickAd Media - Calgary Website Design" className="h-8 w-auto" />
@@ -61,6 +61,14 @@ export const Footer = () => {
                   What's Included
                 </a>
               </li>
+            </ul>
+          </div>
+          
+          <div>
+            <h3 className="font-heading font-semibold mb-4">Legal</h3>
+            <ul className="space-y-2 text-sm">
+              <li><Link to="/privacy" className="text-muted-foreground hover:text-primary transition-colors">Privacy Policy</Link></li>
+              <li><Link to="/terms" className="text-muted-foreground hover:text-primary transition-colors">Terms of Service</Link></li>
             </ul>
           </div>
         </div>
