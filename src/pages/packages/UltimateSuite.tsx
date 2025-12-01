@@ -38,7 +38,7 @@ const UltimateSuite = () => {
     generateOfferSchema(
       "Ultimate Business Website Suite",
       "Complete website solution with custom design, SEO, copywriting, branding, and 3 months support",
-      "2500-5000",
+      "997-2500",
       "CAD"
     )
   ];
@@ -47,7 +47,7 @@ const UltimateSuite = () => {
     <div className="min-h-screen">
       <SEOHead
         title="Ultimate Business Website Suite | Calgary's Premier Website Package"
-        description="Get everything your Calgary business needs to dominate online. Custom design, SEO optimization, professional copywriting, branding package, and 3 months of priority support. $2,500-$5,000."
+        description="Get everything your Calgary business needs to dominate online. Custom design, SEO optimization, professional copywriting, branding package, and 3 months of priority support. Starting at $997."
         canonical="https://www.clickadmedia.com/"
         keywords="Calgary website design, business website package, custom website Calgary, website design suite"
         schemas={schemas}

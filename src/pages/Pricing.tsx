@@ -9,7 +9,7 @@ const Pricing = () => {
     generateOfferSchema(
       "Calgary Website Design Services",
       "Transparent pricing for professional Calgary website design. From starter sites to custom solutions.",
-      "2500-12000",
+      "997-2500",
       "CAD"
     )
   ];
@@ -18,7 +18,7 @@ const Pricing = () => {
     <div className="min-h-screen">
       <SEOHead
         title="Calgary Website Design Pricing | Transparent Packages & Quotes"
-        description="Clear, upfront pricing for Calgary website design. Starter sites from $2.5k, Growth sites from $6k, custom solutions available. No hidden fees, just results."
+        description="Clear, upfront pricing for Calgary website design. Starter sites from $997, Growth sites from $1,497, Premium unlimited sites at $2,500. No hidden fees, just results."
         canonical="https://www.clickadmedia.com/pricing"
         keywords="Calgary website design pricing, web design cost Calgary, website packages Calgary"
         schemas={schemas}

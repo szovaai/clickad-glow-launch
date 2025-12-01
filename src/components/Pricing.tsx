@@ -4,35 +4,52 @@ import { Check } from "lucide-react";
 
 const packages = [
   {
-    name: "DIY Template",
-    price: "$497",
-    description: "One-time payment for the ready-to-launch template",
+    name: "Starter",
+    price: "$997",
+    pages: "5 pages",
+    description: "Perfect for small businesses getting started online",
     features: [
-      "Modern trade-specific template",
-      "Quote forms & email setup",
-      "Hosting setup included",
-      "Advanced follow-up sequences included",
-      "Video onboarding (install + edit)",
-      "SSL & basic security setup",
-      "7-day money back guarantee",
+      "Custom responsive design",
+      "Mobile-first approach",
+      "Basic on-page SEO (titles, meta)",
+      "Contact form with email notifications",
+      "SSL & hosting setup",
+      "Google Analytics integration",
+      "30-day post-launch support",
     ],
     popular: false,
   },
   {
-    name: "DFY Lite",
-    price: "$997",
-    description: "7-day launch - Everything in DIY, done for you",
+    name: "Growth",
+    price: "$1,497",
+    pages: "10 pages",
+    description: "Most popular choice for growing service businesses",
     features: [
-      "Everything in DIY Template",
-      "Custom layouts, import, and setup",
-      "Google Business Profile build-up",
-      "Missed-call text back + SMS messaging follow-up",
-      "Basic SEO (titles, meta, local, schema)",
-      "Launch training call (30 min)",
-      "Priority support during launch",
-      "7-Day Launch or $500 Back guarantee",
+      "Everything in Starter",
+      "Professional copywriting (all pages)",
+      "Advanced SEO (schema, local SEO, sitemap)",
+      "Google Business Profile setup",
+      "Lead capture forms with automations",
+      "Speed & Core Web Vitals optimization",
+      "60-day priority support",
     ],
     popular: true,
+  },
+  {
+    name: "Premium",
+    price: "$2,500",
+    pages: "Unlimited pages",
+    description: "Complete solution for businesses ready to dominate",
+    features: [
+      "Everything in Growth",
+      "Unlimited custom pages",
+      "Branding package (logo, colors, fonts)",
+      "1-on-1 strategy session (60 min)",
+      "Custom functionality/integrations",
+      "Training video library access",
+      "3 months priority support",
+    ],
+    popular: false,
   },
 ];
 
@@ -49,7 +66,7 @@ export const Pricing = () => {
           </p>
         </div>
         
-        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {packages.map((pkg, index) => (
             <Card 
               key={index}
@@ -68,6 +85,7 @@ export const Pricing = () => {
               <div className="space-y-6">
                 <div>
                   <h3 className="text-2xl font-heading font-bold mb-2">{pkg.name}</h3>
+                  <p className="text-sm text-muted-foreground mb-2">{pkg.pages}</p>
                   <div className="text-4xl font-heading font-bold text-primary mb-3">{pkg.price}</div>
                   <p className="text-muted-foreground">{pkg.description}</p>
                 </div>
