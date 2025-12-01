@@ -68,7 +68,7 @@ export const SuiteHero = () => {
             className="mb-8"
           >
             <p className="text-3xl md:text-4xl font-bold text-primary">
-              Starting at $2,500
+              Starting at $997
             </p>
             <p className="text-sm text-muted-foreground mt-2">Investment in your business growth</p>
           </motion.div>
