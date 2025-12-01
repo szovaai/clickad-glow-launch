@@ -16,15 +16,6 @@ export const Footer = () => {
               Calgary-based website design agency for service businesses. 
               We build conversion machines that turn traffic into paying customers.
             </p>
-            <div className="flex flex-col gap-2 mt-4">
-              <a 
-                href="mailto:szovajason@gmail.com" 
-                className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-2"
-              >
-                <Mail className="h-4 w-4" />
-                szovajason@gmail.com
-              </a>
-            </div>
           </div>
           
           {/* Links */}
