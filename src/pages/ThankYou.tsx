@@ -99,8 +99,10 @@ const ThankYou = () => {
             <p className="text-muted-foreground mb-6">
               Download our Website Quick-Wins Checklist to start improving your site today.
             </p>
-            <Button size="lg" variant="default">
-              Download Quick-Wins Checklist (PDF)
+            <Button asChild size="lg" variant="default">
+              <a href="/onboarding-checklist" target="_blank" rel="noopener noreferrer">
+                Download Quick-Wins Checklist
+              </a>
             </Button>
           </div>
 
