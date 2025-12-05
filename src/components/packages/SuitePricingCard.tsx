@@ -1,12 +1,46 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Check, Crown } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Check, Crown, Loader2 } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
+
+const PRICE_IDS = {
+  starter: "price_1Sb4IEGuihElNnYIZvb1iCM9",
+  growth: "price_1Sb4IUGuihElNnYIXX4tOwSb",
+  premium: "price_1Sb4IhGuihElNnYILPHGfbnS",
+};
 
 export const SuitePricingCard = () => {
+  const [loadingPackage, setLoadingPackage] = useState<string | null>(null);
+
+  const handleCheckout = async (packageKey: string) => {
+    setLoadingPackage(packageKey);
+    try {
+      const priceId = PRICE_IDS[packageKey as keyof typeof PRICE_IDS];
+      
+      const { data, error } = await supabase.functions.invoke('create-checkout', {
+        body: { priceId }
+      });
+
+      if (error) throw error;
+      if (data?.url) {
+        window.location.href = data.url;
+      } else {
+        throw new Error("No checkout URL returned");
+      }
+    } catch (error) {
+      console.error("Checkout error:", error);
+      toast.error("Failed to start checkout. Please try again.");
+    } finally {
+      setLoadingPackage(null);
+    }
+  };
+
   const packages = [
     {
+      key: "starter",
       name: "Starter",
       price: "$997",
       pages: "5 pages",
@@ -23,6 +57,7 @@ export const SuitePricingCard = () => {
       popular: false,
     },
     {
+      key: "growth",
       name: "Growth",
       price: "$1,497",
       pages: "10 pages",
@@ -39,6 +74,7 @@ export const SuitePricingCard = () => {
       popular: true,
     },
     {
+      key: "premium",
       name: "Premium",
       price: "$2,500",
       pages: "Unlimited pages",
@@ -114,12 +150,20 @@ export const SuitePricingCard = () => {
                 </div>
 
                 <Button 
-                  asChild 
+                  onClick={() => handleCheckout(pkg.key)}
+                  disabled={loadingPackage !== null}
                   variant={pkg.popular ? "glow" : "outline"} 
                   size="lg" 
                   className="w-full"
                 >
-                  <Link to="/audit">Get Started</Link>
+                  {loadingPackage === pkg.key ? (
+                    <>
+                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                      Loading...
+                    </>
+                  ) : (
+                    "Get Started"
+                  )}
                 </Button>
               </Card>
             </motion.div>
