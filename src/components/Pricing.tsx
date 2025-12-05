@@ -1,12 +1,16 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Check } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 const packages = [
   {
     name: "Starter",
     price: "$997",
     pages: "5 pages",
+    priceId: "price_1Sb4IEGuihElNnYIZvb1iCM9",
     description: "Perfect for small businesses getting started online",
     features: [
       "Custom responsive design",
@@ -23,6 +27,7 @@ const packages = [
     name: "Growth",
     price: "$1,497",
     pages: "10 pages",
+    priceId: "price_1Sb4IUGuihElNnYIXX4tOwSb",
     description: "Most popular choice for growing service businesses",
     features: [
       "Everything in Starter",
@@ -39,6 +44,7 @@ const packages = [
     name: "Premium",
     price: "$2,500",
     pages: "Unlimited pages",
+    priceId: "price_1Sb4IhGuihElNnYILPHGfbnS",
     description: "Complete solution for businesses ready to dominate",
     features: [
       "Everything in Growth",
@@ -54,6 +60,29 @@ const packages = [
 ];
 
 export const Pricing = () => {
+  const [loadingPriceId, setLoadingPriceId] = useState<string | null>(null);
+
+  const handleCheckout = async (priceId: string) => {
+    setLoadingPriceId(priceId);
+    
+    try {
+      const { data, error } = await supabase.functions.invoke('create-checkout', {
+        body: { priceId }
+      });
+
+      if (error) throw error;
+
+      if (data?.url) {
+        window.open(data.url, '_blank');
+      }
+    } catch (error) {
+      console.error('Checkout error:', error);
+      toast.error('Failed to start checkout. Please try again.');
+    } finally {
+      setLoadingPriceId(null);
+    }
+  };
+
   return (
     <section id="pricing" className="py-20 md:py-32">
       <div className="container px-6">
@@ -103,8 +132,10 @@ export const Pricing = () => {
                   variant={pkg.popular ? "glow" : "outline"} 
                   className="w-full"
                   size="lg"
+                  onClick={() => handleCheckout(pkg.priceId)}
+                  disabled={loadingPriceId === pkg.priceId}
                 >
-                  Get Started
+                  {loadingPriceId === pkg.priceId ? "Processing..." : "Get Started"}
                 </Button>
               </div>
             </Card>
