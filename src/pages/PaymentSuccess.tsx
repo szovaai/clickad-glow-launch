@@ -157,7 +157,7 @@ const PaymentSuccess = () => {
               </p>
               <Button asChild className="w-full">
                 <a 
-                  href="https://calendly.com/your-calendly-link" 
+                  href="https://koalendar.com/e/meet-with-jason-szova" 
                   target="_blank" 
                   rel="noopener noreferrer"
                 >
