@@ -23,6 +23,7 @@ import LoomLibrary from "./pages/LoomLibrary";
 import UltimateSuite from "./pages/packages/UltimateSuite";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
+import PaymentSuccess from "./pages/PaymentSuccess";
 
 const queryClient = new QueryClient();
 
@@ -53,6 +54,7 @@ const AppRoutes = () => {
           <Route path="/about" element={<About />} />
           <Route path="/audit" element={<Audit />} />
           <Route path="/thank-you" element={<ThankYou />} />
+          <Route path="/payment-success" element={<PaymentSuccess />} />
           <Route path="/resume" element={<Resume />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/services/calgary-electrician-websites" element={<CalgaryElectricianWebsites />} />
