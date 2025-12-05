@@ -24,6 +24,7 @@ import UltimateSuite from "./pages/packages/UltimateSuite";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import PaymentSuccess from "./pages/PaymentSuccess";
+import OnboardingChecklist from "./pages/OnboardingChecklist";
 
 const queryClient = new QueryClient();
 
@@ -55,6 +56,7 @@ const AppRoutes = () => {
           <Route path="/audit" element={<Audit />} />
           <Route path="/thank-you" element={<ThankYou />} />
           <Route path="/payment-success" element={<PaymentSuccess />} />
+          <Route path="/onboarding-checklist" element={<OnboardingChecklist />} />
           <Route path="/resume" element={<Resume />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/services/calgary-electrician-websites" element={<CalgaryElectricianWebsites />} />

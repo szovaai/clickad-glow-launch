@@ -172,8 +172,10 @@ const PaymentSuccess = () => {
               <p className="text-muted-foreground mb-4">
                 Download our onboarding checklist to gather everything we'll need.
               </p>
-              <Button variant="outline" className="w-full">
-                Download Checklist <ArrowRight className="w-4 h-4 ml-2" />
+              <Button asChild variant="outline" className="w-full">
+                <a href="/onboarding-checklist" target="_blank" rel="noopener noreferrer">
+                  Download Checklist <ArrowRight className="w-4 h-4 ml-2" />
+                </a>
               </Button>
             </Card>
           </div>
