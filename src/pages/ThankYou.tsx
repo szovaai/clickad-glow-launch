@@ -79,21 +79,17 @@ const ThankYou = () => {
             <p className="text-muted-foreground text-center mb-8">
               Book a 15-minute discovery call to discuss how we can help your business.
             </p>
-            <div className="aspect-video w-full bg-muted rounded-lg flex items-center justify-center">
-              {/* Calendly embed would go here */}
-              <div className="text-center">
-                <Calendar className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
-                <p className="text-muted-foreground mb-4">Calendly widget will be embedded here</p>
-                <Button asChild>
-                  <a 
-                    href="https://calendly.com/your-calendly-link" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                  >
-                    Schedule a Call
-                  </a>
-                </Button>
-              </div>
+            <div className="flex justify-center">
+              <Button asChild size="lg">
+                <a 
+                  href="https://koalendar.com/e/meet-with-jason-szova" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                >
+                  <Calendar className="w-5 h-5 mr-2" />
+                  Schedule a Call
+                </a>
+              </Button>
             </div>
           </div>
 
