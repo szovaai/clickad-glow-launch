@@ -8,9 +8,9 @@ import { toast } from "sonner";
 import { Link } from "react-router-dom";
 
 const PRICE_IDS = {
-  capture: "price_1Sb4IEGuihElNnYIZvb1iCM9",
-  receptionist: "price_1Sb4IUGuihElNnYIXX4tOwSb",
-  salesteam: "price_1Sb4IhGuihElNnYILPHGfbnS",
+  capture: "price_1T0myvGuihElNnYIexKFSGEr",
+  receptionist: "price_1T0mzEGuihElNnYIOI5p3qAm",
+  salesteam: "price_1T0mzTGuihElNnYIveLy8xdw",
 };
 
 export const SuitePricingCard = () => {
