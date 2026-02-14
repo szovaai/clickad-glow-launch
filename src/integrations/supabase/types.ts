@@ -764,6 +764,131 @@ export type Database = {
           },
         ]
       }
+      reactivation_campaigns: {
+        Row: {
+          active: boolean
+          channel: string
+          client_account_id: string
+          created_at: string
+          email_subject: string | null
+          email_template: string | null
+          id: string
+          inactive_days_max: number
+          inactive_days_min: number
+          last_run_at: string | null
+          name: string
+          sms_template: string
+          total_contacted: number
+          total_replied: number
+          updated_at: string
+        }
+        Insert: {
+          active?: boolean
+          channel?: string
+          client_account_id: string
+          created_at?: string
+          email_subject?: string | null
+          email_template?: string | null
+          id?: string
+          inactive_days_max?: number
+          inactive_days_min?: number
+          last_run_at?: string | null
+          name?: string
+          sms_template?: string
+          total_contacted?: number
+          total_replied?: number
+          updated_at?: string
+        }
+        Update: {
+          active?: boolean
+          channel?: string
+          client_account_id?: string
+          created_at?: string
+          email_subject?: string | null
+          email_template?: string | null
+          id?: string
+          inactive_days_max?: number
+          inactive_days_min?: number
+          last_run_at?: string | null
+          name?: string
+          sms_template?: string
+          total_contacted?: number
+          total_replied?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reactivation_campaigns_client_account_id_fkey"
+            columns: ["client_account_id"]
+            isOneToOne: false
+            referencedRelation: "client_accounts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      reactivation_log: {
+        Row: {
+          campaign_id: string
+          client_account_id: string
+          contact_email: string | null
+          contact_name: string | null
+          contact_phone: string | null
+          created_at: string
+          id: string
+          original_inquiry: string | null
+          replied: boolean
+          sent_at: string
+          source_id: string | null
+          source_type: string
+          status: string
+        }
+        Insert: {
+          campaign_id: string
+          client_account_id: string
+          contact_email?: string | null
+          contact_name?: string | null
+          contact_phone?: string | null
+          created_at?: string
+          id?: string
+          original_inquiry?: string | null
+          replied?: boolean
+          sent_at?: string
+          source_id?: string | null
+          source_type?: string
+          status?: string
+        }
+        Update: {
+          campaign_id?: string
+          client_account_id?: string
+          contact_email?: string | null
+          contact_name?: string | null
+          contact_phone?: string | null
+          created_at?: string
+          id?: string
+          original_inquiry?: string | null
+          replied?: boolean
+          sent_at?: string
+          source_id?: string | null
+          source_type?: string
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reactivation_log_campaign_id_fkey"
+            columns: ["campaign_id"]
+            isOneToOne: false
+            referencedRelation: "reactivation_campaigns"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "reactivation_log_client_account_id_fkey"
+            columns: ["client_account_id"]
+            isOneToOne: false
+            referencedRelation: "client_accounts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       reviews: {
         Row: {
           client_account_id: string

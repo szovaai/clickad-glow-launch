@@ -44,3 +44,6 @@ verify_jwt = false
 
 [functions.appointment-reminder]
 verify_jwt = false
+
+[functions.lead-reactivation]
+verify_jwt = false
