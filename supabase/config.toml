@@ -33,5 +33,8 @@ verify_jwt = false
 [functions.voice-twiml]
 verify_jwt = false
 
+[functions.voice-stream]
+verify_jwt = false
+
 [functions.voice-tts]
 verify_jwt = false
