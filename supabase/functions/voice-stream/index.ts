@@ -48,15 +48,22 @@ serve(async (req) => {
         switch (msg.type) {
           case "audio": {
             // Forward ElevenLabs audio back to Twilio
-            if (streamSid && twilioWs.readyState === WebSocket.OPEN) {
-              const twilioMsg = JSON.stringify({
+            const audioPayload = msg.audio_event?.audio_base_64 || "";
+            if (audioPayload && streamSid && twilioWs.readyState === WebSocket.OPEN) {
+              twilioWs.send(JSON.stringify({
                 event: "media",
                 streamSid,
-                media: {
-                  payload: msg.audio?.chunk || msg.audio_event?.audio_base_64 || "",
-                },
-              });
-              twilioWs.send(twilioMsg);
+                media: { payload: audioPayload },
+              }));
+            }
+            break;
+          }
+
+          case "interruption": {
+            // Flush Twilio's audio buffer so old audio doesn't overlap
+            if (streamSid && twilioWs.readyState === WebSocket.OPEN) {
+              twilioWs.send(JSON.stringify({ event: "clear", streamSid }));
+              console.log(`[voice-stream] Interruption — cleared Twilio buffer`);
             }
             break;
           }
