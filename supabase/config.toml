@@ -38,3 +38,6 @@ verify_jwt = false
 
 [functions.voice-tts]
 verify_jwt = false
+
+[functions.send-review-request]
+verify_jwt = false

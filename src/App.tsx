@@ -42,6 +42,8 @@ import Analytics from "./pages/app/Analytics";
 import KnowledgeBase from "./pages/app/KnowledgeBase";
 import Integrations from "./pages/app/Integrations";
 import Settings from "./pages/app/Settings";
+import Reviews from "./pages/app/Reviews";
+import ReviewSubmission from "./pages/ReviewSubmission";
 
 const queryClient = new QueryClient();
 
@@ -82,6 +84,7 @@ const AppRoutes = () => {
       <Route path="/terms" element={<Terms />} />
       <Route path="/blog" element={<Blog />} />
       <Route path="/blog/:slug" element={<BlogPost />} />
+      <Route path="/review/:token" element={<ReviewSubmission />} />
 
       {/* SaaS App — Auth */}
       <Route path="/app/login" element={<Login />} />
@@ -99,6 +102,7 @@ const AppRoutes = () => {
         <Route path="knowledge-base" element={<KnowledgeBase />} />
         <Route path="integrations" element={<Integrations />} />
         <Route path="settings" element={<Settings />} />
+        <Route path="reviews" element={<Reviews />} />
       </Route>
 
       {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
