@@ -45,6 +45,7 @@ import Settings from "./pages/app/Settings";
 import Reviews from "./pages/app/Reviews";
 import Appointments from "./pages/app/Appointments";
 import LeadReactivation from "./pages/app/LeadReactivation";
+import PostJobFollowUp from "./pages/app/PostJobFollowUp";
 import ReviewSubmission from "./pages/ReviewSubmission";
 
 const queryClient = new QueryClient();
@@ -107,6 +108,7 @@ const AppRoutes = () => {
         <Route path="reviews" element={<Reviews />} />
         <Route path="appointments" element={<Appointments />} />
         <Route path="reactivation" element={<LeadReactivation />} />
+        <Route path="post-job" element={<PostJobFollowUp />} />
       </Route>
 
       {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
