@@ -1,20 +1,43 @@
 
 
-## Fix: Enable Voice AI Receptionist
+## Fix Voice AI TwiML Parse Error
 
-**Problem**: The voice configuration has `active` set to `false`, causing the AI to respond with "This service is currently unavailable. Please call back later."
+### Problem
+Two issues are causing the Twilio "Document parse failure" (Error 12100):
 
-**Solution**: Set `active = true` in the `voice_configs` table for your client account.
+1. **Unresolved template placeholders** -- Your greeting script contains `{{business_name}}` as literal text. The code uses the script as-is without replacing placeholders, so Twilio receives `{{business_name}}` verbatim.
+
+2. **No template replacement logic** -- The fallback greeting uses JavaScript template literals (`${client?.business_name}`), but when a custom `greeting_script` exists, no substitution happens.
+
+### Solution
+
+Update `supabase/functions/voice-twiml/index.ts` to replace `{{business_name}}` (and any other placeholders) in the greeting, qualification, and booking scripts before they are used.
 
 ### Technical Details
 
-A single database update is needed:
+**File**: `supabase/functions/voice-twiml/index.ts`
 
-```sql
-UPDATE voice_configs
-SET active = true
-WHERE client_account_id = '346cb7b2-248a-41c1-b6bc-0e42c99e877e';
+1. Add a helper function to replace template placeholders:
+```typescript
+function resolveTemplate(template: string, vars: Record<string, string>): string {
+  return template.replace(/\{\{(\w+)\}\}/g, (_, key) => vars[key] || "");
+}
 ```
 
-No code changes are required. After this update, the next call to your Twilio number will be answered by the AI receptionist using your saved greeting, qualification, and booking scripts.
+2. After loading client data (~line 87), apply the replacement to the greeting:
+```typescript
+const templateVars = {
+  business_name: client?.business_name || "us",
+};
+
+const greeting = resolveTemplate(
+  voiceConfig.greeting_script || 
+    "Hello, thank you for calling {{business_name}}. How can I help you today?",
+  templateVars
+);
+```
+
+3. Also apply the replacement in the system prompt where `qualification_script` and `booking_script` are used (~line 110), so the AI context also has proper names instead of raw placeholders.
+
+No database changes needed. The edge function will auto-deploy after the code update.
 
