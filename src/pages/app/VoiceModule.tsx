@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Mic, Phone, FileText, Zap, Clock, AlertTriangle, BookOpen, Settings } from "lucide-react";
+import { Mic, Phone, FileText, Zap, Clock, AlertTriangle, Settings, Copy, CheckCircle2 } from "lucide-react";
 import { toast } from "sonner";
 import ScriptBuilder from "@/components/app/voice/ScriptBuilder";
 import CallFlowBuilder from "@/components/app/voice/CallFlowBuilder";
@@ -25,6 +25,7 @@ interface VoiceConfig {
     emergencyNumber: string;
     afterHoursVoicemail: boolean;
     maxQualificationAttempts: number;
+    voiceSelection?: string;
   };
   active: boolean;
 }
@@ -38,9 +39,20 @@ const defaultConfig: VoiceConfig = {
     emergencyNumber: "",
     afterHoursVoicemail: true,
     maxQualificationAttempts: 3,
+    voiceSelection: "Polly.Joanna",
   },
   active: false,
 };
+
+const VOICE_OPTIONS = [
+  { value: "Polly.Joanna", label: "Joanna (US Female)" },
+  { value: "Polly.Salli", label: "Salli (US Female)" },
+  { value: "Polly.Kendra", label: "Kendra (US Female)" },
+  { value: "Polly.Kimberly", label: "Kimberly (US Female)" },
+  { value: "Polly.Amy", label: "Amy (British Female)" },
+];
+
+const WEBHOOK_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/voice-twiml`;
 
 export default function VoiceModule() {
   const { agencyId } = useAuth();
@@ -59,6 +71,7 @@ export default function VoiceModule() {
   const [saving, setSaving] = useState(false);
   const [savingPhone, setSavingPhone] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [copied, setCopied] = useState(false);
 
   // Load clients
   useEffect(() => {
@@ -89,12 +102,13 @@ export default function VoiceModule() {
       ]);
 
       if (configRes.data) {
+        const rules = (configRes.data.transfer_rules as any) || defaultConfig.transfer_rules;
         setConfig({
           id: configRes.data.id,
           greeting_script: configRes.data.greeting_script || "",
           qualification_script: configRes.data.qualification_script || "",
           booking_script: configRes.data.booking_script || "",
-          transfer_rules: (configRes.data.transfer_rules as any) || defaultConfig.transfer_rules,
+          transfer_rules: { ...defaultConfig.transfer_rules, ...rules },
           active: configRes.data.active,
         });
       } else {
@@ -127,6 +141,13 @@ export default function VoiceModule() {
     loadData();
   }, [selectedClient]);
 
+  const copyWebhookUrl = () => {
+    navigator.clipboard.writeText(WEBHOOK_URL);
+    setCopied(true);
+    toast.success("Webhook URL copied!");
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   const saveConfig = async () => {
     if (!selectedClient) return;
     setSaving(true);
@@ -148,6 +169,13 @@ export default function VoiceModule() {
       error = res.error;
       if (res.data) setConfig((c) => ({ ...c, id: res.data.id }));
     }
+
+    setSaving(false);
+    if (error) {
+      toast.error("Failed to save: " + error.message);
+    } else {
+      toast.success("Voice configuration saved");
+    }
   };
 
   const savePhoneConfig = async () => {
@@ -162,7 +190,6 @@ export default function VoiceModule() {
       autoReplyMessage: phoneSettings.autoReplyMessage,
     };
 
-    // Check if client_config exists
     const { data: existing } = await supabase
       .from("client_configs")
       .select("id")
@@ -186,13 +213,6 @@ export default function VoiceModule() {
       toast.error("Failed to save phone config: " + error.message);
     } else {
       toast.success("Phone configuration saved");
-    }
-
-    setSaving(false);
-    if (error) {
-      toast.error("Failed to save: " + error.message);
-    } else {
-      toast.success("Voice configuration saved");
     }
   };
 
@@ -219,7 +239,7 @@ export default function VoiceModule() {
             Voice AI (Beta)
           </h1>
           <p className="text-sm text-muted-foreground mt-1">
-            AI Receptionist powered by Gemini 3 — configure scripts, call flow, and review transcripts
+            AI Receptionist powered by Gemini — configure scripts, call flow, and review transcripts
           </p>
         </div>
         <div className="flex items-center gap-3">
@@ -247,13 +267,48 @@ export default function VoiceModule() {
         </select>
       )}
 
+      {/* Webhook URL Card */}
+      <Card className="border-primary/30 bg-primary/5">
+        <CardContent className="p-4 space-y-3">
+          <div className="flex items-center gap-2">
+            <Phone className="w-5 h-5 text-primary shrink-0" />
+            <h3 className="font-semibold text-foreground">Twilio Webhook Setup</h3>
+          </div>
+          <p className="text-sm text-muted-foreground">
+            Paste this URL into your Twilio phone number's <strong>"A Call Comes In"</strong> webhook (HTTP POST):
+          </p>
+          <div className="flex items-center gap-2">
+            <code className="flex-1 text-xs bg-background/50 border border-border rounded-md px-3 py-2 text-foreground break-all">
+              {WEBHOOK_URL}
+            </code>
+            <Button variant="outline" size="sm" onClick={copyWebhookUrl} className="shrink-0">
+              {copied ? <CheckCircle2 className="w-4 h-4 text-green-400" /> : <Copy className="w-4 h-4" />}
+            </Button>
+          </div>
+          <div className="flex items-center gap-2">
+            <Label className="text-sm text-muted-foreground">Voice:</Label>
+            <select
+              className="bg-background border border-border rounded-md px-2 py-1 text-sm text-foreground"
+              value={config.transfer_rules.voiceSelection || "Polly.Joanna"}
+              onChange={(e) => setConfig((c) => ({
+                ...c,
+                transfer_rules: { ...c.transfer_rules, voiceSelection: e.target.value },
+              }))}
+            >
+              {VOICE_OPTIONS.map((v) => (
+                <option key={v.value} value={v.value}>{v.label}</option>
+              ))}
+            </select>
+          </div>
+        </CardContent>
+      </Card>
+
       {!config.active && (
         <Card className="border-yellow-500/30 bg-yellow-500/5">
           <CardContent className="p-4 flex items-center gap-3">
             <AlertTriangle className="w-5 h-5 text-yellow-400 shrink-0" />
             <p className="text-sm text-yellow-300">
-              Voice AI is currently disabled. Enable it above and save to start receiving AI-handled calls. 
-              The Gemini 3 voice integration will be connected when available.
+              Voice AI is currently disabled. Enable it above and save to start receiving AI-handled calls.
             </p>
           </CardContent>
         </Card>
