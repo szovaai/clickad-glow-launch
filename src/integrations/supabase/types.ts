@@ -129,6 +129,60 @@ export type Database = {
           },
         ]
       }
+      call_transcripts: {
+        Row: {
+          call_log_id: string | null
+          caller_phone: string | null
+          client_account_id: string
+          created_at: string
+          duration_seconds: number | null
+          id: string
+          intent_detected: string | null
+          outcome: string | null
+          summary: string | null
+          transcript: Json | null
+        }
+        Insert: {
+          call_log_id?: string | null
+          caller_phone?: string | null
+          client_account_id: string
+          created_at?: string
+          duration_seconds?: number | null
+          id?: string
+          intent_detected?: string | null
+          outcome?: string | null
+          summary?: string | null
+          transcript?: Json | null
+        }
+        Update: {
+          call_log_id?: string | null
+          caller_phone?: string | null
+          client_account_id?: string
+          created_at?: string
+          duration_seconds?: number | null
+          id?: string
+          intent_detected?: string | null
+          outcome?: string | null
+          summary?: string | null
+          transcript?: Json | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "call_transcripts_call_log_id_fkey"
+            columns: ["call_log_id"]
+            isOneToOne: false
+            referencedRelation: "call_logs"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "call_transcripts_client_account_id_fkey"
+            columns: ["client_account_id"]
+            isOneToOne: false
+            referencedRelation: "client_accounts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       chat_conversations: {
         Row: {
           client_account_id: string
@@ -797,6 +851,74 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      voice_configs: {
+        Row: {
+          active: boolean
+          booking_script: string | null
+          client_account_id: string
+          created_at: string
+          greeting_script: string | null
+          id: string
+          qualification_script: string | null
+          transfer_rules: Json | null
+          updated_at: string
+        }
+        Insert: {
+          active?: boolean
+          booking_script?: string | null
+          client_account_id: string
+          created_at?: string
+          greeting_script?: string | null
+          id?: string
+          qualification_script?: string | null
+          transfer_rules?: Json | null
+          updated_at?: string
+        }
+        Update: {
+          active?: boolean
+          booking_script?: string | null
+          client_account_id?: string
+          created_at?: string
+          greeting_script?: string | null
+          id?: string
+          qualification_script?: string | null
+          transfer_rules?: Json | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "voice_configs_client_account_id_fkey"
+            columns: ["client_account_id"]
+            isOneToOne: true
+            referencedRelation: "client_accounts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      voice_function_defs: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          name: string
+          parameters: Json | null
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          name: string
+          parameters?: Json | null
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          name?: string
+          parameters?: Json | null
+        }
+        Relationships: []
       }
     }
     Views: {
