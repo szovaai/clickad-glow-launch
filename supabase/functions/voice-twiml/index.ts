@@ -80,12 +80,19 @@ serve(async (req) => {
     const baseUrl = Deno.env.get("SUPABASE_URL")!;
     const actionUrl = `${baseUrl}/functions/v1/voice-twiml?clientId=${clientId}&voice=${encodeURIComponent(selectedVoice)}`;
 
+    const templateVars: Record<string, string> = {
+      business_name: client?.business_name || "us",
+    };
+
     // First turn — no speech yet, play greeting
     if (!speechResult) {
       conversations.set(callSid, []);
 
-      const greeting = voiceConfig.greeting_script || 
-        `Hello, thank you for calling ${client?.business_name || "us"}. How can I help you today?`;
+      const greeting = resolveTemplate(
+        voiceConfig.greeting_script || 
+          "Hello, thank you for calling {{business_name}}. How can I help you today?",
+        templateVars
+      );
 
       return twiml(
         `<Gather input="speech" action="${actionUrl}" speechTimeout="auto" language="en-US">` +
@@ -109,9 +116,9 @@ serve(async (req) => {
 Industry: ${client?.industry || "general services"}
 Services: ${client?.services?.join(", ") || "various services"}
 
-Greeting script: ${voiceConfig.greeting_script || ""}
-Qualification questions: ${voiceConfig.qualification_script || ""}
-Booking script: ${voiceConfig.booking_script || ""}
+Greeting script: ${resolveTemplate(voiceConfig.greeting_script || "", templateVars)}
+Qualification questions: ${resolveTemplate(voiceConfig.qualification_script || "", templateVars)}
+Booking script: ${resolveTemplate(voiceConfig.booking_script || "", templateVars)}
 ${kbContent ? `\nKnowledge base:\n${kbContent}` : ""}
 
 Rules:
@@ -200,6 +207,10 @@ Rules:
     return twiml(`<Say voice="Polly.Joanna">I'm sorry, something went wrong. Please try again later. Goodbye.</Say><Hangup/>`);
   }
 });
+
+function resolveTemplate(template: string, vars: Record<string, string>): string {
+  return template.replace(/\{\{(\w+)\}\}/g, (_, key) => vars[key] || "");
+}
 
 function escapeXml(str: string): string {
   return str
