@@ -7,10 +7,12 @@ import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Mic, Phone, FileText, Zap, Clock, AlertTriangle, BookOpen } from "lucide-react";
+import { Mic, Phone, FileText, Zap, Clock, AlertTriangle, BookOpen, Settings } from "lucide-react";
 import { toast } from "sonner";
 import ScriptBuilder from "@/components/app/voice/ScriptBuilder";
 import CallFlowBuilder from "@/components/app/voice/CallFlowBuilder";
+import PhoneConfig from "@/components/app/voice/PhoneConfig";
+import type { PhoneSettings } from "@/components/app/voice/PhoneConfig";
 import KnowledgePreview from "@/components/app/shared/KnowledgePreview";
 
 interface VoiceConfig {
@@ -47,7 +49,15 @@ export default function VoiceModule() {
   const [config, setConfig] = useState<VoiceConfig>(defaultConfig);
   const [transcripts, setTranscripts] = useState<any[]>([]);
   const [functionDefs, setFunctionDefs] = useState<any[]>([]);
+  const [phoneSettings, setPhoneSettings] = useState<PhoneSettings>({
+    twilioAccountSid: "",
+    twilioAuthToken: "",
+    twilioPhoneNumber: "",
+    missedCallTextBack: false,
+    autoReplyMessage: "",
+  });
   const [saving, setSaving] = useState(false);
+  const [savingPhone, setSavingPhone] = useState(false);
   const [loading, setLoading] = useState(true);
 
   // Load clients
@@ -71,10 +81,11 @@ export default function VoiceModule() {
     if (!selectedClient) return;
 
     const loadData = async () => {
-      const [configRes, transcriptRes, funcRes] = await Promise.all([
+      const [configRes, transcriptRes, funcRes, phoneRes] = await Promise.all([
         supabase.from("voice_configs").select("*").eq("client_account_id", selectedClient).maybeSingle(),
         supabase.from("call_transcripts").select("*").eq("client_account_id", selectedClient).order("created_at", { ascending: false }).limit(20),
         supabase.from("voice_function_defs").select("*").order("name"),
+        supabase.from("client_configs").select("phone_config").eq("client_account_id", selectedClient).maybeSingle(),
       ]);
 
       if (configRes.data) {
@@ -88,6 +99,25 @@ export default function VoiceModule() {
         });
       } else {
         setConfig(defaultConfig);
+      }
+
+      if (phoneRes.data?.phone_config) {
+        const pc = phoneRes.data.phone_config as any;
+        setPhoneSettings({
+          twilioAccountSid: pc.twilioAccountSid || "",
+          twilioAuthToken: pc.twilioAuthToken || "",
+          twilioPhoneNumber: pc.twilioPhoneNumber || "",
+          missedCallTextBack: pc.missedCallTextBack || false,
+          autoReplyMessage: pc.autoReplyMessage || "",
+        });
+      } else {
+        setPhoneSettings({
+          twilioAccountSid: "",
+          twilioAuthToken: "",
+          twilioPhoneNumber: "",
+          missedCallTextBack: false,
+          autoReplyMessage: "",
+        });
       }
 
       setTranscripts(transcriptRes.data || []);
@@ -117,6 +147,45 @@ export default function VoiceModule() {
       const res = await supabase.from("voice_configs").insert(payload).select().single();
       error = res.error;
       if (res.data) setConfig((c) => ({ ...c, id: res.data.id }));
+    }
+  };
+
+  const savePhoneConfig = async () => {
+    if (!selectedClient) return;
+    setSavingPhone(true);
+
+    const phonePayload = {
+      twilioAccountSid: phoneSettings.twilioAccountSid,
+      twilioAuthToken: phoneSettings.twilioAuthToken,
+      twilioPhoneNumber: phoneSettings.twilioPhoneNumber,
+      missedCallTextBack: phoneSettings.missedCallTextBack,
+      autoReplyMessage: phoneSettings.autoReplyMessage,
+    };
+
+    // Check if client_config exists
+    const { data: existing } = await supabase
+      .from("client_configs")
+      .select("id")
+      .eq("client_account_id", selectedClient)
+      .maybeSingle();
+
+    let error;
+    if (existing) {
+      ({ error } = await supabase
+        .from("client_configs")
+        .update({ phone_config: phonePayload as any })
+        .eq("client_account_id", selectedClient));
+    } else {
+      ({ error } = await supabase
+        .from("client_configs")
+        .insert({ client_account_id: selectedClient, phone_config: phonePayload as any }));
+    }
+
+    setSavingPhone(false);
+    if (error) {
+      toast.error("Failed to save phone config: " + error.message);
+    } else {
+      toast.success("Phone configuration saved");
     }
 
     setSaving(false);
@@ -200,6 +269,7 @@ export default function VoiceModule() {
         <TabsList className="bg-card/50">
           <TabsTrigger value="scripts"><FileText className="w-4 h-4 mr-1" /> Scripts</TabsTrigger>
           <TabsTrigger value="flow"><Zap className="w-4 h-4 mr-1" /> Call Flow</TabsTrigger>
+          <TabsTrigger value="phone"><Settings className="w-4 h-4 mr-1" /> Phone</TabsTrigger>
           <TabsTrigger value="transcripts"><Phone className="w-4 h-4 mr-1" /> Transcripts</TabsTrigger>
           <TabsTrigger value="functions"><Zap className="w-4 h-4 mr-1" /> Functions</TabsTrigger>
         </TabsList>
@@ -232,6 +302,15 @@ export default function VoiceModule() {
               {saving ? "Saving…" : "Save Flow Config"}
             </Button>
           </div>
+        </TabsContent>
+
+        <TabsContent value="phone">
+          <PhoneConfig
+            settings={phoneSettings}
+            onChange={setPhoneSettings}
+            onSave={savePhoneConfig}
+            saving={savingPhone}
+          />
         </TabsContent>
 
         <TabsContent value="transcripts">
