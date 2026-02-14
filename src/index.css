@@ -41,6 +41,16 @@ All colors MUST be HSL.
 
     --radius: 0.75rem;
 
+    /* Sidebar tokens */
+    --sidebar-background: 0 0% 6%;
+    --sidebar-foreground: 0 0% 90%;
+    --sidebar-primary: 217 91% 60%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 217 91% 60%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 0 0% 12%;
+    --sidebar-ring: 217 91% 60%;
+
     /* Custom ClickAd tokens */
     --jet-black: 0 0% 4%;
     --charcoal: 0 0% 10%;
