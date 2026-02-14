@@ -1,4 +1,4 @@
-import { LayoutDashboard, Users, MessageSquare, Workflow, Mic, BarChart3, BookOpen, Plug, Settings, LogOut, Zap, Star, CalendarCheck, UserX } from "lucide-react";
+import { LayoutDashboard, Users, MessageSquare, Workflow, Mic, BarChart3, BookOpen, Plug, Settings, LogOut, Zap, Star, CalendarCheck, UserX, HeartHandshake } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import {
@@ -25,6 +25,7 @@ const navItems = [
   { title: "Reviews", url: "/app/reviews", icon: Star },
   { title: "Appointments", url: "/app/appointments", icon: CalendarCheck },
   { title: "Reactivation", url: "/app/reactivation", icon: UserX },
+  { title: "Post-Job", url: "/app/post-job", icon: HeartHandshake },
   { title: "Knowledge Base", url: "/app/knowledge-base", icon: BookOpen },
   { title: "Integrations", url: "/app/integrations", icon: Plug },
   { title: "Settings", url: "/app/settings", icon: Settings },

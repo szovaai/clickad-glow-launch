@@ -43,6 +43,7 @@ export type Database = {
           customer_name: string
           customer_phone: string
           duration_minutes: number
+          followup_sent: boolean
           id: string
           notes: string | null
           reminder_1h_sent: boolean
@@ -60,6 +61,7 @@ export type Database = {
           customer_name: string
           customer_phone: string
           duration_minutes?: number
+          followup_sent?: boolean
           id?: string
           notes?: string | null
           reminder_1h_sent?: boolean
@@ -77,6 +79,7 @@ export type Database = {
           customer_name?: string
           customer_phone?: string
           duration_minutes?: number
+          followup_sent?: boolean
           id?: string
           notes?: string | null
           reminder_1h_sent?: boolean
@@ -731,6 +734,113 @@ export type Database = {
           visitor_id?: string
         }
         Relationships: []
+      }
+      post_job_configs: {
+        Row: {
+          active: boolean
+          client_account_id: string
+          created_at: string
+          delay_hours: number
+          id: string
+          review_redirect_enabled: boolean
+          review_threshold: number
+          satisfaction_sms: string
+          updated_at: string
+          upsell_enabled: boolean
+          upsell_sms: string
+        }
+        Insert: {
+          active?: boolean
+          client_account_id: string
+          created_at?: string
+          delay_hours?: number
+          id?: string
+          review_redirect_enabled?: boolean
+          review_threshold?: number
+          satisfaction_sms?: string
+          updated_at?: string
+          upsell_enabled?: boolean
+          upsell_sms?: string
+        }
+        Update: {
+          active?: boolean
+          client_account_id?: string
+          created_at?: string
+          delay_hours?: number
+          id?: string
+          review_redirect_enabled?: boolean
+          review_threshold?: number
+          satisfaction_sms?: string
+          updated_at?: string
+          upsell_enabled?: boolean
+          upsell_sms?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "post_job_configs_client_account_id_fkey"
+            columns: ["client_account_id"]
+            isOneToOne: true
+            referencedRelation: "client_accounts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      post_job_log: {
+        Row: {
+          appointment_id: string
+          client_account_id: string
+          created_at: string
+          customer_name: string | null
+          customer_phone: string
+          id: string
+          reply_rating: number | null
+          review_sent: boolean
+          sent_at: string
+          step: string
+          upsell_sent: boolean
+        }
+        Insert: {
+          appointment_id: string
+          client_account_id: string
+          created_at?: string
+          customer_name?: string | null
+          customer_phone: string
+          id?: string
+          reply_rating?: number | null
+          review_sent?: boolean
+          sent_at?: string
+          step?: string
+          upsell_sent?: boolean
+        }
+        Update: {
+          appointment_id?: string
+          client_account_id?: string
+          created_at?: string
+          customer_name?: string | null
+          customer_phone?: string
+          id?: string
+          reply_rating?: number | null
+          review_sent?: boolean
+          sent_at?: string
+          step?: string
+          upsell_sent?: boolean
+        }
+        Relationships: [
+          {
+            foreignKeyName: "post_job_log_appointment_id_fkey"
+            columns: ["appointment_id"]
+            isOneToOne: false
+            referencedRelation: "appointments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "post_job_log_client_account_id_fkey"
+            columns: ["client_account_id"]
+            isOneToOne: false
+            referencedRelation: "client_accounts"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       profiles: {
         Row: {
