@@ -17,3 +17,12 @@ verify_jwt = false
 
 [functions.chat-qualifier]
 verify_jwt = false
+
+[functions.missed-call-webhook]
+verify_jwt = false
+
+[functions.send-followup-sms]
+verify_jwt = false
+
+[functions.sequence-processor]
+verify_jwt = false
