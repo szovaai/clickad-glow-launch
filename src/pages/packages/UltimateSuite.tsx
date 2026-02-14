@@ -1,6 +1,7 @@
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { SuiteHero } from "@/components/packages/SuiteHero";
+import { PainSection } from "@/components/ai-sales/PainSection";
 import { CoreOfferSection } from "@/components/packages/CoreOfferSection";
 import { ValueAddsGrid } from "@/components/packages/ValueAddsGrid";
 import { PremiumSupportSection } from "@/components/packages/PremiumSupportSection";
@@ -21,14 +22,14 @@ import {
 const UltimateSuite = () => {
   const schemas = [
     generateServiceSchema(
-      "Ultimate Business Website Suite",
-      "Premium website package for Calgary service businesses. Includes custom design, SEO optimization, copywriting, branding package, and 3 months of priority support. Everything your business needs to dominate online.",
+      "AI Sales Infrastructure",
+      "AI receptionist, website chat qualifier, follow-up automation, and CRM for Calgary service businesses. Never miss a call or lead again.",
       "Calgary, AB"
     ),
     generateFAQPageSchema(suiteFAQs),
     generateHowToSchema(
-      "How to Launch Your Business Website",
-      "A proven 5-step process from discovery to launch and ongoing support",
+      "How to Install Your AI Sales System",
+      "A proven 3-step process: Install, Train, Optimize",
       suiteProcessSteps.map(step => ({
         title: step.title,
         description: step.description,
@@ -36,9 +37,9 @@ const UltimateSuite = () => {
       }))
     ),
     generateOfferSchema(
-      "Ultimate Business Website Suite",
-      "Complete website solution with custom design, SEO, copywriting, branding, and 3 months support",
-      "997-2500",
+      "AI Sales Infrastructure",
+      "Complete AI receptionist and sales automation system for service businesses",
+      "1497-5000",
       "CAD"
     )
   ];
@@ -46,15 +47,16 @@ const UltimateSuite = () => {
   return (
     <div className="min-h-screen">
       <SEOHead
-        title="Ultimate Business Website Suite | Calgary's Premier Website Package"
-        description="Get everything your Calgary business needs to dominate online. Custom design, SEO optimization, professional copywriting, branding package, and 3 months of priority support. Starting at $997."
+        title="AI Sales System for Service Businesses | ClickAd Media"
+        description="Install an AI receptionist, chat qualifier, and automated follow-up that answers, qualifies, and books customers 24/7. Live in 7 days. Starting at $1,497."
         canonical="https://www.clickadmedia.com/"
-        keywords="Calgary website design, business website package, custom website Calgary, website design suite"
+        keywords="AI receptionist, AI sales system, automated booking, lead capture, missed call text back, Calgary"
         schemas={schemas}
       />
       <Navigation />
       <main>
         <SuiteHero />
+        <PainSection />
         <CoreOfferSection />
         <ValueAddsGrid />
         <PremiumSupportSection />

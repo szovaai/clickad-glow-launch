@@ -25,26 +25,26 @@ export const GuaranteeSection = () => {
             </motion.div>
 
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              100% <span className="glow-text">Satisfaction Guarantee</span>
+              Our <span className="glow-text">Performance Guarantee</span>
             </h2>
 
             <p className="text-xl text-muted-foreground mb-6 max-w-2xl mx-auto leading-relaxed">
-              If you're not completely satisfied with your new website within 30 days of launch, 
-              we'll make it right—or refund your deposit. No questions asked.
+              We don't launch until you approve the call flow. If your AI system doesn't book appointments 
+              within 30 days of going live, we'll keep optimizing for free until it does.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-6 justify-center text-sm pt-6 border-t border-border/50">
               <div className="flex items-center gap-2 justify-center">
                 <span className="text-primary">✓</span>
-                <span className="text-muted-foreground">Risk-Free Investment</span>
+                <span className="text-muted-foreground">You approve before launch</span>
               </div>
               <div className="flex items-center gap-2 justify-center">
                 <span className="text-primary">✓</span>
-                <span className="text-muted-foreground">30-Day Protection</span>
+                <span className="text-muted-foreground">30-day performance window</span>
               </div>
               <div className="flex items-center gap-2 justify-center">
                 <span className="text-primary">✓</span>
-                <span className="text-muted-foreground">Your Success Matters</span>
+                <span className="text-muted-foreground">Free optimization if needed</span>
               </div>
             </div>
           </Card>

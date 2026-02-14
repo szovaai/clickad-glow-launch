@@ -12,8 +12,10 @@ import { trackFormSubmission } from "@/lib/analytics";
 
 const leadSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100),
-  email: z.string().trim().email("Invalid email address").max(255),
-  phone: z.string().trim().max(20).optional(),
+  business: z.string().trim().min(1, "Business name is required").max(100),
+  phone: z.string().trim().min(1, "Phone is required").max(20),
+  website: z.string().trim().max(500).optional().or(z.literal('')),
+  industry: z.string().trim().max(100).optional(),
 });
 
 type LeadFormData = z.infer<typeof leadSchema>;
@@ -35,9 +37,9 @@ export const HeroLeadForm = () => {
 
       if (error) throw error;
 
-      // Track form submission with GA4
       trackFormSubmission('hero_lead_form', {
         has_phone: !!data.phone,
+        industry: data.industry || 'not_specified',
       });
 
       toast.success("Thanks! We'll be in touch soon.");
@@ -53,9 +55,9 @@ export const HeroLeadForm = () => {
   return (
     <div className="bg-card/50 backdrop-blur-sm border border-border/50 rounded-lg p-6 shadow-xl">
       <div className="mb-4">
-        <h3 className="text-xl font-semibold mb-1">Get Your Free Quote</h3>
+        <h3 className="text-xl font-semibold mb-1">Get a 60-Second AI Sales System Plan</h3>
         <p className="text-sm text-muted-foreground">
-          Start your project in under 60 seconds
+          See how AI can answer and book for your business
         </p>
       </div>
       
@@ -74,21 +76,20 @@ export const HeroLeadForm = () => {
         </div>
 
         <div>
-          <Label htmlFor="email">Email *</Label>
+          <Label htmlFor="business">Business Name *</Label>
           <Input
-            id="email"
-            type="email"
-            {...register("email")}
-            placeholder="you@company.com"
+            id="business"
+            {...register("business")}
+            placeholder="Your company"
             className="mt-1.5"
           />
-          {errors.email && (
-            <p className="text-sm text-destructive mt-1">{errors.email.message}</p>
+          {errors.business && (
+            <p className="text-sm text-destructive mt-1">{errors.business.message}</p>
           )}
         </div>
 
         <div>
-          <Label htmlFor="phone">Phone (optional)</Label>
+          <Label htmlFor="phone">Phone *</Label>
           <Input
             id="phone"
             type="tel"
@@ -99,6 +100,26 @@ export const HeroLeadForm = () => {
           {errors.phone && (
             <p className="text-sm text-destructive mt-1">{errors.phone.message}</p>
           )}
+        </div>
+
+        <div>
+          <Label htmlFor="website">Website (optional)</Label>
+          <Input
+            id="website"
+            {...register("website")}
+            placeholder="https://yoursite.com"
+            className="mt-1.5"
+          />
+        </div>
+
+        <div>
+          <Label htmlFor="industry">Industry (optional)</Label>
+          <Input
+            id="industry"
+            {...register("industry")}
+            placeholder="e.g. HVAC, Roofing, Dental"
+            className="mt-1.5"
+          />
         </div>
 
         <Button 
@@ -113,12 +134,12 @@ export const HeroLeadForm = () => {
               Sending...
             </>
           ) : (
-            'Get Started'
+            'Get My Plan'
           )}
         </Button>
         
         <p className="text-xs text-muted-foreground text-center">
-          No spam. Unsubscribe anytime.
+          No spam. We'll send your custom plan within 24 hours.
         </p>
       </form>
     </div>

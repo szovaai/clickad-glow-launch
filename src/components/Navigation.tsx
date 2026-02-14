@@ -16,10 +16,10 @@ export const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const navLinks = [
-    { href: "#included", label: "What's Included" },
-    { href: "#process", label: "Process" },
-    { href: "#testimonials", label: "Testimonials" },
+    { href: "#included", label: "AI Sales System" },
+    { href: "#process", label: "How It Works" },
     { href: "#pricing", label: "Pricing" },
+    { href: "#faq", label: "FAQ" },
   ];
 
   const companyLinks = [
@@ -74,7 +74,7 @@ export const Navigation = () => {
 
           <div className="flex items-center gap-4">
             <Button variant="glow" size="sm" asChild className="hidden md:flex">
-              <Link to="/audit">Get a Quote</Link>
+              <Link to="/audit">Book a Demo</Link>
             </Button>
 
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -112,7 +112,7 @@ export const Navigation = () => {
                   ))}
                   <Button variant="glow" asChild className="w-full mt-4">
                     <Link to="/audit" onClick={() => setIsOpen(false)}>
-                      Get a Quote
+                      Book a Demo
                     </Link>
                   </Button>
                 </nav>

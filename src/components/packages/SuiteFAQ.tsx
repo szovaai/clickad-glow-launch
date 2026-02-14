@@ -6,36 +6,43 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-// Export FAQ data for schema generation
 export const suiteFAQs = [
   {
-    question: "What's the typical timeline from start to launch?",
-    answer: "Most projects are completed within 4 weeks. This includes discovery (30 minutes), strategy & design (Week 1), development (Weeks 2-3), and launch & training (Week 4). Complex projects may take longer, which we'll discuss during the discovery call."
+    question: "How does the AI receptionist work?",
+    answer: "Our AI receptionist answers calls using a natural-sounding voice trained on your business rules, FAQs, and services. It qualifies leads by asking your custom questions, books appointments directly into your calendar, and can even transfer hot leads to you live. It works 24/7—nights, weekends, and holidays."
   },
-    {
-      question: "Can I see examples of your work?",
-      answer: "Absolutely! We have a portfolio showcasing our work for Calgary businesses across various industries including electricians, renovation contractors, and industrial companies. You can view our work in the portfolio section or request specific examples during your strategy call."
-    },
-    {
-      question: "What if I need more pages than what's included?",
-      answer: "The base package includes 4 professionally written pages (Home, About, Services, Contact). Additional pages can be added for a fee, which we'll discuss during your discovery call based on your specific needs."
-    },
-    {
-      question: "Do you offer payment plans?",
-      answer: "Yes! We understand that quality websites are an investment. We offer flexible payment plans to make the Ultimate Business Website Suite accessible. Discuss payment options during your strategy call to find what works best for your business."
-    },
-    {
-      question: "What happens after the 3-month support period?",
-      answer: "After your 3-month priority support period, you can choose to continue with a monthly maintenance plan for ongoing updates, support, and optimization. Alternatively, you'll have full ownership of your site and can manage it yourself or hire another provider."
-    },
-    {
-      question: "Will I be able to update the website myself?",
-      answer: "Yes! Your website will be built on a user-friendly platform. During your launch strategy session, we'll train you on how to make basic updates. Plus, you'll have access to our training video library covering common tasks."
-    },
-    {
-      question: "What makes this package different from template websites?",
-      answer: "Unlike template websites, every aspect of your site is custom-designed to reflect your unique brand and business goals. You get professional copywriting, a branding package, strategic design, and 3 months of hands-on support—not just a one-size-fits-all template."
-    }
+  {
+    question: "Does it sound human?",
+    answer: "Yes. Modern voice AI is virtually indistinguishable from a human receptionist. We customize the voice, tone, and conversation style to match your brand. Most callers won't realize they're speaking with AI."
+  },
+  {
+    question: "What happens if AI can't answer a question?",
+    answer: "If the AI encounters a question outside its training, it gracefully handles it by taking a message, offering to have someone call back, or transferring the call to you or your team directly. No lead is ever lost."
+  },
+  {
+    question: "Can it transfer calls to me?",
+    answer: "Absolutely. You can set rules for when calls should be transferred—for example, high-value leads, urgent requests, or specific topics. The AI qualifies first, then transfers with context so you're never going in blind."
+  },
+  {
+    question: "Can it collect deposits or payments?",
+    answer: "Yes. We can integrate payment collection into the booking flow so customers can pay deposits or full amounts when scheduling. This works via secure payment links sent by SMS after the call."
+  },
+  {
+    question: "What CRM do you use?",
+    answer: "We work with GoHighLevel, HubSpot, or can set up a lightweight custom CRM depending on your needs. Every lead, call transcript, and booking is stored and organized automatically."
+  },
+  {
+    question: "How long does setup take?",
+    answer: "Most systems are live within 7 days. Day 1-3: We connect your phone, calendar, and CRM. Day 4-7: We train the AI on your business rules, scripts, and qualification flow. Then we go live and start optimizing."
+  },
+  {
+    question: "What industries does this work best for?",
+    answer: "This works exceptionally well for contractors (HVAC, plumbing, electrical, roofing), home services, clinics, med spas, dental offices, and any service business that books appointments and gets inbound calls."
+  },
+  {
+    question: "Can you use my existing phone number and website?",
+    answer: "Yes. We can port your existing number or set up call forwarding so nothing changes for your customers. For your website, we add the chat widget and booking system without rebuilding anything."
+  },
 ];
 
 export const SuiteFAQ = () => {
@@ -53,7 +60,7 @@ export const SuiteFAQ = () => {
             Frequently Asked <span className="glow-text">Questions</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Everything you need to know about the Ultimate Business Website Suite
+            Everything you need to know about your AI Sales System
           </p>
         </motion.div>
 

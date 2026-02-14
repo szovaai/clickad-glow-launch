@@ -1,49 +1,49 @@
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
-import { Search, FileText, Palette, Settings } from "lucide-react";
+import { Zap, FileText, Calendar, RefreshCw } from "lucide-react";
 
 export const ValueAddsGrid = () => {
   const valueAdds = [
     {
-      icon: Search,
-      title: "SEO & Performance Optimization",
+      icon: Zap,
+      title: "Speed-to-Lead Metrics",
       features: [
-        "On-page SEO setup for better rankings",
-        "Core Web Vitals optimization",
-        "Fast loading speeds (under 2 seconds)",
-        "Mobile-optimized for all devices"
-      ]
+        "Average response time under 60 seconds",
+        "Real-time lead notification dashboard",
+        "Competitor response benchmarking",
+        "Monthly performance reports",
+      ],
     },
     {
       icon: FileText,
-      title: "Copywriting & Content Bundle",
+      title: "Custom Call Scripts",
       features: [
-        "Professional copy for Home, About, Services, Contact",
-        "Conversion-focused headlines",
-        "Clear, compelling calls-to-action",
-        "SEO-optimized content structure"
-      ]
+        "Industry-specific qualification questions",
+        "Objection handling workflows",
+        "After-hours messaging customization",
+        "Multi-language support available",
+      ],
     },
     {
-      icon: Palette,
-      title: "Branding Package",
+      icon: Calendar,
+      title: "Calendar Integration",
       features: [
-        "Logo refresh or light redesign",
-        "Custom color palette selection",
-        "Typography system setup",
-        "Brand guidelines document"
-      ]
+        "Google Calendar + Outlook sync",
+        "Automatic appointment scheduling",
+        "Buffer time between bookings",
+        "Team calendar management",
+      ],
     },
     {
-      icon: Settings,
-      title: "Technical Setup",
+      icon: RefreshCw,
+      title: "Lead Reactivation",
       features: [
-        "SSL certificate installation",
-        "Hosting configuration",
-        "Google Analytics integration",
-        "Performance monitoring setup"
-      ]
-    }
+        "Re-engage cold leads automatically",
+        "Win-back SMS + email campaigns",
+        "Seasonal promotion blasts",
+        "Past-customer follow-up sequences",
+      ],
+    },
   ];
 
   return (
@@ -57,10 +57,10 @@ export const ValueAddsGrid = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Premium <span className="glow-text">Value Adds</span>
+            Premium <span className="glow-text">Add-Ons</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Everything you need for a successful online presence
+            Tools that make your AI sales system even more powerful
           </p>
         </motion.div>
 
