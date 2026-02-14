@@ -1,165 +1,229 @@
 
 
-# ClickAdMedia Full Refactor: AI Sales Infrastructure
+# ClickAd AI Sales System -- Full SaaS Build Plan
 
 ## Overview
 
-This is a complete repositioning of the site from "website design agency" to "AI Sales Infrastructure provider." The core message shifts from "We build websites" to "We install an AI Sales System that answers, qualifies, and books customers 24/7."
+Build a multi-tenant SaaS platform at app.clickadmedia.co with agency/client dashboards, AI chat qualifier, missed-call text-back, follow-up automation, voice AI readiness, and GoHighLevel integration.
 
-This plan is broken into 3 phases to keep changes manageable and testable.
-
----
-
-## Phase 1 -- Homepage + Navigation + Pricing (Core Pivot)
-
-### 1. Navigation Refactor (`src/components/Navigation.tsx`)
-- Update nav links to: Home, AI Sales System, Pricing, Results, Industries, FAQ
-- Change "Get a Quote" button to "Book a Demo"
-- Add sticky CTA behavior
-- Update mobile nav to match
-
-### 2. Homepage Hero Rewrite (`src/components/packages/SuiteHero.tsx`)
-- New headline: "Turn Missed Calls Into Booked Jobs -- Automatically."
-- New subheadline about AI receptionist + chat qualifier + automated follow-up
-- CTA buttons: "Book a Demo" (primary) + "See What's Included" (secondary)
-- Update the right-side lead form heading to "Get a 60-Second AI Sales System Plan"
-- Update form fields: Name, Business, Phone, Website, Industry dropdown
-- Add 3 mini proof bullets: "Instant call answering", "Missed-call text back", "Auto booking + reminders"
-
-### 3. Pain Section (New Component)
-- Create `src/components/ai-sales/PainSection.tsx`
-- Headline: "Most leads are lost in the first 5 minutes."
-- 4 pain bullets about missed calls, slow replies, no follow-up, admin costs
-
-### 4. Core Offer -- AI Sales Infrastructure (Rewrite `CoreOfferSection.tsx`)
-- Replace "Bespoke Website Design" with a 4-card grid:
-  1. AI Receptionist (Voice) -- answers, qualifies, books, transfers
-  2. Smart Website Chat Qualifier -- captures, filters, books
-  3. Follow-Up Automation -- missed-call text back, SMS/email sequences, reminders
-  4. CRM + Pipeline -- lead storage, tags, status tracking
-
-### 5. How It Works (Rewrite `SuiteProcessTimeline.tsx`)
-- Simplify to 3 steps: Install, Train, Optimize
-- Update icons, titles, descriptions, durations
-
-### 6. Value Adds Grid (Rewrite `ValueAddsGrid.tsx`)
-- Replace SEO/copywriting/branding cards with AI sales system supporting features
-- Options: Speed-to-Lead metrics, Custom Call Scripts, Calendar Integration, Lead Reactivation
-
-### 7. Pricing Rewrite (`SuitePricingCard.tsx`)
-- New tier names and features:
-  - **Lead Capture System** ($1,497) -- AI website/landing funnel, chat capture, missed-call text back, CRM basics
-  - **AI Receptionist System** ($2,997) -- Everything above + AI voice receptionist, scripts, follow-up automation, calendar
-  - **AI Sales Team + Optimization** ($5,000+) -- Everything above + multi-step qualification, review generation, lead reactivation, monthly optimization
-- Add monthly management note: $297-$997/mo depending on tier
-- Update Stripe price IDs (new products will need to be created in Stripe)
-
-### 8. Guarantee Rewrite (`GuaranteeSection.tsx`)
-- Change from "satisfaction guarantee" to: "We don't launch until you approve the call flow" + "If it doesn't book at least X appointments in 30 days, we keep optimizing free for 30 more days"
-
-### 9. FAQ Rewrite (`SuiteFAQ.tsx`)
-- Replace all questions with AI sales system FAQs:
-  - How does the AI receptionist work?
-  - Does it sound human?
-  - What happens if AI can't answer?
-  - Can it transfer calls to me?
-  - Can it collect deposits?
-  - What CRM do you use?
-  - How long does setup take?
-  - What industries does this work best for?
-  - Can you use my existing number/site?
-
-### 10. Final CTA Rewrite (`CTA.tsx`)
-- Headline: "Want your business to answer and book leads 24/7?"
-- Buttons: "Book Demo" + "Get a Plan"
-
-### 11. SEO Updates (`UltimateSuite.tsx`)
-- Update all SEO meta tags, schema markup, and page titles to reflect AI Sales System positioning
+This will be built across **6 sequential implementation rounds**, each one building on the last.
 
 ---
 
-## Phase 2 -- New Pages
+## Round 1: Auth + Database Schema + Roles
 
-### 1. Offer Page (`/ai-sales-system`)
-- Deep explanation of the AI Sales Infrastructure
-- What's included breakdown
-- Demo clips placeholder section
+### Database Tables (via migrations)
 
-### 2. Pricing Page (`/pricing`)
-- Standalone clean pricing comparison page with the 3 new tiers
+**Core multi-tenant tables:**
 
-### 3. Results Page (`/results`)
-- Before/after lead response workflows
-- Demo call transcript examples
-- Pipeline screenshots
+```text
+profiles          - user_id (FK auth.users), agency_id, display_name, avatar_url
+agencies          - id, name, logo_url, created_at
+client_accounts   - id, agency_id (FK), business_name, industry, services, service_area, hours, emergency_hours, status, created_at
+user_roles        - id, user_id (FK auth.users), role (enum: agency_admin, agency_support, client_owner, client_staff)
+```
 
-### 4. Book Demo Page
-- Short, frictionless scheduler integration
-- "What to expect" section
+**Enums:**
+- `app_role`: agency_admin, agency_support, client_owner, client_staff
 
-### 5. Industries Section
-- Create industry pages for: Contractors/Trades, Clinics/Med Spas, Home Services, Local Pros, High-Ticket Service Providers
-- Each with tailored messaging
+**Security definer function** `has_role()` for RLS policies (avoids infinite recursion).
+
+**RLS policies** on all tables scoped by agency_id/user_id.
+
+### Auth System
+- Email/password signup + login pages
+- Role-based route protection (agency vs client views)
+- Agency admin can invite/create client users
+- Auth context provider with role checking
+
+### App Shell
+- Dark theme SaaS layout with sidebar navigation
+- Route structure: `/app/dashboard`, `/app/clients`, `/app/chat`, `/app/automations`, `/app/voice`, `/app/analytics`, `/app/integrations`, `/app/settings`
+- Role-based nav (agency sees all clients, client sees own dashboard)
 
 ---
 
-## Phase 3 -- Backend + Tracking
+## Round 2: Client Onboarding Wizard + Config Tables
 
-### 1. Stripe Product Updates
-- Create 3 new Stripe products with updated pricing ($1,497 / $2,997 / $5,000)
-- Update price IDs in the codebase
+### Additional Database Tables
 
-### 2. Lead Form Updates
-- Update HeroLeadForm fields and validation schema
-- Update form submission to capture new fields (industry, website URL)
+```text
+client_configs         - id, client_account_id (FK), qualification_rules (jsonb), calendar_settings (jsonb), phone_config (jsonb), knowledge_base (jsonb)
+ghl_integrations       - id, client_account_id (FK), api_key (encrypted), location_id, pipeline_id, stage_mapping (jsonb), custom_field_mapping (jsonb)
+```
 
-### 3. Conversion Tracking
-- Update all tracking events to reflect new funnel
-- Add "Book Demo" conversion event
+### 6-Step Wizard UI
+1. Business Info (name, industry, services, area, hours)
+2. Qualification Logic (budget min, job filters, location filters, custom questions)
+3. Calendar Setup (Google Calendar connect, availability, buffer, duration)
+4. GoHighLevel Integration (API key, location, pipeline, stage mapping)
+5. Phone Configuration (Twilio/GHL number, missed-call text-back toggle, auto-reply message)
+6. Knowledge Base (FAQs, service descriptions, pricing ranges, policies, objection responses)
+
+All saved to `client_configs` and `ghl_integrations` tables.
+
+### Edge Functions
+- `ghl-proxy` -- proxy calls to GoHighLevel API (create contact, create opportunity, apply tags, trigger workflow)
+
+---
+
+## Round 3: AI Chat Qualifier Module
+
+### Database Tables
+
+```text
+chat_conversations  - id, client_account_id, visitor_id, status (active/closed/qualified/unqualified), created_at
+chat_messages       - id, conversation_id (FK), role (visitor/ai/system), content, metadata (jsonb), created_at
+chat_widget_configs - id, client_account_id (FK), primary_color, logo_url, auto_open, greeting_message, qualification_flow (jsonb)
+```
+
+### Embeddable Widget
+- Floating chat bubble component (can be extracted as standalone script tag later)
+- Qualification flow engine driven by `qualification_flow` jsonb config
+- Collects: name, phone, email, service requested, notes
+- Logic: qualified -> show calendar booking; unqualified -> capture info + follow-up; after hours -> book next slot
+
+### AI Backend
+- Edge function `chat-qualifier` using Lovable AI (Gemini 3 Flash) with client's knowledge base as context
+- Creates GHL contact + opportunity via `ghl-proxy` edge function
+- Applies tags and triggers workflows
+
+### Widget Embed Page
+- Settings page for color, logo, greeting customization
+- Generates script tag / iframe embed code for client websites
+
+---
+
+## Round 4: Missed-Call Text-Back + Follow-Up Automation
+
+### Database Tables
+
+```text
+call_logs           - id, client_account_id, caller_phone, direction (inbound/outbound), status (answered/missed/recovered), duration, created_at
+sms_messages        - id, client_account_id, call_log_id (FK nullable), to_phone, from_phone, body, status, sent_at
+follow_up_sequences - id, client_account_id, name, trigger_event, steps (jsonb), active, created_at
+sequence_enrollments - id, sequence_id (FK), contact_phone, current_step, status (active/completed/stopped), enrolled_at
+```
+
+### Missed-Call Text-Back Engine
+- Edge function `missed-call-webhook` receives Twilio/GHL webhook on missed call
+- Sends SMS within 30 seconds with booking link
+- Creates GHL contact tagged "Missed Call"
+- Triggers follow-up workflow
+- Dashboard: missed calls, text replies, booked from recovery
+
+### Follow-Up Automation Builder
+- Pre-built templates: New lead (Day 0,1,3), No-show, Quote follow-up, 30-day reactivation
+- SMS + Email editor per step
+- Delay logic + conditional logic (if booked, stop sequence)
+- Enable/disable per sequence, edit templates, duplicate
+
+### Edge Functions
+- `send-followup-sms` -- sends SMS via Twilio
+- `sequence-processor` -- processes active enrollments and sends next step
+
+---
+
+## Round 5: Voice AI Architecture (Gemini 3 Ready)
+
+### Database Tables
+
+```text
+voice_configs       - id, client_account_id, greeting_script, qualification_script, booking_script, transfer_rules (jsonb), active
+call_transcripts    - id, client_account_id, call_log_id (FK), transcript (jsonb), summary, intent_detected, outcome, created_at
+voice_function_defs - id, name (createContact/bookAppointment/applyTag/transferCall), parameters (jsonb), description
+```
+
+### UI (Placeholder + Architecture)
+- Voice Module section with "Enable AI Receptionist (Beta)" toggle (disabled for now)
+- Script builder interface for greeting, qualification, booking, transfer
+- Call flow builder (visual steps)
+- Save all config to database
+
+### Webhook Endpoint
+- Edge function `voice-webhook` -- receives incoming call events, stores transcript, summary, outcome
+- Prepared function signatures: `createContact()`, `createOpportunity()`, `bookAppointment()`, `applyTag()`, `transferCall()`
+- Architecture designed so Gemini 3 voice handler plugs in later via streaming API
+
+---
+
+## Round 6: Analytics Dashboards (Client + Agency)
+
+### Client Dashboard
+- KPIs: Total Calls, Answered, Missed, Booked, Qualified, Conversion Rate, Response Time, Recovered
+- Charts (recharts): Calls/day, Bookings/day, Missed call recovery rate, Pipeline conversion
+- Revenue Estimator: enter avg job value, show "Estimated Revenue Captured"
+- Weekly Summary Card: trends + static suggestions
+
+### Agency Dashboard
+- All clients list with status indicators
+- Aggregate metrics across all clients
+- Sort by performance
+- Flagged issues view
+- "Impersonate" button to view as client
+- Edit client config inline
 
 ---
 
 ## Technical Details
 
-### Files to Create (Phase 1)
-- `src/components/ai-sales/PainSection.tsx`
+### Design System
+- Dark theme with blue accent glow (matches existing glassmorphism style)
+- High-tech, futuristic AI SaaS feel
+- shadcn/ui components throughout
+- Framer Motion animations
 
-### Files to Heavily Modify (Phase 1)
-- `src/components/Navigation.tsx` -- new nav links
-- `src/components/packages/SuiteHero.tsx` -- complete hero rewrite
-- `src/components/packages/CoreOfferSection.tsx` -- 4-card AI offer grid
-- `src/components/packages/SuiteProcessTimeline.tsx` -- 3-step process
-- `src/components/packages/ValueAddsGrid.tsx` -- new supporting features
-- `src/components/packages/SuitePricingCard.tsx` -- new tiers + pricing
-- `src/components/packages/GuaranteeSection.tsx` -- new guarantee copy
-- `src/components/packages/SuiteFAQ.tsx` -- all new FAQs
-- `src/components/CTA.tsx` -- new final CTA
-- `src/pages/packages/UltimateSuite.tsx` -- updated page composition + SEO
-- `src/components/PremiumHeader.tsx` -- update hero form heading/fields (used on /home)
-- `src/lib/validation.ts` -- update form validation schema
+### New Files Created (Approximate)
 
-### Files to Create (Phase 2)
-- `src/pages/AISalesSystem.tsx`
-- `src/pages/Results.tsx` (standalone page)
-- `src/pages/BookDemo.tsx`
-- `src/pages/industries/Contractors.tsx` (and similar)
+**Round 1 (~15 files):**
+- `src/pages/app/Login.tsx`, `src/pages/app/Signup.tsx`
+- `src/pages/app/Dashboard.tsx`
+- `src/components/app/AppLayout.tsx`, `src/components/app/AppSidebar.tsx`
+- `src/contexts/AuthContext.tsx`
+- `src/hooks/useAuth.ts`, `src/hooks/useRole.ts`
+- Migration files for all tables + RLS
 
-### Stripe Changes Needed
-- 3 new products + prices must be created before updating checkout
+**Round 2 (~10 files):**
+- `src/pages/app/onboarding/OnboardingWizard.tsx`
+- `src/components/app/onboarding/Step1-6.tsx` (6 step components)
+- `src/pages/app/Clients.tsx`
+- Edge function: `supabase/functions/ghl-proxy/index.ts`
+
+**Round 3 (~8 files):**
+- `src/components/app/chat/ChatWidget.tsx`, `ChatQualifier.tsx`, `WidgetSettings.tsx`
+- `src/pages/app/ChatModule.tsx`
+- Edge function: `supabase/functions/chat-qualifier/index.ts`
+
+**Round 4 (~8 files):**
+- `src/pages/app/Automations.tsx`
+- `src/components/app/automations/SequenceBuilder.tsx`, `SequenceTemplates.tsx`
+- `src/components/app/calls/MissedCallDashboard.tsx`
+- Edge functions: `missed-call-webhook`, `send-followup-sms`, `sequence-processor`
+
+**Round 5 (~6 files):**
+- `src/pages/app/VoiceModule.tsx`
+- `src/components/app/voice/ScriptBuilder.tsx`, `CallFlowBuilder.tsx`
+- Edge function: `voice-webhook`
+
+**Round 6 (~6 files):**
+- `src/pages/app/Analytics.tsx`
+- `src/components/app/analytics/KPICards.tsx`, `Charts.tsx`, `RevenueEstimator.tsx`
+- `src/pages/app/AgencyDashboard.tsx`
+
+### Secrets Needed
+- GoHighLevel API credentials (will request when building Round 2)
+- Twilio credentials already exist
+- Google Calendar API (will request when building Round 2)
+- Gemini 3 API key (future, not needed for MVP)
 
 ### What Gets Preserved
-- Existing design system (glassmorphism, glow effects, Electric Blue accent)
-- Framer Motion animations
-- shadcn/ui component library
-- All backend infrastructure (Supabase, edge functions, CRM tables)
-- Blog, About, Privacy, Terms pages (untouched)
-- Old homepage preserved at `/home`
+- Entire existing marketing site (homepage, blog, pricing, etc.)
+- Existing edge functions, DB tables, chatbot
+- The `/app/*` routes are completely new and separate
 
 ---
 
-## Recommended Approach
+## Implementation Order
 
-Due to the scope, I recommend implementing **Phase 1 only** first (homepage + nav + pricing rewrite). This gets the core repositioning live. Phases 2 and 3 can follow in subsequent sessions.
-
-Shall I proceed with Phase 1?
+We will build **Round 1 first** (Auth + DB Schema + Roles + App Shell), then proceed through each round sequentially. Each round will be a separate implementation message.
 
