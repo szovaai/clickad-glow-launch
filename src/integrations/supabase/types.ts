@@ -91,6 +91,44 @@ export type Database = {
           },
         ]
       }
+      call_logs: {
+        Row: {
+          caller_phone: string
+          client_account_id: string
+          created_at: string
+          direction: string
+          duration: number | null
+          id: string
+          status: string
+        }
+        Insert: {
+          caller_phone: string
+          client_account_id: string
+          created_at?: string
+          direction?: string
+          duration?: number | null
+          id?: string
+          status?: string
+        }
+        Update: {
+          caller_phone?: string
+          client_account_id?: string
+          created_at?: string
+          direction?: string
+          duration?: number | null
+          id?: string
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "call_logs_client_account_id_fkey"
+            columns: ["client_account_id"]
+            isOneToOne: false
+            referencedRelation: "client_accounts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       chat_conversations: {
         Row: {
           client_account_id: string
@@ -376,6 +414,47 @@ export type Database = {
           },
         ]
       }
+      follow_up_sequences: {
+        Row: {
+          active: boolean
+          client_account_id: string
+          created_at: string
+          id: string
+          name: string
+          steps: Json
+          trigger_event: string
+          updated_at: string
+        }
+        Insert: {
+          active?: boolean
+          client_account_id: string
+          created_at?: string
+          id?: string
+          name: string
+          steps?: Json
+          trigger_event?: string
+          updated_at?: string
+        }
+        Update: {
+          active?: boolean
+          client_account_id?: string
+          created_at?: string
+          id?: string
+          name?: string
+          steps?: Json
+          trigger_event?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "follow_up_sequences_client_account_id_fkey"
+            columns: ["client_account_id"]
+            isOneToOne: false
+            referencedRelation: "client_accounts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       ghl_integrations: {
         Row: {
           api_key: string | null
@@ -565,6 +644,114 @@ export type Database = {
             columns: ["agency_id"]
             isOneToOne: false
             referencedRelation: "agencies"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sequence_enrollments: {
+        Row: {
+          client_account_id: string
+          contact_email: string | null
+          contact_name: string | null
+          contact_phone: string
+          current_step: number
+          enrolled_at: string
+          id: string
+          next_action_at: string | null
+          sequence_id: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          client_account_id: string
+          contact_email?: string | null
+          contact_name?: string | null
+          contact_phone: string
+          current_step?: number
+          enrolled_at?: string
+          id?: string
+          next_action_at?: string | null
+          sequence_id: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          client_account_id?: string
+          contact_email?: string | null
+          contact_name?: string | null
+          contact_phone?: string
+          current_step?: number
+          enrolled_at?: string
+          id?: string
+          next_action_at?: string | null
+          sequence_id?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sequence_enrollments_client_account_id_fkey"
+            columns: ["client_account_id"]
+            isOneToOne: false
+            referencedRelation: "client_accounts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "sequence_enrollments_sequence_id_fkey"
+            columns: ["sequence_id"]
+            isOneToOne: false
+            referencedRelation: "follow_up_sequences"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sms_messages: {
+        Row: {
+          body: string
+          call_log_id: string | null
+          client_account_id: string
+          created_at: string
+          from_phone: string
+          id: string
+          sent_at: string | null
+          status: string
+          to_phone: string
+        }
+        Insert: {
+          body: string
+          call_log_id?: string | null
+          client_account_id: string
+          created_at?: string
+          from_phone: string
+          id?: string
+          sent_at?: string | null
+          status?: string
+          to_phone: string
+        }
+        Update: {
+          body?: string
+          call_log_id?: string | null
+          client_account_id?: string
+          created_at?: string
+          from_phone?: string
+          id?: string
+          sent_at?: string | null
+          status?: string
+          to_phone?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sms_messages_call_log_id_fkey"
+            columns: ["call_log_id"]
+            isOneToOne: false
+            referencedRelation: "call_logs"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "sms_messages_client_account_id_fkey"
+            columns: ["client_account_id"]
+            isOneToOne: false
+            referencedRelation: "client_accounts"
             referencedColumns: ["id"]
           },
         ]
