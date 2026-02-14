@@ -896,6 +896,44 @@ export type Database = {
           },
         ]
       }
+      voice_conversations: {
+        Row: {
+          call_sid: string
+          caller_phone: string | null
+          client_account_id: string
+          created_at: string
+          id: string
+          messages: Json
+          updated_at: string
+        }
+        Insert: {
+          call_sid: string
+          caller_phone?: string | null
+          client_account_id: string
+          created_at?: string
+          id?: string
+          messages?: Json
+          updated_at?: string
+        }
+        Update: {
+          call_sid?: string
+          caller_phone?: string | null
+          client_account_id?: string
+          created_at?: string
+          id?: string
+          messages?: Json
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "voice_conversations_client_account_id_fkey"
+            columns: ["client_account_id"]
+            isOneToOne: false
+            referencedRelation: "client_accounts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       voice_function_defs: {
         Row: {
           created_at: string
