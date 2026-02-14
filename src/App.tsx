@@ -37,6 +37,7 @@ import OnboardingWizard from "./pages/app/OnboardingWizard";
 import PlaceholderPage from "./pages/app/PlaceholderPage";
 import ChatModule from "./pages/app/ChatModule";
 import Automations from "./pages/app/Automations";
+import VoiceModule from "./pages/app/VoiceModule";
 
 const queryClient = new QueryClient();
 
@@ -89,7 +90,7 @@ const AppRoutes = () => {
         <Route path="onboarding" element={<OnboardingWizard />} />
         <Route path="chat" element={<ChatModule />} />
         <Route path="automations" element={<Automations />} />
-        <Route path="voice" element={<PlaceholderPage title="Voice AI (Beta)" description="AI Receptionist with Gemini 3 integration-ready architecture." round={5} />} />
+        <Route path="voice" element={<VoiceModule />} />
         <Route path="analytics" element={<PlaceholderPage title="Analytics" description="KPI dashboards, charts, and revenue estimator." round={6} />} />
         <Route path="integrations" element={<PlaceholderPage title="Integrations" description="GoHighLevel, Twilio, and Google Calendar connections." round={2} />} />
         <Route path="settings" element={<PlaceholderPage title="Settings" description="Account settings, team management, and configuration." round={2} />} />
