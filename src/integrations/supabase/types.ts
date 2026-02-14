@@ -91,6 +91,129 @@ export type Database = {
           },
         ]
       }
+      chat_conversations: {
+        Row: {
+          client_account_id: string
+          created_at: string
+          id: string
+          status: string
+          updated_at: string
+          visitor_email: string | null
+          visitor_id: string
+          visitor_name: string | null
+          visitor_phone: string | null
+        }
+        Insert: {
+          client_account_id: string
+          created_at?: string
+          id?: string
+          status?: string
+          updated_at?: string
+          visitor_email?: string | null
+          visitor_id: string
+          visitor_name?: string | null
+          visitor_phone?: string | null
+        }
+        Update: {
+          client_account_id?: string
+          created_at?: string
+          id?: string
+          status?: string
+          updated_at?: string
+          visitor_email?: string | null
+          visitor_id?: string
+          visitor_name?: string | null
+          visitor_phone?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "chat_conversations_client_account_id_fkey"
+            columns: ["client_account_id"]
+            isOneToOne: false
+            referencedRelation: "client_accounts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      chat_messages: {
+        Row: {
+          content: string
+          conversation_id: string
+          created_at: string
+          id: string
+          metadata: Json | null
+          role: string
+        }
+        Insert: {
+          content: string
+          conversation_id: string
+          created_at?: string
+          id?: string
+          metadata?: Json | null
+          role: string
+        }
+        Update: {
+          content?: string
+          conversation_id?: string
+          created_at?: string
+          id?: string
+          metadata?: Json | null
+          role?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "chat_messages_conversation_id_fkey"
+            columns: ["conversation_id"]
+            isOneToOne: false
+            referencedRelation: "chat_conversations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      chat_widget_configs: {
+        Row: {
+          auto_open: boolean | null
+          client_account_id: string
+          created_at: string
+          greeting_message: string | null
+          id: string
+          logo_url: string | null
+          primary_color: string | null
+          qualification_flow: Json | null
+          updated_at: string
+        }
+        Insert: {
+          auto_open?: boolean | null
+          client_account_id: string
+          created_at?: string
+          greeting_message?: string | null
+          id?: string
+          logo_url?: string | null
+          primary_color?: string | null
+          qualification_flow?: Json | null
+          updated_at?: string
+        }
+        Update: {
+          auto_open?: boolean | null
+          client_account_id?: string
+          created_at?: string
+          greeting_message?: string | null
+          id?: string
+          logo_url?: string | null
+          primary_color?: string | null
+          qualification_flow?: Json | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "chat_widget_configs_client_account_id_fkey"
+            columns: ["client_account_id"]
+            isOneToOne: true
+            referencedRelation: "client_accounts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       client_accounts: {
         Row: {
           agency_id: string

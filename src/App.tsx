@@ -35,6 +35,7 @@ import Dashboard from "./pages/app/Dashboard";
 import Clients from "./pages/app/Clients";
 import OnboardingWizard from "./pages/app/OnboardingWizard";
 import PlaceholderPage from "./pages/app/PlaceholderPage";
+import ChatModule from "./pages/app/ChatModule";
 
 const queryClient = new QueryClient();
 
@@ -85,7 +86,7 @@ const AppRoutes = () => {
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="clients" element={<Clients />} />
         <Route path="onboarding" element={<OnboardingWizard />} />
-        <Route path="chat" element={<PlaceholderPage title="AI Chat Qualifier" description="Embeddable AI chat widget with qualification flow and calendar booking." round={3} />} />
+        <Route path="chat" element={<ChatModule />} />
         <Route path="automations" element={<PlaceholderPage title="Automations" description="Missed-call text-back engine and follow-up sequence builder." round={4} />} />
         <Route path="voice" element={<PlaceholderPage title="Voice AI (Beta)" description="AI Receptionist with Gemini 3 integration-ready architecture." round={5} />} />
         <Route path="analytics" element={<PlaceholderPage title="Analytics" description="KPI dashboards, charts, and revenue estimator." round={6} />} />
