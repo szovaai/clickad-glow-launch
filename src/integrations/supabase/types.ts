@@ -374,6 +374,7 @@ export type Database = {
           business_name: string
           created_at: string
           emergency_hours: boolean | null
+          google_review_url: string | null
           hours: Json | null
           id: string
           industry: string | null
@@ -387,6 +388,7 @@ export type Database = {
           business_name: string
           created_at?: string
           emergency_hours?: boolean | null
+          google_review_url?: string | null
           hours?: Json | null
           id?: string
           industry?: string | null
@@ -400,6 +402,7 @@ export type Database = {
           business_name?: string
           created_at?: string
           emergency_hours?: boolean | null
+          google_review_url?: string | null
           hours?: Json | null
           id?: string
           industry?: string | null

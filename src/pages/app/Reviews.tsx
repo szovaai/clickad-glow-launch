@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Star, Copy, Check, Send, Loader2, ThumbsUp, ThumbsDown } from "lucide-react";
+import { Star, Copy, Check, Send, Loader2, ThumbsUp, ThumbsDown, ExternalLink } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -37,6 +37,10 @@ export default function Reviews() {
   const [statusFilter, setStatusFilter] = useState<string>("all");
   const [copiedId, setCopiedId] = useState<string | null>(null);
 
+  // Google Review URL
+  const [googleUrl, setGoogleUrl] = useState("");
+  const [savingUrl, setSavingUrl] = useState(false);
+
   // Request dialog
   const [dialogOpen, setDialogOpen] = useState(false);
   const [reqName, setReqName] = useState("");
@@ -47,8 +51,25 @@ export default function Reviews() {
     if (clientId) {
       localStorage.setItem("selectedClientId", clientId);
       loadReviews();
+      loadGoogleUrl();
     }
   }, [clientId]);
+
+  async function loadGoogleUrl() {
+    const { data } = await supabase
+      .from("client_accounts")
+      .select("google_review_url")
+      .eq("id", clientId)
+      .single();
+    setGoogleUrl((data as any)?.google_review_url || "");
+  }
+
+  async function saveGoogleUrl() {
+    setSavingUrl(true);
+    await supabase.from("client_accounts").update({ google_review_url: googleUrl.trim() || null } as any).eq("id", clientId);
+    setSavingUrl(false);
+    toast({ title: "Google Review URL saved!" });
+  }
 
   async function loadReviews() {
     setLoading(true);
@@ -173,6 +194,30 @@ export default function Reviews() {
           </Dialog>
         </div>
       </div>
+
+      {/* Google Review Redirect Config */}
+      {isAgencyUser && (
+        <div className="bg-card border border-border rounded-lg p-4 mb-4">
+          <div className="flex items-center gap-2 mb-2">
+            <ExternalLink className="h-4 w-4 text-primary" />
+            <h3 className="font-medium text-foreground text-sm">Google Review Redirect</h3>
+          </div>
+          <p className="text-xs text-muted-foreground mb-3">
+            When customers rate 4-5 stars, they'll be redirected to leave a Google review. Lower ratings are captured as private feedback.
+          </p>
+          <div className="flex gap-2">
+            <Input
+              placeholder="https://g.page/r/YOUR_BUSINESS/review"
+              value={googleUrl}
+              onChange={(e) => setGoogleUrl(e.target.value)}
+              className="flex-1 text-sm"
+            />
+            <Button size="sm" onClick={saveGoogleUrl} disabled={savingUrl}>
+              {savingUrl ? "Saving..." : "Save"}
+            </Button>
+          </div>
+        </div>
+      )}
 
       {/* Filters */}
       <div className="flex gap-2 mb-4">
