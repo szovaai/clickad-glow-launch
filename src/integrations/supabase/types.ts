@@ -702,6 +702,59 @@ export type Database = {
           },
         ]
       }
+      reviews: {
+        Row: {
+          client_account_id: string
+          created_at: string
+          customer_email: string | null
+          customer_name: string
+          customer_phone: string
+          id: string
+          quote: string | null
+          rating: number | null
+          role: string | null
+          status: string
+          submitted_at: string | null
+          token: string
+        }
+        Insert: {
+          client_account_id: string
+          created_at?: string
+          customer_email?: string | null
+          customer_name: string
+          customer_phone: string
+          id?: string
+          quote?: string | null
+          rating?: number | null
+          role?: string | null
+          status?: string
+          submitted_at?: string | null
+          token?: string
+        }
+        Update: {
+          client_account_id?: string
+          created_at?: string
+          customer_email?: string | null
+          customer_name?: string
+          customer_phone?: string
+          id?: string
+          quote?: string | null
+          rating?: number | null
+          role?: string | null
+          status?: string
+          submitted_at?: string | null
+          token?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reviews_client_account_id_fkey"
+            columns: ["client_account_id"]
+            isOneToOne: false
+            referencedRelation: "client_accounts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       sequence_enrollments: {
         Row: {
           client_account_id: string
