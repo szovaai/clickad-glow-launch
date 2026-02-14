@@ -1,4 +1,4 @@
-import { LayoutDashboard, Users, MessageSquare, Workflow, Mic, BarChart3, BookOpen, Plug, Settings, LogOut, Zap, Star } from "lucide-react";
+import { LayoutDashboard, Users, MessageSquare, Workflow, Mic, BarChart3, BookOpen, Plug, Settings, LogOut, Zap, Star, CalendarCheck } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import {
@@ -23,6 +23,7 @@ const navItems = [
   { title: "Voice (Beta)", url: "/app/voice", icon: Mic },
   { title: "Analytics", url: "/app/analytics", icon: BarChart3 },
   { title: "Reviews", url: "/app/reviews", icon: Star },
+  { title: "Appointments", url: "/app/appointments", icon: CalendarCheck },
   { title: "Knowledge Base", url: "/app/knowledge-base", icon: BookOpen },
   { title: "Integrations", url: "/app/integrations", icon: Plug },
   { title: "Settings", url: "/app/settings", icon: Settings },
