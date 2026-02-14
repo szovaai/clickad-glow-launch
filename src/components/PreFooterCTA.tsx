@@ -32,12 +32,12 @@ export const PreFooterCTA = () => {
             {/* Content Side */}
             <div className="p-8 md:p-12">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Still have questions?<br />
-                Let's chat.
+                Not sure which system<br />
+                is right for you?
               </h2>
               
               <p className="text-lg text-muted-foreground mb-8">
-                We'll give you real answers and real options—no sales pitch, no pressure.
+                We'll walk you through a live demo tailored to your business—no sales pitch, no pressure. Just a clear plan.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4">
@@ -54,7 +54,7 @@ export const PreFooterCTA = () => {
                 <QuoteCta>
                   <button className="flex-1 inline-flex items-center justify-center gap-2 rounded-lg border border-border bg-card/50 px-6 py-3 text-sm font-medium backdrop-blur transition hover:bg-card">
                     <MessageSquare className="w-5 h-5" />
-                    Send a Message
+                    Book a Demo
                   </button>
                 </QuoteCta>
               </div>

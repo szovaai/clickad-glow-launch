@@ -14,13 +14,13 @@ export const CTA = () => {
           </div>
           
           <h2 className="text-4xl md:text-6xl font-heading font-bold leading-tight">
-            Want Your Business to Answer and Book Leads{" "}
-            <span className="text-primary glow-text">24/7</span>?
+            Ready to Never Miss a Lead{" "}
+            <span className="text-primary glow-text">Again</span>?
           </h2>
           
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Book a 10-minute demo and see exactly how an AI receptionist will work for your business. 
-            No fluff. No pressure. Just a clear plan to never miss a lead again.
+            Book a 10-minute demo and see exactly how an AI sales system will work for your business. 
+            No fluff. No pressure. Just a clear plan to book more jobs automatically.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
@@ -32,29 +32,19 @@ export const CTA = () => {
               </Link>
             </Button>
             <Button variant="outline" size="lg" asChild>
-              <a href="#pricing">Get a Plan</a>
+              <a href="#pricing">See Pricing</a>
             </Button>
           </div>
           
           <div className="pt-8 flex flex-wrap justify-center gap-6 text-sm">
-            <div className="flex items-center gap-2 text-muted-foreground">
-              <div className="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center">
-                <div className="w-2 h-2 bg-primary rounded-full" />
+            {["Live in 5 Days", "Cancel Anytime", "60-Day Guarantee"].map((text) => (
+              <div key={text} className="flex items-center gap-2 text-muted-foreground">
+                <div className="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center">
+                  <div className="w-2 h-2 bg-primary rounded-full" />
+                </div>
+                <span>{text}</span>
               </div>
-              <span>Live in 7 Days</span>
-            </div>
-            <div className="flex items-center gap-2 text-muted-foreground">
-              <div className="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center">
-                <div className="w-2 h-2 bg-primary rounded-full" />
-              </div>
-              <span>Cancel Anytime</span>
-            </div>
-            <div className="flex items-center gap-2 text-muted-foreground">
-              <div className="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center">
-                <div className="w-2 h-2 bg-primary rounded-full" />
-              </div>
-              <span>Performance Guaranteed</span>
-            </div>
+            ))}
           </div>
         </div>
       </div>

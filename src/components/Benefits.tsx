@@ -1,22 +1,27 @@
-import { Zap, Target, BarChart3 } from "lucide-react";
+import { Phone, MessageSquare, CalendarCheck, BarChart3 } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { motion } from "framer-motion";
 
-const benefits = [
+const coreOffer = [
   {
-    icon: Zap,
-    title: "Conversion Site",
-    description: "Every pixel optimized to turn visitors into booked appointments. Mobile-first design that works flawlessly across all devices.",
+    icon: Phone,
+    title: "AI Receptionist",
+    description: "Answers every call in under 2 rings. Qualifies the lead, captures details, and books or transfers—no hold music, no voicemail.",
   },
   {
-    icon: Target,
-    title: "AI Follow-Up Stack",
-    description: "Automated customer communication that nurtures leads 24/7. Never miss a potential customer again.",
+    icon: MessageSquare,
+    title: "Smart Chat Qualifier",
+    description: "Engages website visitors instantly. Asks the right questions, captures contact info, and routes hot leads straight to your calendar.",
+  },
+  {
+    icon: CalendarCheck,
+    title: "Follow-Up Automation",
+    description: "Missed-call text back, post-job satisfaction checks, review requests, and lead reactivation—all running on autopilot 24/7.",
   },
   {
     icon: BarChart3,
-    title: "Performance Dashboard",
-    description: "Track bookings, traffic, and ROI in real-time. Know exactly what's working and what isn't.",
+    title: "CRM + Pipeline",
+    description: "Every lead, call, and appointment tracked in one dashboard. See exactly where revenue is coming from and what's converting.",
   },
 ];
 
@@ -25,16 +30,28 @@ export const Benefits = () => {
     <section className="py-20 md:py-32 relative overflow-hidden">
       <div className="container px-6">
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-          <h2 className="text-4xl md:text-5xl font-heading font-bold">
-            What Calgary Service Businesses Get
-          </h2>
-          <p className="text-xl text-muted-foreground">
-            Professional website design solutions for Calgary-based service companies
-          </p>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-4xl md:text-5xl font-heading font-bold"
+          >
+            Your AI Sales Team—
+            <span className="text-primary glow-text">Always On</span>
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-xl text-muted-foreground"
+          >
+            Four systems working together to capture, qualify, and convert every lead that touches your business.
+          </motion.p>
         </div>
         
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {benefits.map((benefit, index) => (
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+          {coreOffer.map((item, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 20 }}
@@ -43,17 +60,17 @@ export const Benefits = () => {
               transition={{ delay: index * 0.1, duration: 0.5 }}
             >
               <Card 
-                className="p-8 bg-card/50 backdrop-blur-sm border-primary/10 hover:border-primary/30 transition-all duration-300 hover:shadow-[0_0_30px_hsl(var(--primary)/0.2)] group h-full"
+                className="p-6 bg-card/50 backdrop-blur-sm border-primary/10 hover:border-primary/30 transition-all duration-300 hover:shadow-[0_0_30px_hsl(var(--primary)/0.2)] group h-full"
               >
-              <div className="mb-6 w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                <benefit.icon className="w-7 h-7 text-primary" />
-              </div>
-              <h3 className="text-2xl font-heading font-bold mb-3">
-                {benefit.title}
-              </h3>
-              <p className="text-muted-foreground leading-relaxed">
-                {benefit.description}
-              </p>
+                <div className="mb-5 w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                  <item.icon className="w-6 h-6 text-primary" />
+                </div>
+                <h3 className="text-xl font-heading font-bold mb-2">
+                  {item.title}
+                </h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  {item.description}
+                </p>
               </Card>
             </motion.div>
           ))}

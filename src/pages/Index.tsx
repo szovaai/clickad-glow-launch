@@ -1,14 +1,14 @@
 import PremiumHeader from "@/components/PremiumHeader";
+import { PainSection } from "@/components/ai-sales/PainSection";
 import { Benefits } from "@/components/Benefits";
-import { Work } from "@/components/Work";
-import { Templates } from "@/components/Templates";
 import { Timeline } from "@/components/Timeline";
+import { Work } from "@/components/Work";
+import { Pricing } from "@/components/Pricing";
 import { Results } from "@/components/Results";
 import { FAQ } from "@/components/FAQ";
+import { PreFooterCTA } from "@/components/PreFooterCTA";
 import { CTA } from "@/components/CTA";
 import { Footer } from "@/components/Footer";
-import { BeforeAfterSlider } from "@/components/hero/BeforeAfterSlider";
-import { PreFooterCTA } from "@/components/PreFooterCTA";
 import { StickyMobileCTA } from "@/components/hero/StickyMobileCTA";
 
 const Index = () => {
@@ -16,14 +16,14 @@ const Index = () => {
     <div className="min-h-screen">
       <PremiumHeader />
       <main>
+        <PainSection />
         <section id="services">
           <Benefits />
         </section>
-        <Work />
-        <BeforeAfterSlider />
-        <Templates />
         <Timeline />
+        <Work />
         <Results />
+        <Pricing />
         <FAQ />
         <PreFooterCTA />
         <CTA />
