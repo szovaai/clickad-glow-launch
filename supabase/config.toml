@@ -29,3 +29,6 @@ verify_jwt = false
 
 [functions.voice-webhook]
 verify_jwt = false
+
+[functions.voice-twiml]
+verify_jwt = false
