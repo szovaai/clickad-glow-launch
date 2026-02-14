@@ -79,6 +79,7 @@ serve(async (req) => {
 
     const baseUrl = Deno.env.get("SUPABASE_URL")!;
     const actionUrl = `${baseUrl}/functions/v1/voice-twiml?clientId=${clientId}&voice=${encodeURIComponent(selectedVoice)}`;
+    const safeActionUrl = actionUrl.replace(/&/g, "&amp;");
 
     const templateVars: Record<string, string> = {
       business_name: client?.business_name || "us",
@@ -95,7 +96,7 @@ serve(async (req) => {
       );
 
       return twiml(
-        `<Gather input="speech" action="${actionUrl}" speechTimeout="auto" language="en-US">` +
+      `<Gather input="speech" action="${safeActionUrl}" speechTimeout="auto" language="en-US">` +
         `<Say voice="${selectedVoice}">${escapeXml(greeting)}</Say>` +
         `</Gather>` +
         `<Say voice="${selectedVoice}">I didn't hear anything. Goodbye!</Say><Hangup/>`
@@ -195,11 +196,11 @@ Rules:
 
     // Continue conversation
     return twiml(
-      `<Gather input="speech" action="${actionUrl}" speechTimeout="auto" language="en-US">` +
+      `<Gather input="speech" action="${safeActionUrl}" speechTimeout="auto" language="en-US">` +
       `<Say voice="${selectedVoice}">${escapeXml(assistantMessage)}</Say>` +
       `</Gather>` +
       `<Say voice="${selectedVoice}">I didn't catch that. Could you please repeat?</Say>` +
-      `<Gather input="speech" action="${actionUrl}" speechTimeout="auto" language="en-US"/>` +
+      `<Gather input="speech" action="${safeActionUrl}" speechTimeout="auto" language="en-US"/>` +
       `<Say voice="${selectedVoice}">I still couldn't hear you. Goodbye!</Say><Hangup/>`
     );
   } catch (e) {
