@@ -11,6 +11,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Badge } from "@/components/ui/badge";
 import { MessageSquare, Copy, Settings, Users, Clock } from "lucide-react";
 import ChatQualifierWidget from "@/components/app/chat/ChatQualifierWidget";
+import KnowledgePreview from "@/components/app/shared/KnowledgePreview";
 
 const ChatModule = () => {
   const { agencyId } = useAuth();
@@ -174,6 +175,7 @@ const ChatModule = () => {
               )}
             </CardContent>
           </Card>
+          {selectedClient && <KnowledgePreview clientId={selectedClient} />}
         </div>
       </div>
 

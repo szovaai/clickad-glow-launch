@@ -7,10 +7,11 @@ import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Mic, Phone, FileText, Zap, Clock, AlertTriangle } from "lucide-react";
+import { Mic, Phone, FileText, Zap, Clock, AlertTriangle, BookOpen } from "lucide-react";
 import { toast } from "sonner";
 import ScriptBuilder from "@/components/app/voice/ScriptBuilder";
 import CallFlowBuilder from "@/components/app/voice/CallFlowBuilder";
+import KnowledgePreview from "@/components/app/shared/KnowledgePreview";
 
 interface VoiceConfig {
   id?: string;
@@ -187,6 +188,12 @@ export default function VoiceModule() {
             </p>
           </CardContent>
         </Card>
+      )}
+
+      {selectedClient && (
+        <div className="max-w-sm">
+          <KnowledgePreview clientId={selectedClient} />
+        </div>
       )}
 
       <Tabs defaultValue="scripts" className="space-y-4">
