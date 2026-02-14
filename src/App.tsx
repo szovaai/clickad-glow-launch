@@ -39,6 +39,8 @@ import ChatModule from "./pages/app/ChatModule";
 import Automations from "./pages/app/Automations";
 import VoiceModule from "./pages/app/VoiceModule";
 import Analytics from "./pages/app/Analytics";
+import KnowledgeBase from "./pages/app/KnowledgeBase";
+import Integrations from "./pages/app/Integrations";
 
 const queryClient = new QueryClient();
 
@@ -93,7 +95,8 @@ const AppRoutes = () => {
         <Route path="automations" element={<Automations />} />
         <Route path="voice" element={<VoiceModule />} />
         <Route path="analytics" element={<Analytics />} />
-        <Route path="integrations" element={<PlaceholderPage title="Integrations" description="GoHighLevel, Twilio, and Google Calendar connections." round={2} />} />
+        <Route path="knowledge-base" element={<KnowledgeBase />} />
+        <Route path="integrations" element={<Integrations />} />
         <Route path="settings" element={<PlaceholderPage title="Settings" description="Account settings, team management, and configuration." round={2} />} />
       </Route>
 
