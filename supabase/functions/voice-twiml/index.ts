@@ -6,13 +6,37 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
-// In-memory conversation store (per isolate lifetime)
-const conversations = new Map<string, { role: string; content: string }[]>();
-
 function twiml(body: string): Response {
   return new Response(
     `<?xml version="1.0" encoding="UTF-8"?><Response>${body}</Response>`,
     { headers: { ...corsHeaders, "Content-Type": "text/xml" } }
+  );
+}
+
+function resolveTemplate(template: string, vars: Record<string, string>): string {
+  return template.replace(/\{\{(\w+)\}\}/g, (_, key) => vars[key] || "");
+}
+
+function escapeXml(str: string): string {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&apos;");
+}
+
+function buildPlayUrl(baseUrl: string, text: string): string {
+  const url = `${baseUrl}/functions/v1/voice-tts?text=${encodeURIComponent(text)}`;
+  return url.replace(/&/g, "&amp;");
+}
+
+function buildGatherWithPlay(baseUrl: string, text: string, actionUrl: string): string {
+  const playUrl = buildPlayUrl(baseUrl, text);
+  return (
+    `<Gather input="speech" action="${actionUrl}" speechTimeout="auto" language="en-US">` +
+    `<Play>${playUrl}</Play>` +
+    `</Gather>`
   );
 }
 
@@ -21,10 +45,8 @@ serve(async (req) => {
 
   try {
     const url = new URL(req.url);
-    const supabase = createClient(
-      Deno.env.get("SUPABASE_URL")!,
-      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
-    );
+    const baseUrl = Deno.env.get("SUPABASE_URL")!;
+    const supabase = createClient(baseUrl, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
 
     // Twilio sends form-encoded data
     const formData = await req.formData();
@@ -33,12 +55,10 @@ serve(async (req) => {
     const callerPhone = formData.get("From") as string || "";
     const calledNumber = formData.get("To") as string || "";
 
-    // Get clientId from query param or look up by phone number
+    // Resolve clientId
     let clientId = url.searchParams.get("clientId") || "";
-    const voice = url.searchParams.get("voice") || "Polly.Joanna";
 
     if (!clientId) {
-      // First call — look up client by their Twilio phone number
       const { data: configs } = await supabase
         .from("client_configs")
         .select("client_account_id, phone_config")
@@ -55,11 +75,11 @@ serve(async (req) => {
       }
 
       if (!clientId) {
-        return twiml(`<Say voice="${voice}">Sorry, this number is not configured. Goodbye.</Say><Hangup/>`);
+        return twiml(`<Say voice="Polly.Joanna">Sorry, this number is not configured. Goodbye.</Say><Hangup/>`);
       }
     }
 
-    // Load client data
+    // Load client data in parallel
     const [voiceConfigRes, clientRes, clientConfigRes] = await Promise.all([
       supabase.from("voice_configs").select("*").eq("client_account_id", clientId).maybeSingle(),
       supabase.from("client_accounts").select("business_name, services, industry").eq("id", clientId).single(),
@@ -71,47 +91,50 @@ serve(async (req) => {
     const knowledgeBase = clientConfigRes.data?.knowledge_base;
 
     if (!voiceConfig?.active) {
-      return twiml(`<Say voice="${voice}">This service is currently unavailable. Please call back later. Goodbye.</Say><Hangup/>`);
+      const msg = "This service is currently unavailable. Please call back later. Goodbye.";
+      return twiml(`<Play>${buildPlayUrl(baseUrl, msg)}</Play><Hangup/>`);
     }
 
-    // Get selected voice from transfer_rules
-    const selectedVoice = (voiceConfig.transfer_rules as any)?.voiceSelection || voice;
+    const safeActionUrl = `${baseUrl}/functions/v1/voice-twiml?clientId=${clientId}`.replace(/&/g, "&amp;");
+    const templateVars: Record<string, string> = { business_name: client?.business_name || "us" };
 
-    const baseUrl = Deno.env.get("SUPABASE_URL")!;
-    const actionUrl = `${baseUrl}/functions/v1/voice-twiml?clientId=${clientId}&voice=${encodeURIComponent(selectedVoice)}`;
-    const safeActionUrl = actionUrl.replace(/&/g, "&amp;");
-
-    const templateVars: Record<string, string> = {
-      business_name: client?.business_name || "us",
-    };
-
-    // First turn — no speech yet, play greeting
+    // === FIRST TURN — no speech yet, play greeting ===
     if (!speechResult) {
-      conversations.set(callSid, []);
+      // Create conversation record in DB
+      await supabase.from("voice_conversations").upsert({
+        call_sid: callSid,
+        client_account_id: clientId,
+        caller_phone: callerPhone,
+        messages: [],
+      }, { onConflict: "call_sid" });
 
       const greeting = resolveTemplate(
-        voiceConfig.greeting_script || 
-          "Hello, thank you for calling {{business_name}}. How can I help you today?",
+        voiceConfig.greeting_script || "Hello, thank you for calling {{business_name}}. How can I help you today?",
         templateVars
       );
 
       return twiml(
-      `<Gather input="speech" action="${safeActionUrl}" speechTimeout="auto" language="en-US">` +
-        `<Say voice="${selectedVoice}">${escapeXml(greeting)}</Say>` +
-        `</Gather>` +
-        `<Say voice="${selectedVoice}">I didn't hear anything. Goodbye!</Say><Hangup/>`
+        buildGatherWithPlay(baseUrl, greeting, safeActionUrl) +
+        `<Say voice="Polly.Joanna">I didn't hear anything. Goodbye!</Say><Hangup/>`
       );
     }
 
-    // Subsequent turns — process speech with Gemini
-    const history = conversations.get(callSid) || [];
+    // === SUBSEQUENT TURNS — load history from DB ===
+    const { data: convData } = await supabase
+      .from("voice_conversations")
+      .select("messages")
+      .eq("call_sid", callSid)
+      .maybeSingle();
+
+    const history: { role: string; content: string }[] = convData?.messages || [];
     history.push({ role: "user", content: speechResult });
 
     // Build system prompt
-    const kbContent = knowledgeBase ? 
-      Object.entries(knowledgeBase as Record<string, any>)
-        .map(([k, v]) => `${k}: ${typeof v === "string" ? v : JSON.stringify(v)}`)
-        .join("\n") : "";
+    const kbContent = knowledgeBase
+      ? Object.entries(knowledgeBase as Record<string, any>)
+          .map(([k, v]) => `${k}: ${typeof v === "string" ? v : JSON.stringify(v)}`)
+          .join("\n")
+      : "";
 
     const systemPrompt = `You are a friendly, professional female AI receptionist for ${client?.business_name || "the business"}.
 Industry: ${client?.industry || "general services"}
@@ -130,16 +153,14 @@ Rules:
 - Never mention you are an AI unless directly asked.
 - If you can't help, offer to take a message or transfer to a team member.`;
 
-    const messages = [
-      { role: "system", content: systemPrompt },
-      ...history,
-    ];
+    const messages = [{ role: "system", content: systemPrompt }, ...history];
 
-    // Call Gemini via Lovable AI gateway
+    // Call AI via Lovable AI gateway
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     if (!LOVABLE_API_KEY) {
       console.error("LOVABLE_API_KEY not configured");
-      return twiml(`<Say voice="${selectedVoice}">I'm having technical difficulties. Please call back shortly. Goodbye.</Say><Hangup/>`);
+      const msg = "I'm having technical difficulties. Please call back shortly. Goodbye.";
+      return twiml(`<Play>${buildPlayUrl(baseUrl, msg)}</Play><Hangup/>`);
     }
 
     const aiResponse = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
@@ -158,20 +179,25 @@ Rules:
     if (!aiResponse.ok) {
       const errText = await aiResponse.text();
       console.error("AI gateway error:", aiResponse.status, errText);
-      return twiml(`<Say voice="${selectedVoice}">I'm sorry, I'm having trouble right now. Can I take your number and have someone call you back?</Say><Hangup/>`);
+      const msg = "I'm sorry, I'm having trouble right now. Can I take your number and have someone call you back?";
+      return twiml(`<Play>${buildPlayUrl(baseUrl, msg)}</Play><Hangup/>`);
     }
 
     const aiData = await aiResponse.json();
     const assistantMessage = aiData.choices?.[0]?.message?.content || "I'm sorry, could you repeat that?";
 
+    // Save updated history to DB
     history.push({ role: "assistant", content: assistantMessage });
-    conversations.set(callSid, history);
+    await supabase
+      .from("voice_conversations")
+      .update({ messages: history, updated_at: new Date().toISOString() })
+      .eq("call_sid", callSid);
 
-    // Check if conversation should end (transfer, booking, or goodbye)
+    // Check if conversation should end
     const shouldEnd = /goodbye|transfer|have a great day|talk to you soon/i.test(assistantMessage);
 
     if (shouldEnd) {
-      // Save transcript via voice-webhook
+      // Save transcript and clean up
       try {
         await fetch(`${baseUrl}/functions/v1/voice-webhook`, {
           method: "POST",
@@ -181,8 +207,8 @@ Rules:
             callerPhone,
             transcript: history.map((h, i) => ({ role: h.role, content: h.content, timestamp: i })),
             summary: `Call with ${callerPhone}. ${history.length} turns.`,
-            outcome: /transfer/i.test(assistantMessage) ? "transferred" : 
-                     /book|appointment|schedule/i.test(assistantMessage) ? "booked" : "qualified",
+            outcome: /transfer/i.test(assistantMessage) ? "transferred"
+              : /book|appointment|schedule/i.test(assistantMessage) ? "booked" : "qualified",
             durationSeconds: history.length * 15,
           }),
         });
@@ -190,34 +216,21 @@ Rules:
         console.error("Failed to save transcript:", e);
       }
 
-      conversations.delete(callSid);
-      return twiml(`<Say voice="${selectedVoice}">${escapeXml(assistantMessage)}</Say><Hangup/>`);
+      // Clean up conversation record
+      await supabase.from("voice_conversations").delete().eq("call_sid", callSid);
+
+      return twiml(`<Play>${buildPlayUrl(baseUrl, assistantMessage)}</Play><Hangup/>`);
     }
 
     // Continue conversation
     return twiml(
-      `<Gather input="speech" action="${safeActionUrl}" speechTimeout="auto" language="en-US">` +
-      `<Say voice="${selectedVoice}">${escapeXml(assistantMessage)}</Say>` +
-      `</Gather>` +
-      `<Say voice="${selectedVoice}">I didn't catch that. Could you please repeat?</Say>` +
+      buildGatherWithPlay(baseUrl, assistantMessage, safeActionUrl) +
+      `<Say voice="Polly.Joanna">I didn't catch that. Could you please repeat?</Say>` +
       `<Gather input="speech" action="${safeActionUrl}" speechTimeout="auto" language="en-US"/>` +
-      `<Say voice="${selectedVoice}">I still couldn't hear you. Goodbye!</Say><Hangup/>`
+      `<Say voice="Polly.Joanna">I still couldn't hear you. Goodbye!</Say><Hangup/>`
     );
   } catch (e) {
     console.error("voice-twiml error:", e);
     return twiml(`<Say voice="Polly.Joanna">I'm sorry, something went wrong. Please try again later. Goodbye.</Say><Hangup/>`);
   }
 });
-
-function resolveTemplate(template: string, vars: Record<string, string>): string {
-  return template.replace(/\{\{(\w+)\}\}/g, (_, key) => vars[key] || "");
-}
-
-function escapeXml(str: string): string {
-  return str
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&apos;");
-}
