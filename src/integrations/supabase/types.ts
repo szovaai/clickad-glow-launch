@@ -141,6 +141,47 @@ export type Database = {
           },
         ]
       }
+      client_configs: {
+        Row: {
+          calendar_settings: Json | null
+          client_account_id: string
+          created_at: string
+          id: string
+          knowledge_base: Json | null
+          phone_config: Json | null
+          qualification_rules: Json | null
+          updated_at: string
+        }
+        Insert: {
+          calendar_settings?: Json | null
+          client_account_id: string
+          created_at?: string
+          id?: string
+          knowledge_base?: Json | null
+          phone_config?: Json | null
+          qualification_rules?: Json | null
+          updated_at?: string
+        }
+        Update: {
+          calendar_settings?: Json | null
+          client_account_id?: string
+          created_at?: string
+          id?: string
+          knowledge_base?: Json | null
+          phone_config?: Json | null
+          qualification_rules?: Json | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "client_configs_client_account_id_fkey"
+            columns: ["client_account_id"]
+            isOneToOne: true
+            referencedRelation: "client_accounts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       companies: {
         Row: {
           city: string | null
@@ -208,6 +249,50 @@ export type Database = {
             columns: ["company_id"]
             isOneToOne: false
             referencedRelation: "companies"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      ghl_integrations: {
+        Row: {
+          api_key: string | null
+          client_account_id: string
+          created_at: string
+          custom_field_mapping: Json | null
+          id: string
+          location_id: string | null
+          pipeline_id: string | null
+          stage_mapping: Json | null
+          updated_at: string
+        }
+        Insert: {
+          api_key?: string | null
+          client_account_id: string
+          created_at?: string
+          custom_field_mapping?: Json | null
+          id?: string
+          location_id?: string | null
+          pipeline_id?: string | null
+          stage_mapping?: Json | null
+          updated_at?: string
+        }
+        Update: {
+          api_key?: string | null
+          client_account_id?: string
+          created_at?: string
+          custom_field_mapping?: Json | null
+          id?: string
+          location_id?: string | null
+          pipeline_id?: string | null
+          stage_mapping?: Json | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ghl_integrations_client_account_id_fkey"
+            columns: ["client_account_id"]
+            isOneToOne: true
+            referencedRelation: "client_accounts"
             referencedColumns: ["id"]
           },
         ]
