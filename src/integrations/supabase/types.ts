@@ -35,6 +35,68 @@ export type Database = {
         }
         Relationships: []
       }
+      appointments: {
+        Row: {
+          client_account_id: string
+          created_at: string
+          customer_email: string | null
+          customer_name: string
+          customer_phone: string
+          duration_minutes: number
+          id: string
+          notes: string | null
+          reminder_1h_sent: boolean
+          reminder_24h_sent: boolean
+          reschedule_token: string
+          scheduled_at: string
+          service_type: string | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          client_account_id: string
+          created_at?: string
+          customer_email?: string | null
+          customer_name: string
+          customer_phone: string
+          duration_minutes?: number
+          id?: string
+          notes?: string | null
+          reminder_1h_sent?: boolean
+          reminder_24h_sent?: boolean
+          reschedule_token?: string
+          scheduled_at: string
+          service_type?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          client_account_id?: string
+          created_at?: string
+          customer_email?: string | null
+          customer_name?: string
+          customer_phone?: string
+          duration_minutes?: number
+          id?: string
+          notes?: string | null
+          reminder_1h_sent?: boolean
+          reminder_24h_sent?: boolean
+          reschedule_token?: string
+          scheduled_at?: string
+          service_type?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "appointments_client_account_id_fkey"
+            columns: ["client_account_id"]
+            isOneToOne: false
+            referencedRelation: "client_accounts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       audits: {
         Row: {
           company_id: string | null

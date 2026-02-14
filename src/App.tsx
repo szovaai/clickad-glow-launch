@@ -43,6 +43,7 @@ import KnowledgeBase from "./pages/app/KnowledgeBase";
 import Integrations from "./pages/app/Integrations";
 import Settings from "./pages/app/Settings";
 import Reviews from "./pages/app/Reviews";
+import Appointments from "./pages/app/Appointments";
 import ReviewSubmission from "./pages/ReviewSubmission";
 
 const queryClient = new QueryClient();
@@ -103,6 +104,7 @@ const AppRoutes = () => {
         <Route path="integrations" element={<Integrations />} />
         <Route path="settings" element={<Settings />} />
         <Route path="reviews" element={<Reviews />} />
+        <Route path="appointments" element={<Appointments />} />
       </Route>
 
       {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
