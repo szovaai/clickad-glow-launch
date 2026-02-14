@@ -1,16 +1,30 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { z } from "https://deno.land/x/zod@v3.22.4/mod.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
+const RequestSchema = z.object({
+  messages: z.array(
+    z.object({
+      role: z.enum(["user", "assistant", "system"]),
+      content: z.string().max(4000),
+    })
+  ).max(50),
+  clientAccountId: z.string().uuid().optional(),
+  visitorId: z.string().max(200).optional(),
+  conversationId: z.string().uuid().optional(),
+});
+
 serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
 
   try {
-    const { messages, clientAccountId, visitorId, conversationId } = await req.json();
+    const raw = await req.json();
+    const { messages, clientAccountId, visitorId, conversationId } = RequestSchema.parse(raw);
 
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     if (!LOVABLE_API_KEY) throw new Error("LOVABLE_API_KEY is not configured");
@@ -43,7 +57,6 @@ serve(async (req) => {
       }
     }
 
-    // Fetch client business info
     let businessName = "our company";
     if (clientAccountId) {
       const { data: account } = await supabase
@@ -110,8 +123,13 @@ ${knowledgeContext ? `\nBUSINESS KNOWLEDGE BASE:\n${knowledgeContext}` : ""}`;
       headers: { ...corsHeaders, "Content-Type": "text/event-stream" },
     });
   } catch (e) {
+    if (e instanceof z.ZodError) {
+      return new Response(JSON.stringify({ error: "Invalid input", details: e.errors }), {
+        status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
     console.error("chat-qualifier error:", e);
-    return new Response(JSON.stringify({ error: e instanceof Error ? e.message : "Unknown error" }), {
+    return new Response(JSON.stringify({ error: "Internal error" }), {
       status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   }

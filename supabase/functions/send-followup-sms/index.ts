@@ -1,22 +1,26 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { z } from "https://deno.land/x/zod@v3.22.4/mod.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
+const RequestSchema = z.object({
+  to: z.string().min(1).max(30),
+  from: z.string().max(30).optional(),
+  body: z.string().min(1).max(1600),
+  clientAccountId: z.string().uuid(),
+  callLogId: z.string().uuid().optional(),
+});
+
 serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
 
   try {
-    const { to, from, body, clientAccountId, callLogId } = await req.json();
-
-    if (!to || !body) {
-      return new Response(JSON.stringify({ error: "Missing to or body" }), {
-        status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
-      });
-    }
+    const raw = await req.json();
+    const { to, from, body, clientAccountId, callLogId } = RequestSchema.parse(raw);
 
     const twilioSid = Deno.env.get("TWILIO_ACCOUNT_SID");
     const twilioAuth = Deno.env.get("TWILIO_AUTH_TOKEN");
@@ -45,7 +49,6 @@ serve(async (req) => {
 
     const smsStatus = twilioResp.ok ? "sent" : "failed";
 
-    // Log to DB
     const supabase = createClient(
       Deno.env.get("SUPABASE_URL")!,
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
@@ -65,8 +68,13 @@ serve(async (req) => {
       status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   } catch (e) {
+    if (e instanceof z.ZodError) {
+      return new Response(JSON.stringify({ error: "Invalid input", details: e.errors }), {
+        status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
     console.error("send-followup-sms error:", e);
-    return new Response(JSON.stringify({ error: e instanceof Error ? e.message : "Unknown error" }), {
+    return new Response(JSON.stringify({ error: "Internal error" }), {
       status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   }

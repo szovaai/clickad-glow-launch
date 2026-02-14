@@ -1,29 +1,31 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { z } from "https://deno.land/x/zod@v3.22.4/mod.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
+const RequestSchema = z.object({
+  callerPhone: z.string().min(1).max(30),
+  clientAccountId: z.string().uuid(),
+  direction: z.string().max(20).optional(),
+  callStatus: z.string().max(20).optional(),
+});
+
 serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
 
   try {
-    const { callerPhone, clientAccountId, direction, callStatus } = await req.json();
-
-    if (!callerPhone || !clientAccountId) {
-      return new Response(JSON.stringify({ error: "Missing callerPhone or clientAccountId" }), {
-        status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
-      });
-    }
+    const raw = await req.json();
+    const { callerPhone, clientAccountId, direction, callStatus } = RequestSchema.parse(raw);
 
     const supabase = createClient(
       Deno.env.get("SUPABASE_URL")!,
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
     );
 
-    // Log the call
     const { data: callLog, error: callErr } = await supabase
       .from("call_logs")
       .insert({
@@ -39,7 +41,6 @@ serve(async (req) => {
 
     // If missed, send text-back
     if (callStatus === "missed" || !callStatus) {
-      // Get phone config
       const { data: config } = await supabase
         .from("client_configs")
         .select("phone_config")
@@ -50,7 +51,6 @@ serve(async (req) => {
       if (phoneConfig?.missedCallTextBack && phoneConfig?.phoneNumber) {
         const message = phoneConfig.autoReplyMessage || "Sorry we missed your call! Want to book a time? Reply YES.";
 
-        // Send SMS via Twilio
         const twilioSid = Deno.env.get("TWILIO_ACCOUNT_SID");
         const twilioAuth = Deno.env.get("TWILIO_AUTH_TOKEN");
         const twilioFrom = phoneConfig.phoneNumber;
@@ -73,7 +73,6 @@ serve(async (req) => {
 
           const smsStatus = twilioResp.ok ? "sent" : "failed";
 
-          // Log SMS
           await supabase.from("sms_messages").insert({
             client_account_id: clientAccountId,
             call_log_id: callLog.id,
@@ -85,7 +84,6 @@ serve(async (req) => {
           });
         }
 
-        // Enroll in missed-call follow-up sequence
         const { data: sequences } = await supabase
           .from("follow_up_sequences")
           .select("id")
@@ -99,7 +97,7 @@ serve(async (req) => {
             sequence_id: sequences[0].id,
             client_account_id: clientAccountId,
             contact_phone: callerPhone,
-            next_action_at: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(), // first follow-up in 24h
+            next_action_at: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
           });
         }
       }
@@ -109,8 +107,13 @@ serve(async (req) => {
       status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   } catch (e) {
+    if (e instanceof z.ZodError) {
+      return new Response(JSON.stringify({ error: "Invalid input", details: e.errors }), {
+        status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
     console.error("missed-call-webhook error:", e);
-    return new Response(JSON.stringify({ error: e instanceof Error ? e.message : "Unknown error" }), {
+    return new Response(JSON.stringify({ error: "Internal error" }), {
       status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   }

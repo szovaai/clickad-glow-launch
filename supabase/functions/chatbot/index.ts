@@ -1,9 +1,19 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
+import { z } from "https://deno.land/x/zod@v3.22.4/mod.ts";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
+
+const RequestSchema = z.object({
+  messages: z.array(
+    z.object({
+      role: z.enum(["user", "assistant", "system"]),
+      content: z.string().max(4000),
+    })
+  ).max(50),
+});
 
 serve(async (req) => {
   if (req.method === 'OPTIONS') {
@@ -11,9 +21,10 @@ serve(async (req) => {
   }
 
   try {
-    const { messages } = await req.json();
+    const raw = await req.json();
+    const { messages } = RequestSchema.parse(raw);
+
     const LOVABLE_API_KEY = Deno.env.get('LOVABLE_API_KEY');
-    
     if (!LOVABLE_API_KEY) {
       throw new Error('LOVABLE_API_KEY is not configured');
     }
@@ -155,25 +166,15 @@ Your goal: Answer questions naturally and guide qualified visitors toward the qu
       
       if (response.status === 429) {
         return new Response(
-          JSON.stringify({ 
-            error: 'Too many requests. Please try again in a moment.' 
-          }),
-          { 
-            status: 429, 
-            headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
-          }
+          JSON.stringify({ error: 'Too many requests. Please try again in a moment.' }),
+          { status: 429, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
         );
       }
       
       if (response.status === 402) {
         return new Response(
-          JSON.stringify({ 
-            error: 'Service temporarily unavailable. Please contact szovajason@gmail.com' 
-          }),
-          { 
-            status: 402, 
-            headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
-          }
+          JSON.stringify({ error: 'Service temporarily unavailable. Please contact szovajason@gmail.com' }),
+          { status: 402, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
         );
       }
 
@@ -193,17 +194,19 @@ Your goal: Answer questions naturally and guide qualified visitors toward the qu
     );
 
   } catch (error) {
+    if (error instanceof z.ZodError) {
+      return new Response(
+        JSON.stringify({ error: 'Invalid input', details: error.errors }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
     console.error('Chatbot function error:', error);
-    
     return new Response(
       JSON.stringify({ 
-        error: error instanceof Error ? error.message : 'Unknown error',
+        error: 'Internal error',
         response: "I'm sorry, I'm having trouble right now. Please email szovajason@gmail.com or fill out our quote form."
       }),
-      { 
-        status: 500, 
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
-      }
+      { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
   }
 });
