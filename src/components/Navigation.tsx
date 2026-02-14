@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Menu, ChevronDown } from "lucide-react";
+import { Menu, ChevronDown, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import {
@@ -73,6 +73,13 @@ export const Navigation = () => {
           </div>
 
           <div className="flex items-center gap-4">
+            <a
+              href="tel:+18254518117"
+              className="hidden md:flex items-center gap-1.5 text-sm font-medium text-primary hover:text-primary/80 transition-colors"
+            >
+              <Phone className="w-4 h-4" />
+              (825) 451-8117
+            </a>
             <Button variant="glow" size="sm" asChild className="hidden md:flex">
               <Link to="/audit">Book a Demo</Link>
             </Button>
