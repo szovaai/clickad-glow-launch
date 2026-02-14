@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { TrendingUp, BarChart3, Search, Smartphone, Zap, Shield, Target, ArrowRight } from "lucide-react";
+import { ArrowRight, Phone, Bot, MessageSquare, CalendarCheck, Zap } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -12,7 +12,6 @@ import { heroLeadFormSchema, type HeroLeadFormData } from "@/lib/validation";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 import { getUTMFromSession } from "@/lib/utm";
-import { scrollToSection } from "@/lib/navigation";
 import {
   Select,
   SelectContent,
@@ -34,13 +33,13 @@ import { Star, Sparkles } from "lucide-react";
 import { Navigation } from "@/components/Navigation";
 
 const services = [
-  "Website (Design + Build)",
-  "Funnel / Landing Page",
-  "SEO & Content",
-  "Local Lead Gen (GMB)",
-  "Conversion Copywriting",
-  "Branding / Style Guide",
-  "Ongoing Care Plan",
+  "AI Receptionist (Voice)",
+  "Smart Chat Qualifier",
+  "Missed-Call Text Back",
+  "Follow-Up Automation",
+  "Review Collection",
+  "Lead Reactivation",
+  "CRM + Pipeline Setup",
 ];
 
 export default function PremiumHeader() {
@@ -48,7 +47,7 @@ export default function PremiumHeader() {
     <div className="relative overflow-hidden">
       {/* Backdrop */}
       <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(0,255,136,0.12),transparent_55%),radial-gradient(ellipse_at_bottom,rgba(99,102,241,0.12),transparent_55%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(59,130,246,0.15),transparent_55%),radial-gradient(ellipse_at_bottom,rgba(99,102,241,0.12),transparent_55%)]" />
         <GridGlow />
         <Noise />
       </div>
@@ -65,50 +64,77 @@ export default function PremiumHeader() {
               className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/80 backdrop-blur"
             >
               <Sparkles className="h-3.5 w-3.5" />
-              Calgary • Service Businesses • 7‑Day Launch
+              AI Sales Infrastructure for Service Businesses
             </motion.div>
 
             <motion.h1
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.05, duration: 0.6 }}
-              className="mt-0 text-3xl font-bold leading-[1.05] tracking-[-0.02em] text-foreground sm:text-5xl md:text-6xl"
+              className="mt-4 text-3xl font-bold leading-[1.05] tracking-[-0.02em] text-foreground sm:text-5xl md:text-6xl"
             >
-              WE BUILD <span className="text-primary glow-text">CONVERSION MACHINES</span>
+              Turn Missed Calls Into{" "}
+              <span className="text-primary glow-text">Booked Jobs</span>
+              —Automatically
             </motion.h1>
 
             <motion.p
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1, duration: 0.6 }}
-              className="mt-5 max-w-xl text-balance text-foreground/70"
+              className="mt-5 max-w-xl text-balance text-lg text-foreground/70"
             >
-              Not just websites. We architect AI-powered digital ecosystems that turn clicks into customers and visitors into revenue.
+              We install an AI Sales System that answers calls, qualifies leads, and books appointments 24/7—so you never lose another customer to a missed call.
             </motion.p>
+
+            {/* Stat Badges */}
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.12, duration: 0.6 }}
+              className="mt-6 flex flex-wrap gap-3"
+            >
+              {[
+                { icon: Phone, label: "AI answers in <2 rings" },
+                { icon: MessageSquare, label: "Texts back missed calls" },
+                { icon: CalendarCheck, label: "Books 24/7 on autopilot" },
+              ].map((stat, i) => (
+                <div key={i} className="inline-flex items-center gap-2 rounded-lg border border-border bg-card/50 px-3 py-2 text-sm backdrop-blur">
+                  <stat.icon className="h-4 w-4 text-primary" />
+                  <span className="text-foreground/80">{stat.label}</span>
+                </div>
+              ))}
+            </motion.div>
 
             <motion.div
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.15, duration: 0.6 }}
-              className="mt-6 flex flex-wrap items-center gap-3"
+              className="mt-8 flex flex-wrap items-center gap-3"
             >
               <QuoteCta asChild>
                 <Button variant="glow" size="lg" className="h-12 gap-2 rounded-xl px-6 text-base">
-                  Get a Quote <ArrowRight className="h-4 w-4" />
+                  Book a 10-Min Demo <ArrowRight className="h-4 w-4" />
                 </Button>
               </QuoteCta>
               <button
-                onClick={() => scrollToSection('work')}
+                onClick={() => document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' })}
                 className="inline-flex h-12 items-center rounded-xl border border-border bg-card/50 px-5 text-sm text-foreground backdrop-blur transition hover:bg-card cursor-pointer"
               >
-                See real results
+                See how it works
               </button>
-              <div className="flex items-center gap-1 text-foreground/60">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="h-4 w-4 fill-primary text-primary" />
-                ))}
-                <span className="ml-1 text-xs">5 local case studies • Serving Calgary service businesses</span>
-              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3, duration: 0.6 }}
+              className="mt-6 flex items-center gap-1 text-foreground/60"
+            >
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} className="h-4 w-4 fill-primary text-primary" />
+              ))}
+              <span className="ml-1 text-xs">Trusted by Calgary trades & service businesses</span>
             </motion.div>
           </div>
 
@@ -133,9 +159,9 @@ export function QuoteCta({ children, asChild = false }: { children: React.ReactN
       <SheetTrigger asChild={asChild}>{children}</SheetTrigger>
       <SheetContent side="right" className="w-full overflow-y-auto border-l border-border bg-background sm:max-w-md">
         <SheetHeader className="text-left">
-          <SheetTitle>Request a Quote</SheetTitle>
+          <SheetTitle>Book Your AI Sales Demo</SheetTitle>
           <SheetDescription>
-            Tell us what you need. We'll reply within one business day.
+            Tell us about your business. We'll show you exactly how AI can answer and book for you.
           </SheetDescription>
         </SheetHeader>
         <QuoteForm />
@@ -167,7 +193,6 @@ function QuoteForm() {
 
       const utmParams = getUTMFromSession();
 
-      // 1. Create company record
       const { data: company, error: companyError } = await supabase
         .from("companies")
         .insert({
@@ -180,7 +205,6 @@ function QuoteForm() {
 
       if (companyError) throw companyError;
 
-      // 2. Create contact record
       const nameParts = (payload.name as string).split(" ");
       const firstName = nameParts[0];
       const lastName = nameParts.slice(1).join(" ") || null;
@@ -199,12 +223,11 @@ function QuoteForm() {
 
       if (contactError) throw contactError;
 
-      // 3. Create audit record
       const { data: audit, error: auditError } = await supabase
         .from("audits")
         .insert({
           company_id: company.id,
-          notes: `Budget: ${payload.budget}, Timeline: ${payload.timeline}, Services: ${selected.join(", ")}. Message: ${payload.message || ""}`,
+          notes: `Monthly calls: ${payload.monthly_calls}, Services needed: ${selected.join(", ")}. Message: ${payload.message || ""}`,
           status: "new",
           utm_source: utmParams.utm_source || null,
           utm_medium: utmParams.utm_medium || null,
@@ -217,7 +240,6 @@ function QuoteForm() {
 
       if (auditError) throw auditError;
 
-      // 4. Send email notification
       const { error: emailError } = await supabase.functions.invoke(
         "send-audit-notification",
         {
@@ -226,7 +248,7 @@ function QuoteForm() {
             contactName: payload.name as string,
             email: payload.email as string,
             phone: payload.phone as string,
-            notes: `Budget: ${payload.budget}, Timeline: ${payload.timeline}, Services: ${selected.join(", ")}. ${payload.message || ""}`,
+            notes: `Monthly calls: ${payload.monthly_calls}, Services: ${selected.join(", ")}. ${payload.message || ""}`,
             auditId: audit.id,
           },
         }
@@ -236,12 +258,11 @@ function QuoteForm() {
         console.error("Email notification error:", emailError);
       }
 
-      // 5. Track with Trakrly
       if (typeof window !== "undefined" && (window as any).trackQuoteSubmit) {
         (window as any).trackQuoteSubmit();
       }
 
-      alert("Thanks! Your request was received. We'll reach out within 1 business day.");
+      alert("Thanks! We'll reach out within 24 hours with your custom AI plan.");
       e.currentTarget.reset();
       setSelected([]);
     } catch (error) {
@@ -276,33 +297,19 @@ function QuoteForm() {
         </div>
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-2">
-        <div>
-          <Label>Budget</Label>
-          <Select name="budget" defaultValue="5000-10000">
-            <SelectTrigger className="mt-1">
-              <SelectValue placeholder="Select budget" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="<5000">Under $5k</SelectItem>
-              <SelectItem value="5000-10000">$5k–$10k</SelectItem>
-              <SelectItem value=">10000">$10k+</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-        <div>
-          <Label>Timeline</Label>
-          <Select name="timeline" defaultValue="2-4w">
-            <SelectTrigger className="mt-1">
-              <SelectValue placeholder="Select timeline" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="asap">ASAP</SelectItem>
-              <SelectItem value="2-4w">2–4 weeks</SelectItem>
-              <SelectItem value="4-8w">4–8 weeks</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
+      <div>
+        <Label>How many calls/leads per month?</Label>
+        <Select name="monthly_calls" defaultValue="20-50">
+          <SelectTrigger className="mt-1">
+            <SelectValue placeholder="Select range" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="<20">Under 20</SelectItem>
+            <SelectItem value="20-50">20–50</SelectItem>
+            <SelectItem value="50-100">50–100</SelectItem>
+            <SelectItem value=">100">100+</SelectItem>
+          </SelectContent>
+        </Select>
       </div>
 
       <div>
@@ -324,14 +331,14 @@ function QuoteForm() {
       </div>
 
       <div>
-        <Label htmlFor="message">Tell us about the project</Label>
-        <Textarea id="message" name="message" placeholder="A few sentences about goals, pages, inspiration…" className="mt-1 h-28" />
+        <Label htmlFor="message">Anything else?</Label>
+        <Textarea id="message" name="message" placeholder="Tell us about your biggest challenge with leads..." className="mt-1 h-28" />
       </div>
 
       <div className="flex items-center justify-between pt-2">
-        <p className="text-xs text-muted-foreground">By submitting, you agree to our Terms & Privacy.</p>
+        <p className="text-xs text-muted-foreground">No spam. No pressure. Real answers.</p>
         <Button type="submit" variant="glow" className="rounded-xl" disabled={isSubmitting}>
-          {isSubmitting ? "Sending..." : "Send Request"}
+          {isSubmitting ? "Sending..." : "Get My AI Plan"}
         </Button>
       </div>
     </form>
@@ -356,7 +363,6 @@ function HeroLeadForm() {
   const budget = watch("budget");
 
   React.useEffect(() => {
-    // Track form view
     if (window.Trakrly) {
       window.Trakrly.click({ event: 'hero_form_view' });
     }
@@ -375,21 +381,16 @@ function HeroLeadForm() {
     setIsSubmitting(true);
     
     try {
-      // Extract company name from full name (first word)
       const companyName = data.name.split(' ')[0] + "'s Business";
       
-      // Create company record
       const { data: company, error: companyError } = await supabase
         .from('companies')
-        .insert({
-          name: companyName,
-        })
+        .insert({ name: companyName })
         .select()
         .single();
 
       if (companyError) throw companyError;
 
-      // Create contact record
       const { data: contact, error: contactError } = await supabase
         .from('contacts')
         .insert({
@@ -402,12 +403,10 @@ function HeroLeadForm() {
 
       if (contactError) throw contactError;
 
-      // Get UTM params
       const utmParams = getUTMFromSession();
 
-      // Create audit record with project details and budget in notes
       const notes = [
-        data.projectDetails ? `Project: ${data.projectDetails}` : '',
+        data.projectDetails ? `Biggest challenge: ${data.projectDetails}` : '',
         `Budget: ${data.budget}`,
       ].filter(Boolean).join('\n');
 
@@ -427,7 +426,6 @@ function HeroLeadForm() {
 
       if (auditError) throw auditError;
 
-      // Send notification email
       const { error: emailError } = await supabase.functions.invoke('send-audit-notification', {
         body: {
           companyName: company.name,
@@ -444,7 +442,6 @@ function HeroLeadForm() {
         console.error('Email notification error:', emailError);
       }
 
-      // Track conversion
       if (window.Trakrly) {
         window.Trakrly.click({
           event: 'hero_form_submitted',
@@ -455,10 +452,9 @@ function HeroLeadForm() {
 
       toast({
         title: "Request Received!",
-        description: "We'll be in touch within 24 hours.",
+        description: "We'll send your custom AI plan within 24 hours.",
       });
 
-      // Redirect to thank you page
       setTimeout(() => {
         navigate('/thank-you');
       }, 1000);
@@ -492,175 +488,109 @@ function HeroLeadForm() {
     >
       <div className="mb-6">
         <h3 className="text-2xl font-bold text-foreground mb-3 glow-text">
-          Get a Custom Website That Pays for Itself in 90 Days
+          Get Your Custom AI Sales Plan
         </h3>
         <p className="text-sm text-muted-foreground mb-4">
-          We'll design, write, and launch a conversion-focused site for your service business—free consultation included.
+          See exactly how AI can answer, qualify, and book for your business—free consultation included.
         </p>
         
-        {/* 5-Star Rating */}
-        <div className="flex items-center gap-2 mb-2">
-          {[...Array(5)].map((_, i) => (
-            <Star key={i} className="w-4 h-4 fill-primary text-primary" />
-          ))}
+        {/* Social Proof */}
+        <div className="flex items-center gap-3 p-3 rounded-lg bg-primary/5 border border-primary/10">
+          <Bot className="h-5 w-5 text-primary flex-shrink-0" />
+          <p className="text-xs text-foreground/70">
+            <span className="font-semibold text-primary">AI never sleeps.</span> Your system answers calls, texts, and chats 24/7/365.
+          </p>
         </div>
-        <p className="text-xs text-muted-foreground">
-          Rated 5 Stars by Calgary Business Owners
-        </p>
       </div>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4" onFocus={handleFormStart}>
         <div>
-          <Label htmlFor="name" className="text-foreground">Name *</Label>
+          <Label htmlFor="hero-name" className="text-sm font-medium">Your Name *</Label>
           <Input
-            id="name"
+            id="hero-name"
             {...register("name")}
-            onFocus={handleFormStart}
-            disabled={isSubmitting}
-            className="mt-1.5 bg-background/50 border-border"
-            placeholder="John Doe"
+            placeholder="Jane Smith"
+            className="mt-1.5"
           />
-          {errors.name && (
-            <p className="text-sm text-destructive mt-1">{errors.name.message}</p>
-          )}
+          {errors.name && <p className="text-xs text-destructive mt-1">{errors.name.message}</p>}
         </div>
 
         <div>
-          <Label htmlFor="email" className="text-foreground">Email *</Label>
+          <Label htmlFor="hero-email" className="text-sm font-medium">Email *</Label>
           <Input
-            id="email"
+            id="hero-email"
             type="email"
             {...register("email")}
-            onFocus={handleFormStart}
-            disabled={isSubmitting}
-            className="mt-1.5 bg-background/50 border-border"
-            placeholder="john@example.com"
+            placeholder="you@company.com"
+            className="mt-1.5"
           />
-          {errors.email && (
-            <p className="text-sm text-destructive mt-1">{errors.email.message}</p>
-          )}
+          {errors.email && <p className="text-xs text-destructive mt-1">{errors.email.message}</p>}
         </div>
 
         <div>
-          <Label htmlFor="projectDetails" className="text-foreground">Project Details</Label>
-          <Textarea
-            id="projectDetails"
+          <Label htmlFor="hero-details" className="text-sm font-medium">What's your biggest lead challenge? (optional)</Label>
+          <Input
+            id="hero-details"
             {...register("projectDetails")}
-            onFocus={handleFormStart}
-            disabled={isSubmitting}
-            className="mt-1.5 bg-background/50 border-border min-h-[80px]"
-            placeholder="Brief description of what you need..."
+            placeholder="e.g. Missing calls after hours"
+            className="mt-1.5"
           />
-          {errors.projectDetails && (
-            <p className="text-sm text-destructive mt-1">{errors.projectDetails.message}</p>
-          )}
         </div>
 
         <div>
-          <Label htmlFor="budget" className="text-foreground">Budget Range *</Label>
-          <Select
-            onValueChange={(value) => setValue("budget", value)}
-            disabled={isSubmitting}
-            value={budget}
-          >
-            <SelectTrigger className="mt-1.5 bg-background/50 border-border">
-              <SelectValue placeholder="Select your budget" />
-            </SelectTrigger>
-            <SelectContent className="bg-popover border-border z-50">
-              <SelectItem value="$500-$1k">$500 - $1,000</SelectItem>
-              <SelectItem value="$1k-$5k">$1,000 - $5,000</SelectItem>
-              <SelectItem value="$5k+">$5,000+</SelectItem>
-              <SelectItem value="Not sure yet">Not sure yet</SelectItem>
-            </SelectContent>
-          </Select>
-          {errors.budget && (
-            <p className="text-sm text-destructive mt-1">{errors.budget.message}</p>
-          )}
+          <Label className="text-sm font-medium">Monthly investment range *</Label>
+          <div className="grid grid-cols-3 gap-2 mt-1.5">
+            {[
+              { value: "<1500", label: "Under $1.5k" },
+              { value: "1500-3000", label: "$1.5k–$3k" },
+              { value: ">3000", label: "$3k+" },
+            ].map((option) => (
+              <button
+                key={option.value}
+                type="button"
+                onClick={() => setValue("budget", option.value, { shouldValidate: true })}
+                className={cn(
+                  "rounded-lg border px-3 py-2.5 text-sm font-medium transition-all",
+                  budget === option.value
+                    ? "border-primary bg-primary/10 text-primary ring-1 ring-primary/20"
+                    : "border-border bg-card/50 text-foreground/70 hover:border-primary/30"
+                )}
+              >
+                {option.label}
+              </button>
+            ))}
+          </div>
+          {errors.budget && <p className="text-xs text-destructive mt-1">{errors.budget.message}</p>}
         </div>
 
         <Button
           type="submit"
-          disabled={isSubmitting}
           variant="glow"
-          className="w-full group"
           size="lg"
+          className="w-full text-base font-semibold"
+          disabled={isSubmitting}
         >
-          {isSubmitting ? "Submitting..." : (
-            <>
-              Get Your Free Quote
-              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </>
-          )}
+          {isSubmitting ? "Sending..." : "Get My AI Sales Plan →"}
         </Button>
 
-        {/* Urgency Message */}
-        <div className="mt-4 flex items-center justify-center gap-2 text-sm text-muted-foreground">
-          <Zap className="w-4 h-4 text-primary" />
-          <span>We only take 3 new builds/month. Secure your spot today.</span>
-        </div>
-
-        <p className="text-xs text-muted-foreground text-center mt-2">
-          No spam. We respect your privacy.
+        <p className="text-center text-xs text-muted-foreground">
+          Free consultation • No obligation • Response within 24h
         </p>
       </form>
     </motion.div>
   );
 }
 
-function HeroShowcase() {
-  return (
-    <div className="relative rounded-3xl border border-border bg-gradient-to-b from-card/50 to-card/0 p-2 shadow-2xl shadow-primary/5">
-      <div className="rounded-2xl border border-border bg-background/60 p-6 backdrop-blur">
-        <div className="grid gap-3 sm:grid-cols-2">
-          <div className="aspect-[4/3] rounded-xl bg-gradient-to-br from-primary/30 to-primary/10 flex items-center justify-center">
-            <TrendingUp className="h-16 w-16 text-primary/60" />
-          </div>
-          <div className="grid gap-3">
-            <div className="h-24 rounded-xl bg-card/80 border border-border/50 p-4 flex flex-col justify-between">
-              <div className="text-xs text-muted-foreground">Conversion Rate</div>
-              <div className="text-2xl font-bold text-primary">+320%</div>
-            </div>
-            <div className="h-24 rounded-xl bg-card/80 border border-border/50 p-4 flex flex-col justify-between">
-              <div className="text-xs text-muted-foreground">Load Time</div>
-              <div className="text-2xl font-bold text-foreground">0.8s</div>
-            </div>
-            <div className="h-24 rounded-xl bg-card/80 border border-border/50 p-4 flex flex-col justify-between">
-              <div className="text-xs text-muted-foreground">Pages Built</div>
-              <div className="text-2xl font-bold text-foreground">12+</div>
-            </div>
-          </div>
-        </div>
-        <div className="mt-4 grid grid-cols-3 gap-2">
-          {[
-            { icon: BarChart3, label: "Analytics" },
-            { icon: Search, label: "SEO" },
-            { icon: Smartphone, label: "Mobile" },
-            { icon: Zap, label: "Speed" },
-            { icon: Shield, label: "Security" },
-            { icon: Target, label: "CRO" },
-          ].map((item, i) => (
-            <div key={i} className="h-14 rounded-lg bg-card/80 border border-border/50 flex flex-col items-center justify-center gap-1">
-              <item.icon className="h-4 w-4 text-primary/70" />
-              <span className="text-[10px] text-muted-foreground">{item.label}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-      <div className="pointer-events-none absolute inset-0 rounded-3xl ring-1 ring-border" />
-    </div>
-  );
-}
-
+/* ── decorative helpers ── */
 function GridGlow() {
   return (
-    <svg aria-hidden="true" className="absolute inset-x-0 top-[-10%] -z-10 h-[140%] w-full">
+    <svg className="pointer-events-none absolute inset-0 h-full w-full opacity-[0.03]">
       <defs>
-        <radialGradient id="g" cx="50%" cy="0%" r="80%">
-          <stop offset="0%" stopColor="hsl(var(--primary) / 0.25)" />
-          <stop offset="60%" stopColor="hsl(var(--primary) / 0)" />
-        </radialGradient>
+        <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+          <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" strokeWidth="0.5" />
+        </pattern>
       </defs>
-      <rect width="100%" height="100%" fill="url(#g)" />
+      <rect width="100%" height="100%" fill="url(#grid)" />
     </svg>
   );
 }
@@ -668,7 +598,12 @@ function GridGlow() {
 function Noise() {
   return (
     <div
-      className="pointer-events-none absolute inset-0 -z-10 opacity-[0.08] [background:radial-gradient(circle_at_1px_1px,hsl(var(--foreground))_1px,transparent_1px)] [background-size:18px_18px]"
+      className="pointer-events-none absolute inset-0 mix-blend-soft-light opacity-[0.03]"
+      style={{
+        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E")`,
+        backgroundRepeat: "repeat",
+        backgroundSize: "200px 200px",
+      }}
     />
   );
 }
