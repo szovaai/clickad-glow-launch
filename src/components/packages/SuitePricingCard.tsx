@@ -5,11 +5,12 @@ import { Button } from "@/components/ui/button";
 import { Check, Crown, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { Link } from "react-router-dom";
 
 const PRICE_IDS = {
-  starter: "price_1Sb4IEGuihElNnYIZvb1iCM9",
-  growth: "price_1Sb4IUGuihElNnYIXX4tOwSb",
-  premium: "price_1Sb4IhGuihElNnYILPHGfbnS",
+  capture: "price_1Sb4IEGuihElNnYIZvb1iCM9",
+  receptionist: "price_1Sb4IUGuihElNnYIXX4tOwSb",
+  salesteam: "price_1Sb4IhGuihElNnYILPHGfbnS",
 };
 
 export const SuitePricingCard = () => {
@@ -19,11 +20,9 @@ export const SuitePricingCard = () => {
     setLoadingPackage(packageKey);
     try {
       const priceId = PRICE_IDS[packageKey as keyof typeof PRICE_IDS];
-      
       const { data, error } = await supabase.functions.invoke('create-checkout', {
         body: { priceId }
       });
-
       if (error) throw error;
       if (data?.url) {
         window.location.href = data.url;
@@ -40,53 +39,53 @@ export const SuitePricingCard = () => {
 
   const packages = [
     {
-      key: "starter",
-      name: "Starter",
-      price: "$997",
-      pages: "5 pages",
-      description: "Perfect for small businesses getting started online",
+      key: "capture",
+      name: "Lead Capture System",
+      price: "$1,497",
+      setup: "One-time setup",
+      monthly: "$297/mo management",
+      description: "Start capturing and converting leads automatically",
       features: [
-        "Custom responsive design",
-        "Mobile-first approach",
-        "Basic on-page SEO (titles, meta)",
-        "Contact form with email notifications",
-        "SSL & hosting setup",
-        "Google Analytics integration",
+        "Conversion-focused website or landing page",
+        "Chat lead capture + booking widget",
+        "Missed-call text back",
+        "CRM pipeline basics",
+        "Google Analytics + tracking setup",
         "30-day post-launch support",
       ],
       popular: false,
     },
     {
-      key: "growth",
-      name: "Growth",
-      price: "$1,497",
-      pages: "10 pages",
-      description: "Most popular choice for growing service businesses",
+      key: "receptionist",
+      name: "AI Receptionist System",
+      price: "$2,997",
+      setup: "One-time setup",
+      monthly: "$497/mo management",
+      description: "Full AI voice + chat answering and booking",
       features: [
-        "Everything in Starter",
-        "Professional copywriting (all pages)",
-        "Advanced SEO (schema, local SEO, sitemap)",
-        "Google Business Profile setup",
-        "Lead capture forms with automations",
-        "Speed & Core Web Vitals optimization",
+        "Everything in Lead Capture",
+        "AI voice receptionist (24/7 call answering)",
+        "Custom qualification scripts",
+        "Follow-up automation (SMS + email)",
+        "Calendar integration + reminders",
         "60-day priority support",
       ],
       popular: true,
     },
     {
-      key: "premium",
-      name: "Premium",
-      price: "$2,500",
-      pages: "Unlimited pages",
-      description: "Complete solution for businesses ready to dominate",
+      key: "salesteam",
+      name: "AI Sales Team + Optimization",
+      price: "$5,000+",
+      setup: "Custom setup",
+      monthly: "$997/mo management",
+      description: "Enterprise-level AI sales infrastructure",
       features: [
-        "Everything in Growth",
-        "Unlimited custom pages",
-        "Branding package (logo, colors, fonts)",
-        "1-on-1 strategy session (60 min)",
-        "Custom functionality/integrations",
-        "Training video library access",
-        "3 months priority support",
+        "Everything in AI Receptionist",
+        "Multi-step qualification flows",
+        "Review generation automation",
+        "Lead reactivation campaigns",
+        "Monthly optimization + reporting",
+        "Dedicated account manager",
       ],
       popular: false,
     },
@@ -103,10 +102,10 @@ export const SuitePricingCard = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Choose Your <span className="glow-text">Package</span>
+            Choose Your <span className="glow-text">System</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Transparent pricing with no hidden fees
+            Transparent pricing. Setup + monthly management.
           </p>
         </motion.div>
 
@@ -135,8 +134,9 @@ export const SuitePricingCard = () => {
 
                 <div className={`${pkg.popular ? 'pt-10' : 'pt-2'}`}>
                   <h3 className="text-2xl font-bold mb-2">{pkg.name}</h3>
-                  <p className="text-sm text-primary mb-3">{pkg.pages}</p>
-                  <div className="text-4xl font-bold text-primary mb-3">{pkg.price}</div>
+                  <div className="text-4xl font-bold text-primary mb-1">{pkg.price}</div>
+                  <p className="text-sm text-primary/80 mb-1">{pkg.setup}</p>
+                  <p className="text-xs text-muted-foreground mb-4">+ {pkg.monthly}</p>
                   <p className="text-muted-foreground mb-6">{pkg.description}</p>
                 </div>
 
@@ -171,7 +171,7 @@ export const SuitePricingCard = () => {
         </div>
 
         <p className="text-center text-sm text-muted-foreground mt-8">
-          Payment plans available • No long-term contracts
+          Payment plans available • Cancel management anytime • You own everything
         </p>
       </div>
     </section>
