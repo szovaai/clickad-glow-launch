@@ -44,13 +44,7 @@ const defaultConfig: VoiceConfig = {
   active: false,
 };
 
-const VOICE_OPTIONS = [
-  { value: "Polly.Joanna", label: "Joanna (US Female)" },
-  { value: "Polly.Salli", label: "Salli (US Female)" },
-  { value: "Polly.Kendra", label: "Kendra (US Female)" },
-  { value: "Polly.Kimberly", label: "Kimberly (US Female)" },
-  { value: "Polly.Amy", label: "Amy (British Female)" },
-];
+// Voice is now handled by ElevenLabs Conversational AI agent
 
 const WEBHOOK_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/voice-twiml`;
 
@@ -239,7 +233,7 @@ export default function VoiceModule() {
             Voice AI (Beta)
           </h1>
           <p className="text-sm text-muted-foreground mt-1">
-            AI Receptionist powered by Gemini — configure scripts, call flow, and review transcripts
+            AI Receptionist powered by ElevenLabs Conversational AI — real-time voice with bidirectional streaming
           </p>
         </div>
         <div className="flex items-center gap-3">
@@ -275,7 +269,8 @@ export default function VoiceModule() {
             <h3 className="font-semibold text-foreground">Twilio Webhook Setup</h3>
           </div>
           <p className="text-sm text-muted-foreground">
-            Paste this URL into your Twilio phone number's <strong>"A Call Comes In"</strong> webhook (HTTP POST):
+            Paste this URL into your Twilio phone number's <strong>"A Call Comes In"</strong> webhook (HTTP POST).
+            Voice is powered by <strong>ElevenLabs Conversational AI</strong> with real-time bidirectional streaming.
           </p>
           <div className="flex items-center gap-2">
             <code className="flex-1 text-xs bg-background/50 border border-border rounded-md px-3 py-2 text-foreground break-all">
@@ -284,21 +279,6 @@ export default function VoiceModule() {
             <Button variant="outline" size="sm" onClick={copyWebhookUrl} className="shrink-0">
               {copied ? <CheckCircle2 className="w-4 h-4 text-green-400" /> : <Copy className="w-4 h-4" />}
             </Button>
-          </div>
-          <div className="flex items-center gap-2">
-            <Label className="text-sm text-muted-foreground">Voice:</Label>
-            <select
-              className="bg-background border border-border rounded-md px-2 py-1 text-sm text-foreground"
-              value={config.transfer_rules.voiceSelection || "Polly.Joanna"}
-              onChange={(e) => setConfig((c) => ({
-                ...c,
-                transfer_rules: { ...c.transfer_rules, voiceSelection: e.target.value },
-              }))}
-            >
-              {VOICE_OPTIONS.map((v) => (
-                <option key={v.value} value={v.value}>{v.label}</option>
-              ))}
-            </select>
           </div>
         </CardContent>
       </Card>
