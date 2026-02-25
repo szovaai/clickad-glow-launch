@@ -1,26 +1,26 @@
 import { motion } from "framer-motion";
-import { PhoneOff, Clock, UserX, DollarSign } from "lucide-react";
+import { Globe, SearchX, UserX, DollarSign } from "lucide-react";
 
 const painPoints = [
   {
-    icon: PhoneOff,
-    title: "Missed calls go to competitors",
-    description: "Every unanswered call is a booked job for someone else.",
+    icon: Globe,
+    title: "Your website doesn't generate leads",
+    description: "It looks nice, but visitors leave without ever contacting you.",
   },
   {
-    icon: Clock,
-    title: "Slow replies kill conversions",
-    description: "If you don't respond in 5 minutes, your odds of winning the lead drop 80%.",
+    icon: SearchX,
+    title: "Invisible on Google",
+    description: "Your competitors rank above you while you wait for referrals.",
   },
   {
     icon: UserX,
-    title: "Leads don't follow up themselves",
-    description: "Without automated follow-up, 50%+ of warm leads go cold.",
+    title: "Leads leave without contacting you",
+    description: "No chatbot, no instant response — they bounce to the next option.",
   },
   {
     icon: DollarSign,
-    title: "Admin time gets expensive",
-    description: "Hiring a receptionist costs $3,500+/mo. AI costs a fraction.",
+    title: "Paying for ads that don't convert",
+    description: "Traffic without a conversion system is just wasted budget.",
   },
 ];
 
@@ -36,11 +36,11 @@ export const PainSection = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Most Leads Are Lost in the{" "}
-            <span className="glow-text">First 5 Minutes</span>
+            Your Website Is Costing You{" "}
+            <span className="glow-text">Money</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Your competitors are answering faster. Here's what's costing you jobs right now.
+            A pretty website without a lead system is just an expensive brochure.
           </p>
         </motion.div>
 

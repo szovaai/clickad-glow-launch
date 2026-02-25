@@ -8,9 +8,9 @@ import { toast } from "sonner";
 import { Link } from "react-router-dom";
 
 const PRICE_IDS = {
-  capture: "price_1T0myvGuihElNnYIexKFSGEr",
-  receptionist: "price_1T0mzEGuihElNnYIOI5p3qAm",
-  salesteam: "price_1T0mzTGuihElNnYIveLy8xdw",
+  starter: "price_1T0myvGuihElNnYIexKFSGEr",
+  growth: "price_1T0mzEGuihElNnYIOI5p3qAm",
+  domination: "price_1T0mzTGuihElNnYIveLy8xdw",
 };
 
 export const SuitePricingCard = () => {
@@ -39,51 +39,51 @@ export const SuitePricingCard = () => {
 
   const packages = [
     {
-      key: "capture",
-      name: "Lead Capture System",
-      price: "$1,497",
+      key: "starter",
+      name: "Starter AI Site",
+      price: "$997+",
       setup: "One-time setup",
-      monthly: "$297/mo management",
-      description: "Start capturing and converting leads automatically",
+      monthly: "$97/mo management",
+      description: "AI website + chatbot + basic SEO to start capturing leads",
       features: [
-        "Conversion-focused website or landing page",
-        "Chat lead capture + booking widget",
-        "Missed-call text back",
-        "CRM pipeline basics",
-        "Google Analytics + tracking setup",
+        "Conversion-optimized AI website",
+        "AI chatbot (24/7 lead capture)",
+        "On-page SEO foundations",
+        "Mobile-first responsive design",
+        "Speed optimization",
         "30-day post-launch support",
       ],
       popular: false,
     },
     {
-      key: "receptionist",
-      name: "AI Receptionist System",
-      price: "$2,997",
+      key: "growth",
+      name: "Growth Engine",
+      price: "$1,997+",
       setup: "One-time setup",
-      monthly: "$497/mo management",
-      description: "Full AI voice + chat answering and booking",
+      monthly: "$97/mo management",
+      description: "AI website + advanced SEO + full automation stack",
       features: [
-        "Everything in Lead Capture",
-        "AI voice receptionist (24/7 call answering)",
-        "Custom qualification scripts",
-        "Follow-up automation (SMS + email)",
-        "Calendar integration + reminders",
+        "Everything in Starter",
+        "Advanced SEO + Google Business optimization",
+        "SMS + email follow-up automation",
+        "Missed-call text back",
+        "Appointment booking + reminders",
         "60-day priority support",
       ],
       popular: true,
     },
     {
-      key: "salesteam",
-      name: "AI Sales Team + Optimization",
-      price: "$5,000+",
+      key: "domination",
+      name: "Domination Package",
+      price: "$4,997+",
       setup: "Custom setup",
-      monthly: "$997/mo management",
-      description: "Enterprise-level AI sales infrastructure",
+      monthly: "$97/mo management",
+      description: "Everything above + paid ads + retargeting + CRM",
       features: [
-        "Everything in AI Receptionist",
-        "Multi-step qualification flows",
-        "Review generation automation",
-        "Lead reactivation campaigns",
+        "Everything in Growth Engine",
+        "Google Ads setup + management",
+        "Retargeting campaigns",
+        "CRM pipeline + lead tracking",
         "Monthly optimization + reporting",
         "Dedicated account manager",
       ],
@@ -102,10 +102,10 @@ export const SuitePricingCard = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Choose Your <span className="glow-text">System</span>
+            Choose Your <span className="glow-text">Growth Plan</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Transparent pricing. Setup + monthly management.
+            Transparent pricing. One-time setup + monthly management.
           </p>
         </motion.div>
 

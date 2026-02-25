@@ -7,9 +7,9 @@ import { generateOfferSchema } from "@/lib/schema";
 const Pricing = () => {
   const schemas = [
     generateOfferSchema(
-      "Calgary Website Design Services",
-      "Transparent pricing for professional Calgary website design. From starter sites to custom solutions.",
-      "997-2500",
+      "AI Website & Growth System Pricing",
+      "Transparent pricing for AI-powered websites and growth systems. Starter from $997, Growth Engine from $1,997, Domination from $4,997.",
+      "997-4997",
       "CAD"
     )
   ];
@@ -17,10 +17,10 @@ const Pricing = () => {
   return (
     <div className="min-h-screen">
       <SEOHead
-        title="Calgary Website Design Pricing | Transparent Packages & Quotes"
-        description="Clear, upfront pricing for Calgary website design. Starter sites from $997, Growth sites from $1,497, Premium unlimited sites at $2,500. No hidden fees, just results."
+        title="AI Website & Growth System Pricing | ClickAd Media"
+        description="Transparent pricing for AI-powered websites and growth systems. Starter AI Site from $997, Growth Engine from $1,997, Domination Package from $4,997. No hidden fees."
         canonical="https://www.clickadmedia.com/pricing"
-        keywords="Calgary website design pricing, web design cost Calgary, website packages Calgary"
+        keywords="AI website pricing, growth system cost, web design packages, Calgary website pricing"
         schemas={schemas}
       />
       <PremiumHeader />

@@ -8,40 +8,32 @@ import {
 
 export const suiteFAQs = [
   {
-    question: "How does the AI receptionist work?",
-    answer: "Our AI receptionist answers calls using a natural-sounding voice trained on your business rules, FAQs, and services. It qualifies leads by asking your custom questions, books appointments directly into your calendar, and can even transfer hot leads to you live. It works 24/7—nights, weekends, and holidays."
+    question: "What's included in an AI website?",
+    answer: "Every AI website includes a conversion-optimized design, built-in AI chatbot for 24/7 lead capture, automated follow-up sequences, appointment booking, mobile-first responsive design, speed optimization, and on-page SEO foundations. It's a complete lead generation system, not just a pretty page."
   },
   {
-    question: "Does it sound human?",
-    answer: "Yes. Modern voice AI is virtually indistinguishable from a human receptionist. We customize the voice, tone, and conversation style to match your brand. Most callers won't realize they're speaking with AI."
+    question: "How does SEO work with my new site?",
+    answer: "We build SEO into the foundation of your website — proper site structure, meta tags, schema markup, speed optimization, and keyword-targeted content. For Growth Engine and Domination packages, we also handle Google Business optimization, local ranking strategy, authority building, and ongoing keyword targeting."
   },
   {
-    question: "What happens if AI can't answer a question?",
-    answer: "If the AI encounters a question outside its training, it gracefully handles it by taking a message, offering to have someone call back, or transferring the call to you or your team directly. No lead is ever lost."
+    question: "How long does it take to see results?",
+    answer: "Your website and chatbot go live within 7 days and start capturing leads immediately. SEO results typically start showing within 60–90 days as Google indexes and ranks your new site. Paid ads (Domination Package) can generate leads within the first week of launch."
   },
   {
-    question: "Can it transfer calls to me?",
-    answer: "Absolutely. You can set rules for when calls should be transferred—for example, high-value leads, urgent requests, or specific topics. The AI qualifies first, then transfers with context so you're never going in blind."
+    question: "Do you work with businesses outside Calgary?",
+    answer: "Yes. While we're based in Calgary, our AI website and growth systems work for service businesses anywhere in North America. We've helped electricians, contractors, clinics, and home service companies across Canada and the US."
   },
   {
-    question: "Can it collect deposits or payments?",
-    answer: "Yes. We can integrate payment collection into the booking flow so customers can pay deposits or full amounts when scheduling. This works via secure payment links sent by SMS after the call."
+    question: "What if I already have a website?",
+    answer: "We'll audit your current site and determine the best path forward. Sometimes we can upgrade your existing site with our AI chatbot and SEO systems. Other times, a fresh build delivers better results. Either way, we'll give you an honest recommendation."
   },
   {
-    question: "What CRM do you use?",
-    answer: "We work with GoHighLevel, HubSpot, or can set up a lightweight custom CRM depending on your needs. Every lead, call transcript, and booking is stored and organized automatically."
-  },
-  {
-    question: "How long does setup take?",
-    answer: "Most systems are live within 7 days. Day 1-3: We connect your phone, calendar, and CRM. Day 4-7: We train the AI on your business rules, scripts, and qualification flow. Then we go live and start optimizing."
+    question: "Is there a contract?",
+    answer: "Setup is a one-time fee. Monthly management is month-to-month — cancel anytime. We keep clients because we deliver results, not because of contracts. You own your website, content, and data."
   },
   {
     question: "What industries does this work best for?",
-    answer: "This works exceptionally well for contractors (HVAC, plumbing, electrical, roofing), home services, clinics, med spas, dental offices, and any service business that books appointments and gets inbound calls."
-  },
-  {
-    question: "Can you use my existing phone number and website?",
-    answer: "Yes. We can port your existing number or set up call forwarding so nothing changes for your customers. For your website, we add the chat widget and booking system without rebuilding anything."
+    answer: "Our systems work best for service businesses that book appointments and rely on local leads: electricians, HVAC, plumbing, roofing, renovation contractors, dental offices, med spas, clinics, and home service companies. If you get inbound calls and need to book jobs, this is built for you."
   },
 ];
 
@@ -60,7 +52,7 @@ export const SuiteFAQ = () => {
             Frequently Asked <span className="glow-text">Questions</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Everything you need to know about your AI Sales System
+            Everything you need to know about our AI website and growth systems
           </p>
         </motion.div>
 
