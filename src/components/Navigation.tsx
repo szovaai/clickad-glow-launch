@@ -16,10 +16,10 @@ export const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const navLinks = [
-    { href: "#included", label: "AI Sales System" },
-    { href: "#process", label: "How It Works" },
-    { href: "#pricing", label: "Pricing" },
-    { href: "#faq", label: "FAQ" },
+    { href: "/services", label: "Services", isRoute: true },
+    { href: "#process", label: "How It Works", isRoute: false },
+    { href: "#pricing", label: "Pricing", isRoute: false },
+    { href: "#faq", label: "FAQ", isRoute: false },
   ];
 
   const companyLinks = [
@@ -40,20 +40,30 @@ export const Navigation = () => {
           </div>
 
           <div className="hidden items-center gap-6 md:flex">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={(e) => {
-                  e.preventDefault();
-                  const hash = link.href.replace('#', '');
-                  scrollToSection(hash);
-                }}
-                className="text-sm font-medium transition-colors hover:text-primary cursor-pointer"
-              >
-                {link.label}
-              </a>
-            ))}
+            {navLinks.map((link) =>
+              link.isRoute ? (
+                <Link
+                  key={link.href}
+                  to={link.href}
+                  className="text-sm font-medium transition-colors hover:text-primary"
+                >
+                  {link.label}
+                </Link>
+              ) : (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    const hash = link.href.replace('#', '');
+                    scrollToSection(hash);
+                  }}
+                  className="text-sm font-medium transition-colors hover:text-primary cursor-pointer"
+                >
+                  {link.label}
+                </a>
+              )
+            )}
             
             <DropdownMenu>
               <DropdownMenuTrigger className="flex items-center gap-1 text-sm font-medium transition-colors hover:text-primary outline-none">
@@ -81,7 +91,7 @@ export const Navigation = () => {
               (825) 451-8117
             </a>
             <Button variant="glow" size="sm" asChild className="hidden md:flex">
-              <Link to="/audit">Book a Demo</Link>
+              <Link to="/audit">Book Strategy Call</Link>
             </Button>
 
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -92,21 +102,32 @@ export const Navigation = () => {
               </SheetTrigger>
               <SheetContent side="right">
                 <nav className="flex flex-col gap-4 mt-8">
-                  {navLinks.map((link) => (
-                    <a
-                      key={link.href}
-                      href={link.href}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        const hash = link.href.replace('#', '');
-                        scrollToSection(hash);
-                        setIsOpen(false);
-                      }}
-                      className="text-lg font-medium hover:text-primary transition-colors cursor-pointer"
-                    >
-                      {link.label}
-                    </a>
-                  ))}
+                  {navLinks.map((link) =>
+                    link.isRoute ? (
+                      <Link
+                        key={link.href}
+                        to={link.href}
+                        onClick={() => setIsOpen(false)}
+                        className="text-lg font-medium hover:text-primary transition-colors"
+                      >
+                        {link.label}
+                      </Link>
+                    ) : (
+                      <a
+                        key={link.href}
+                        href={link.href}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          const hash = link.href.replace('#', '');
+                          scrollToSection(hash);
+                          setIsOpen(false);
+                        }}
+                        className="text-lg font-medium hover:text-primary transition-colors cursor-pointer"
+                      >
+                        {link.label}
+                      </a>
+                    )
+                  )}
                   {companyLinks.map((link) => (
                     <Link
                       key={link.href}
@@ -119,7 +140,7 @@ export const Navigation = () => {
                   ))}
                   <Button variant="glow" asChild className="w-full mt-4">
                     <Link to="/audit" onClick={() => setIsOpen(false)}>
-                      Book a Demo
+                      Book Strategy Call
                     </Link>
                   </Button>
                 </nav>

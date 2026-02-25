@@ -2,9 +2,8 @@ import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { SuiteHero } from "@/components/packages/SuiteHero";
 import { PainSection } from "@/components/ai-sales/PainSection";
+import { AIDifferentiator } from "@/components/sections/AIDifferentiator";
 import { CoreOfferSection } from "@/components/packages/CoreOfferSection";
-import { ValueAddsGrid } from "@/components/packages/ValueAddsGrid";
-import { PremiumSupportSection } from "@/components/packages/PremiumSupportSection";
 import { SuiteProcessTimeline, suiteProcessSteps } from "@/components/packages/SuiteProcessTimeline";
 import { SuiteTestimonials } from "@/components/packages/SuiteTestimonials";
 import { SuitePricingCard } from "@/components/packages/SuitePricingCard";
@@ -22,14 +21,14 @@ import {
 const UltimateSuite = () => {
   const schemas = [
     generateServiceSchema(
-      "AI Sales Infrastructure",
-      "AI receptionist, website chat qualifier, follow-up automation, and CRM for Calgary service businesses. Never miss a call or lead again.",
+      "AI-Powered Websites & Growth Systems",
+      "AI websites, SEO growth engines, chatbot lead capture, and automated follow-up for service businesses in Calgary and beyond.",
       "Calgary, AB"
     ),
     generateFAQPageSchema(suiteFAQs),
     generateHowToSchema(
-      "How to Install Your AI Sales System",
-      "A proven 3-step process: Install, Train, Optimize",
+      "How to Get Your AI-Powered Growth System",
+      "A proven 3-step process: Audit, Build, Scale",
       suiteProcessSteps.map(step => ({
         title: step.title,
         description: step.description,
@@ -37,9 +36,9 @@ const UltimateSuite = () => {
       }))
     ),
     generateOfferSchema(
-      "AI Sales Infrastructure",
-      "Complete AI receptionist and sales automation system for service businesses",
-      "1497-5000",
+      "AI-Powered Website & Growth System",
+      "Complete AI website, SEO, chatbot, and automation system for service businesses",
+      "997-4997",
       "CAD"
     )
   ];
@@ -47,19 +46,18 @@ const UltimateSuite = () => {
   return (
     <div className="min-h-screen">
       <SEOHead
-        title="AI Sales System for Service Businesses | ClickAd Media"
-        description="Install an AI receptionist, chat qualifier, and automated follow-up that answers, qualifies, and books customers 24/7. Live in 7 days. Starting at $1,497."
+        title="AI-Powered Websites & Growth Systems for Service Businesses | ClickAd Media"
+        description="AI websites, smart chatbots, SEO systems, and automated follow-up that generate leads and book appointments 24/7. Live in 7 days. Starting at $997."
         canonical="https://www.clickadmedia.com/"
-        keywords="AI receptionist, AI sales system, automated booking, lead capture, missed call text back, Calgary"
+        keywords="AI website, AI chatbot, SEO growth, lead capture, automated booking, Calgary web design"
         schemas={schemas}
       />
       <Navigation />
       <main>
         <SuiteHero />
         <PainSection />
+        <AIDifferentiator />
         <CoreOfferSection />
-        <ValueAddsGrid />
-        <PremiumSupportSection />
         <SuiteProcessTimeline />
         <SuiteTestimonials />
         <SuitePricingCard />

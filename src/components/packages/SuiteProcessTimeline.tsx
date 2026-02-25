@@ -1,24 +1,24 @@
 import { motion } from "framer-motion";
-import { PlugZap, Brain, TrendingUp } from "lucide-react";
+import { ClipboardCheck, Wrench, Rocket } from "lucide-react";
 
 export const suiteProcessSteps = [
   {
-    icon: PlugZap,
-    title: "Install",
-    duration: "Day 1–3",
-    description: "We connect your phone system, calendar, and CRM. Your AI receptionist and chat system go live.",
+    icon: ClipboardCheck,
+    title: "Audit & Strategy",
+    duration: "Day 1–2",
+    description: "We analyze your business, current website, and lead flow. You get a clear roadmap for growth.",
   },
   {
-    icon: Brain,
-    title: "Train",
-    duration: "Day 4–7",
-    description: "We program your business rules, FAQs, qualification flow, and custom call scripts so the AI sounds like your best employee.",
+    icon: Wrench,
+    title: "Build & Optimize",
+    duration: "Day 3–7",
+    description: "We build your AI-powered website, implement SEO foundations, and set up your chatbot and lead capture system.",
   },
   {
-    icon: TrendingUp,
-    title: "Optimize",
+    icon: Rocket,
+    title: "Automate & Scale",
     duration: "Ongoing",
-    description: "We review call transcripts, tweak scripts, and improve your booking rate every month.",
+    description: "Your system captures and nurtures leads 24/7. We optimize monthly for better rankings and more conversions.",
   },
 ];
 
@@ -37,7 +37,7 @@ export const SuiteProcessTimeline = () => {
             How It <span className="glow-text">Works</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Live in 7 days. Optimized forever.
+            From audit to autopilot in 7 days.
           </p>
         </motion.div>
 

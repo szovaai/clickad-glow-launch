@@ -5,6 +5,14 @@ import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
@@ -15,7 +23,8 @@ const leadSchema = z.object({
   business: z.string().trim().min(1, "Business name is required").max(100),
   phone: z.string().trim().min(1, "Phone is required").max(20),
   website: z.string().trim().max(500).optional().or(z.literal('')),
-  industry: z.string().trim().max(100).optional(),
+  revenue_range: z.string().optional(),
+  challenge: z.string().trim().max(500).optional(),
 });
 
 type LeadFormData = z.infer<typeof leadSchema>;
@@ -23,7 +32,7 @@ type LeadFormData = z.infer<typeof leadSchema>;
 export const HeroLeadForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   
-  const { register, handleSubmit, formState: { errors }, reset } = useForm<LeadFormData>({
+  const { register, handleSubmit, formState: { errors }, reset, setValue } = useForm<LeadFormData>({
     resolver: zodResolver(leadSchema),
   });
 
@@ -39,7 +48,7 @@ export const HeroLeadForm = () => {
 
       trackFormSubmission('hero_lead_form', {
         has_phone: !!data.phone,
-        industry: data.industry || 'not_specified',
+        revenue_range: data.revenue_range || 'not_specified',
       });
 
       toast.success("Thanks! We'll be in touch soon.");
@@ -55,9 +64,9 @@ export const HeroLeadForm = () => {
   return (
     <div className="bg-card/50 backdrop-blur-sm border border-border/50 rounded-lg p-6 shadow-xl">
       <div className="mb-4">
-        <h3 className="text-xl font-semibold mb-1">Get a 60-Second AI Sales System Plan</h3>
+        <h3 className="text-xl font-semibold mb-1">Get Your Free AI Website Audit</h3>
         <p className="text-sm text-muted-foreground">
-          See how AI can answer and book for your business
+          See exactly how an AI-powered website will grow your business
         </p>
       </div>
       
@@ -113,12 +122,28 @@ export const HeroLeadForm = () => {
         </div>
 
         <div>
-          <Label htmlFor="industry">Industry (optional)</Label>
-          <Input
-            id="industry"
-            {...register("industry")}
-            placeholder="e.g. HVAC, Roofing, Dental"
-            className="mt-1.5"
+          <Label>Monthly Revenue Range</Label>
+          <Select onValueChange={(value) => setValue("revenue_range", value)}>
+            <SelectTrigger className="mt-1.5">
+              <SelectValue placeholder="Select range" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="under-10k">Under $10k</SelectItem>
+              <SelectItem value="10k-50k">$10k – $50k</SelectItem>
+              <SelectItem value="50k-100k">$50k – $100k</SelectItem>
+              <SelectItem value="100k-plus">$100k+</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+
+        <div>
+          <Label htmlFor="challenge">Biggest Growth Challenge</Label>
+          <Textarea
+            id="challenge"
+            {...register("challenge")}
+            placeholder="What's holding your business back?"
+            className="mt-1.5 resize-none"
+            rows={3}
           />
         </div>
 
@@ -134,12 +159,12 @@ export const HeroLeadForm = () => {
               Sending...
             </>
           ) : (
-            'Get My Plan'
+            'Get My Free Audit'
           )}
         </Button>
         
         <p className="text-xs text-muted-foreground text-center">
-          No spam. We'll send your custom plan within 24 hours.
+          No spam. We'll review your site and send a custom growth plan within 24 hours.
         </p>
       </form>
     </div>

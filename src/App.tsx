@@ -22,6 +22,7 @@ import CalgaryIndustrialWebsites from "./pages/services/CalgaryIndustrialWebsite
 import CalgaryWebsiteDesign from "./pages/services/CalgaryWebsiteDesign";
 import LoomLibrary from "./pages/LoomLibrary";
 import UltimateSuite from "./pages/packages/UltimateSuite";
+import Services from "./pages/Services";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import PaymentSuccess from "./pages/PaymentSuccess";
@@ -71,6 +72,7 @@ const AppRoutes = () => {
       {/* Marketing site */}
       <Route path="/" element={<UltimateSuite />} />
       <Route path="/home" element={<Index />} />
+      <Route path="/services" element={<Services />} />
       <Route path="/about" element={<About />} />
       <Route path="/audit" element={<Audit />} />
       <Route path="/thank-you" element={<ThankYou />} />

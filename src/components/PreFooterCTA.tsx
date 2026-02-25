@@ -5,7 +5,7 @@ import { QuoteCta } from "@/components/PremiumHeader";
 
 export const PreFooterCTA = () => {
   const handleCallClick = () => {
-    window.open("tel:+14036999044", "_self");
+    window.open("tel:+18254518117", "_self");
     
     if (window.Trakrly) {
       window.Trakrly.click({
@@ -20,7 +20,6 @@ export const PreFooterCTA = () => {
       <div className="container px-6">
         <div className="max-w-5xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center bg-card border border-border rounded-2xl overflow-hidden shadow-premium">
-            {/* Image Side */}
             <div className="hidden md:block">
               <img
                 src={tradeProfessional}
@@ -29,15 +28,14 @@ export const PreFooterCTA = () => {
               />
             </div>
 
-            {/* Content Side */}
             <div className="p-8 md:p-12">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Not sure which system<br />
+                Not sure which plan<br />
                 is right for you?
               </h2>
               
               <p className="text-lg text-muted-foreground mb-8">
-                We'll walk you through a live demo tailored to your business—no sales pitch, no pressure. Just a clear plan.
+                We'll walk you through a live demo tailored to your business — no sales pitch, no pressure. Just a clear growth plan.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4">
@@ -54,13 +52,13 @@ export const PreFooterCTA = () => {
                 <QuoteCta>
                   <button className="flex-1 inline-flex items-center justify-center gap-2 rounded-lg border border-border bg-card/50 px-6 py-3 text-sm font-medium backdrop-blur transition hover:bg-card">
                     <MessageSquare className="w-5 h-5" />
-                    Book a Demo
+                    Book Strategy Call
                   </button>
                 </QuoteCta>
               </div>
 
               <p className="text-sm text-muted-foreground mt-6 text-center sm:text-left">
-                📞 <span className="font-semibold">(403) 699-9044</span> • Response within 2 hours
+                📞 <span className="font-semibold">(825) 451-8117</span> • Response within 2 hours
               </p>
             </div>
           </div>
