@@ -48,6 +48,7 @@ import Appointments from "./pages/app/Appointments";
 import LeadReactivation from "./pages/app/LeadReactivation";
 import PostJobFollowUp from "./pages/app/PostJobFollowUp";
 import ReviewSubmission from "./pages/ReviewSubmission";
+import AiAudit from "./pages/AiAudit";
 
 const queryClient = new QueryClient();
 
@@ -90,6 +91,7 @@ const AppRoutes = () => {
       <Route path="/blog" element={<Blog />} />
       <Route path="/blog/:slug" element={<BlogPost />} />
       <Route path="/review/:token" element={<ReviewSubmission />} />
+      <Route path="/ai-audit" element={<AiAudit />} />
 
       {/* SaaS App — Auth */}
       <Route path="/app/login" element={<Login />} />
