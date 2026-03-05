@@ -1,74 +1,107 @@
 
 
-## ClickAdMedia 2.0 — Full Website Refactor
+## AI Website Audit Scanner — Plan
 
-Repositioning from "AI Sales Infrastructure" to **"AI-Powered Website & Growth Systems Agency"** with updated pricing, messaging, services, and page structure.
-
----
-
-### Pricing (User-Approved)
-
-| Tier | Setup | Monthly |
-|------|-------|---------|
-| Starter AI Site | $997+ | $97/mo |
-| Growth Engine | $1,997+ | $97/mo |
-| Domination Package | $4,997+ | $97/mo |
+Build an automated website audit tool that scrapes a tradesman's website using Firecrawl, analyzes it with AI against trade-specific criteria, displays a visual scorecard, and generates a downloadable PDF report.
 
 ---
 
-### What Changes
+### Prerequisites
 
-**16 files modified, 2 new files created. No database changes.**
+**Firecrawl connector** needs to be linked to this project (available in workspace but not yet connected). This powers the website scraping.
 
-#### New Files
-1. **`src/components/sections/AIDifferentiator.tsx`** — Side-by-side comparison: Traditional Website vs AI-Powered Website. Practical messaging: more booked jobs, faster response, better conversion.
-2. **`src/pages/Services.tsx`** — Dedicated services page with 4 core offerings detailed out. Route: `/services`.
-
-#### Homepage (`UltimateSuite.tsx`) — New Section Order
-1. Navigation
-2. **Hero** (new headline + lead form)
-3. **Problem Agitation** (broader pain points)
-4. **AI Differentiator** (new)
-5. **Services Overview** (4 new services)
-6. **How It Works** (3 new steps)
-7. Testimonials (keep)
-8. **Pricing** (new tiers)
-9. **Guarantee** (updated)
-10. **FAQ** (rewritten)
-11. CTA
-12. Footer
-
-Removes: `ValueAddsGrid`, `PremiumSupportSection` (content folded into services/pricing)
-
-#### Component Updates
-
-| File | Changes |
-|------|---------|
-| `SuiteHero.tsx` | Headline: "Your Website Should Work Like a Sales Rep — Not a Brochure." Subhead about AI websites + chatbots + SEO. CTAs: "Book Strategy Call" + "Get Free AI Website Audit". Proof bullets: AI Chatbot Included, SEO Built-In, Books 24/7. |
-| `PainSection.tsx` | 4 new pain points: website doesn't generate leads, invisible on Google, leads leave without contacting, paying for ads but site doesn't convert. |
-| `CoreOfferSection.tsx` | 4 services: AI Website Build, SEO Growth Engine, AI Lead Automation, Paid Ads. Each with feature bullets. "Learn more" links to `/services`. |
-| `SuiteProcessTimeline.tsx` | 3 steps: Audit & Strategy, Build & Optimize, Automate & Scale. |
-| `SuitePricingCard.tsx` | 3 tiers with approved pricing ($997/$1,997/$4,997). Features updated per blueprint. Stripe price IDs kept but amounts updated in display. |
-| `Pricing.tsx` | Aligned to same 3 tiers for `/pricing` page. |
-| `SuiteFAQ.tsx` | Rewritten: "What's included in an AI website?", "How does SEO work?", "How long to see results?", "Outside Calgary?", "Already have a website?", "Contract?", "What industries?" |
-| `HeroLeadForm.tsx` | New fields: Monthly revenue range (dropdown), Biggest growth challenge (textarea). CTA: "Get Your Free AI Website Audit". Remove email, keep name/business/phone/website. |
-| `Navigation.tsx` | Nav links: Services (`/services`), How It Works, Pricing, Results, FAQ. Company dropdown unchanged. CTA: "Book Strategy Call". |
-| `Footer.tsx` | Tagline: "AI-powered websites and growth systems for service businesses." CTA: "Get Free AI Website Audit". Year: 2025. |
-| `CTA.tsx` | Headline: "Ready to Turn Your Website Into a Growth Engine?" CTAs: "Book Strategy Call" + "Get Free AI Audit". Badges: "Live in 7 Days", "Cancel Anytime", "Results Guaranteed". |
-| `PreFooterCTA.tsx` | Updated headline and copy to match new positioning. Phone number updated to (825) 451-8117. |
-| `GuaranteeSection.tsx` | Updated to 60-day performance guarantee aligned with website + SEO results. |
-| `App.tsx` | Add `/services` route pointing to new Services page. |
-| `Pricing.tsx` (page) | SEO meta updated for new positioning and price range. |
-| `UltimateSuite.tsx` | SEO meta updated. Remove `ValueAddsGrid` and `PremiumSupportSection` imports. Add `AIDifferentiator`. Reorder sections. |
+**New dependency**: `jspdf` + `html2canvas` for client-side PDF generation.
 
 ---
 
-### Technical Details
+### Architecture
 
-- All changes are frontend-only (copy, layout, component structure)
-- No database migrations needed
-- No edge function changes
-- Stripe checkout price IDs in `SuitePricingCard.tsx` remain unchanged (display prices updated, actual Stripe prices may need updating in Stripe dashboard separately)
-- Lead form schema in `HeroLeadForm.tsx` uses inline zod validation (no changes to `validation.ts` needed since it uses its own schema)
-- New `/services` route added to `App.tsx` router
+```text
+User enters URL + business info
+        ↓
+Frontend calls edge function "run-ai-audit"
+        ↓
+Edge function:
+  1. Firecrawl scrapes the URL (markdown + screenshot + links)
+  2. Sends scraped content to Gemini 2.5 Flash (via Lovable AI)
+     with a structured prompt scoring 8 audit criteria
+  3. Returns JSON scores + recommendations
+        ↓
+Frontend renders visual scorecard
+        ↓
+User clicks "Download PDF" → html2canvas + jsPDF generates report
+```
+
+---
+
+### What Gets Audited (8 Criteria, scored 0-10)
+
+1. **Website Exists & Quality** — Has a website at all, looks professional
+2. **Mobile-Friendly** — Responsive design, mobile viewport
+3. **Google Maps / Local SEO** — NAP consistency, GMB signals in markup
+4. **Customer Reviews** — Testimonials on site, links to Google/Yelp
+5. **Chatbot / Instant Contact** — Live chat, click-to-call, contact forms above fold
+6. **Site Speed** — Page load indicators from HTML size/complexity
+7. **After-Hours Booking** — Online booking system, scheduling links
+8. **Call-to-Action Clarity** — Clear CTAs, phone number visibility, conversion path
+
+Each criterion gets a score (0-10), a status (pass/warning/fail), and a specific recommendation.
+
+---
+
+### Files to Create
+
+1. **`supabase/functions/run-ai-audit/index.ts`** — Edge function that:
+   - Accepts URL + industry + business name
+   - Calls Firecrawl scrape API (markdown + links formats)
+   - Sends scraped content to Gemini 2.5 Flash with structured scoring prompt
+   - Returns JSON with scores, overall grade, and recommendations
+
+2. **`src/pages/AiAudit.tsx`** — New page at `/ai-audit` with:
+   - Input form (business name, website URL, industry dropdown)
+   - Loading state with progress animation
+   - Visual scorecard showing all 8 criteria with color-coded scores
+   - Overall grade (A-F) with radial chart
+   - "Download PDF Report" button
+   - "Send to Business" option that pre-fills email
+
+3. **`src/components/audit/AuditScoreCard.tsx`** — Visual scorecard component with:
+   - Radial/circular overall score
+   - 8 individual metric bars with pass/warning/fail colors
+   - Specific recommendations per criterion
+   - ClickAdMedia branding for the report
+
+4. **`src/components/audit/AuditPdfReport.tsx`** — PDF-optimized layout component that html2canvas renders, branded with ClickAdMedia logo, date, business name
+
+### Files to Modify
+
+5. **`src/App.tsx`** — Add `/ai-audit` route
+6. **`src/components/Navigation.tsx`** — Add "AI Audit" link (or keep it unlisted, accessible via direct URL)
+7. **`supabase/config.toml`** — Register the new edge function
+
+### Database
+
+**No new tables needed.** The existing `audits` table can store results by adding an `ai_results` JSONB column via migration to persist the scan output.
+
+---
+
+### PDF Report Design
+
+The PDF will be a branded one-pager with:
+- ClickAdMedia logo + "AI Website Audit Report" header
+- Business name, URL, date, industry
+- Overall grade in a large circle (A/B/C/D/F with color)
+- 8 horizontal score bars with labels and recommendations
+- Footer with CTA: "Want us to fix these? Book a strategy call at clickadmedia.com"
+
+Generated client-side using `html2canvas` to capture the scorecard component, then embedded into a `jsPDF` document.
+
+---
+
+### Technical Notes
+
+- Uses Gemini 2.5 Flash via Lovable AI (no API key needed) for the analysis
+- Firecrawl handles the scraping (connector already in workspace, needs linking)
+- PDF generation is entirely client-side — no server-side PDF rendering needed
+- The edge function returns structured JSON so the frontend can render both the interactive view and the PDF layout
 
