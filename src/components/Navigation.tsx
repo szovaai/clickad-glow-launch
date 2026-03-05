@@ -23,6 +23,7 @@ export const Navigation = () => {
   ];
 
   const companyLinks = [
+    { href: "/ai-audit", label: "AI Website Audit" },
     { href: "/home", label: "Our Work" },
     { href: "/about", label: "About Us" },
     { href: "/loom-library", label: "Free Audits" },
