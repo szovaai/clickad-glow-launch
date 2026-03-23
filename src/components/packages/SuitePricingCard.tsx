@@ -160,10 +160,10 @@ export const SuitePricingCard = () => {
           className="mt-16 max-w-2xl mx-auto text-center p-8 rounded-xl border border-primary/20 bg-card/30"
         >
           <h3 className="text-xl font-bold mb-2 flex items-center justify-center gap-2">
-            <Shield className="w-5 h-5 text-primary" /> Satisfaction Guarantee
+            <Shield className="w-5 h-5 text-primary" /> 60-Day Risk-Free Guarantee
           </h3>
           <p className="text-muted-foreground">
-            If you're not happy with your website, we'll revise it until you are — or refund your payment. No risk.
+            If your new AI website doesn't generate more leads within 60 days, I'll optimize it for free until it does — or refund your full investment. No hoops. You get results or you get your money back.
           </p>
         </motion.div>
       </div>
