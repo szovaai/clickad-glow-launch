@@ -37,7 +37,7 @@ export const CTA = () => {
           </div>
           
           <div className="pt-8 flex flex-wrap justify-center gap-6 text-sm">
-            {["Live in 7 Days", "Cancel Anytime", "Results Guaranteed"].map((text) => (
+            {["Live in 48 Hours", "No Monthly Fees", "Satisfaction Guaranteed"].map((text) => (
               <div key={text} className="flex items-center gap-2 text-muted-foreground">
                 <div className="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center">
                   <div className="w-2 h-2 bg-primary rounded-full" />
