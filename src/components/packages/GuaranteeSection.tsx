@@ -25,26 +25,28 @@ export const GuaranteeSection = () => {
             </motion.div>
 
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              60-Day <span className="glow-text">Performance Guarantee</span>
+              60-Day <span className="glow-text">Risk-Free Guarantee</span>
             </h2>
 
             <p className="text-xl text-muted-foreground mb-6 max-w-2xl mx-auto leading-relaxed">
               If your new AI website doesn't generate more leads within 60 days of going live, 
-              we'll keep optimizing for free until it does. No excuses.
+              I'll not only optimize it for free until it does — I'll refund your full investment. 
+              No awkward conversations. No hoops. You get results or you get your money back. 
+              The only way you lose is by doing nothing.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-6 justify-center text-sm pt-6 border-t border-border/50">
-              <div className="flex items-center gap-2 justify-center">
-                <span className="text-primary">✓</span>
-                <span className="text-muted-foreground">You approve before launch</span>
-              </div>
               <div className="flex items-center gap-2 justify-center">
                 <span className="text-primary">✓</span>
                 <span className="text-muted-foreground">60-day results window</span>
               </div>
               <div className="flex items-center gap-2 justify-center">
                 <span className="text-primary">✓</span>
-                <span className="text-muted-foreground">Free optimization if needed</span>
+                <span className="text-muted-foreground">Free optimization until it works</span>
+              </div>
+              <div className="flex items-center gap-2 justify-center">
+                <span className="text-primary">✓</span>
+                <span className="text-muted-foreground">Full refund if no results</span>
               </div>
             </div>
           </Card>
