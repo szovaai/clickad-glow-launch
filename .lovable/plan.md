@@ -1,107 +1,38 @@
 
 
-## AI Website Audit Scanner — Plan
+## Update to Single $997 Offer — "AI Website in 48 Hours"
 
-Build an automated website audit tool that scrapes a tradesman's website using Firecrawl, analyzes it with AI against trade-specific criteria, displays a visual scorecard, and generates a downloadable PDF report.
-
----
-
-### Prerequisites
-
-**Firecrawl connector** needs to be linked to this project (available in workspace but not yet connected). This powers the website scraping.
-
-**New dependency**: `jspdf` + `html2canvas` for client-side PDF generation.
+Replace the 3-tier pricing with one focused offer across all pricing surfaces. Keep everything else (audit form, testimonials, pain section, etc.) unchanged.
 
 ---
 
-### Architecture
+### Files to Modify (4 files)
 
-```text
-User enters URL + business info
-        ↓
-Frontend calls edge function "run-ai-audit"
-        ↓
-Edge function:
-  1. Firecrawl scrapes the URL (markdown + screenshot + links)
-  2. Sends scraped content to Gemini 2.5 Flash (via Lovable AI)
-     with a structured prompt scoring 8 audit criteria
-  3. Returns JSON scores + recommendations
-        ↓
-Frontend renders visual scorecard
-        ↓
-User clicks "Download PDF" → html2canvas + jsPDF generates report
-```
+#### 1. `src/components/packages/SuitePricingCard.tsx` (Homepage pricing)
+- Replace 3-tier grid with single centered card
+- Headline: "AI Website in 48 Hours"
+- Price: $997 (one-time, no monthly)
+- Feature list: custom AI website (up to 5 pages), mobile-responsive, basic SEO, contact form + click-to-call, 1 round of revisions, you own everything
+- "What Makes This Different" section: 48-hour delivery, agency quality at fraction of cost, built to convert
+- Optional Add-Ons section below: AI Chatbot ($297), SEO Growth Package ($497/mo), Full Automation Stack ($197/mo)
+- Single CTA: "Get Your New Site in 48 Hours"
+- Keep Stripe checkout flow (use starter price ID)
 
----
+#### 2. `src/components/Pricing.tsx` (`/pricing` page component)
+- Same transformation: single offer instead of 3 tiers
+- Match the homepage pricing card content exactly
+- Keep the guarantee section, update copy to match 48-hour positioning
 
-### What Gets Audited (8 Criteria, scored 0-10)
+#### 3. `src/pages/Pricing.tsx` (SEO meta)
+- Update title/description to reference "$997 AI Website in 48 Hours" instead of 3-tier range
 
-1. **Website Exists & Quality** — Has a website at all, looks professional
-2. **Mobile-Friendly** — Responsive design, mobile viewport
-3. **Google Maps / Local SEO** — NAP consistency, GMB signals in markup
-4. **Customer Reviews** — Testimonials on site, links to Google/Yelp
-5. **Chatbot / Instant Contact** — Live chat, click-to-call, contact forms above fold
-6. **Site Speed** — Page load indicators from HTML size/complexity
-7. **After-Hours Booking** — Online booking system, scheduling links
-8. **Call-to-Action Clarity** — Clear CTAs, phone number visibility, conversion path
-
-Each criterion gets a score (0-10), a status (pass/warning/fail), and a specific recommendation.
+#### 4. `src/components/CTA.tsx`
+- Update CTA badge from "Live in 7 Days" to "Live in 48 Hours"
+- Keep everything else the same
 
 ---
 
-### Files to Create
-
-1. **`supabase/functions/run-ai-audit/index.ts`** — Edge function that:
-   - Accepts URL + industry + business name
-   - Calls Firecrawl scrape API (markdown + links formats)
-   - Sends scraped content to Gemini 2.5 Flash with structured scoring prompt
-   - Returns JSON with scores, overall grade, and recommendations
-
-2. **`src/pages/AiAudit.tsx`** — New page at `/ai-audit` with:
-   - Input form (business name, website URL, industry dropdown)
-   - Loading state with progress animation
-   - Visual scorecard showing all 8 criteria with color-coded scores
-   - Overall grade (A-F) with radial chart
-   - "Download PDF Report" button
-   - "Send to Business" option that pre-fills email
-
-3. **`src/components/audit/AuditScoreCard.tsx`** — Visual scorecard component with:
-   - Radial/circular overall score
-   - 8 individual metric bars with pass/warning/fail colors
-   - Specific recommendations per criterion
-   - ClickAdMedia branding for the report
-
-4. **`src/components/audit/AuditPdfReport.tsx`** — PDF-optimized layout component that html2canvas renders, branded with ClickAdMedia logo, date, business name
-
-### Files to Modify
-
-5. **`src/App.tsx`** — Add `/ai-audit` route
-6. **`src/components/Navigation.tsx`** — Add "AI Audit" link (or keep it unlisted, accessible via direct URL)
-7. **`supabase/config.toml`** — Register the new edge function
-
-### Database
-
-**No new tables needed.** The existing `audits` table can store results by adding an `ai_results` JSONB column via migration to persist the scan output.
-
----
-
-### PDF Report Design
-
-The PDF will be a branded one-pager with:
-- ClickAdMedia logo + "AI Website Audit Report" header
-- Business name, URL, date, industry
-- Overall grade in a large circle (A/B/C/D/F with color)
-- 8 horizontal score bars with labels and recommendations
-- Footer with CTA: "Want us to fix these? Book a strategy call at clickadmedia.com"
-
-Generated client-side using `html2canvas` to capture the scorecard component, then embedded into a `jsPDF` document.
-
----
-
-### Technical Notes
-
-- Uses Gemini 2.5 Flash via Lovable AI (no API key needed) for the analysis
-- Firecrawl handles the scraping (connector already in workspace, needs linking)
-- PDF generation is entirely client-side — no server-side PDF rendering needed
-- The edge function returns structured JSON so the frontend can render both the interactive view and the PDF layout
+### What Stays the Same
+- Audit form, testimonials, pain section, AI differentiator, FAQ, navigation, footer
+- All other pages and components unchanged
 
