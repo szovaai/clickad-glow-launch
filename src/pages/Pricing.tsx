@@ -7,9 +7,9 @@ import { generateOfferSchema } from "@/lib/schema";
 const Pricing = () => {
   const schemas = [
     generateOfferSchema(
-      "AI Website & Growth System Pricing",
-      "Transparent pricing for AI-powered websites and growth systems. Starter from $997, Growth Engine from $1,997, Domination from $4,997.",
-      "997-4997",
+      "AI Website in 48 Hours — $997",
+      "Get a custom AI-designed website delivered in 48 hours for $997. Mobile-responsive, SEO-ready, built to convert. No monthly fees.",
+      "997",
       "CAD"
     )
   ];
@@ -17,10 +17,10 @@ const Pricing = () => {
   return (
     <div className="min-h-screen">
       <SEOHead
-        title="AI Website & Growth System Pricing | ClickAd Media"
-        description="Transparent pricing for AI-powered websites and growth systems. Starter AI Site from $997, Growth Engine from $1,997, Domination Package from $4,997. No hidden fees."
+        title="AI Website in 48 Hours — $997 | ClickAd Media"
+        description="Get a custom AI-designed website delivered in 48 hours for $997. Mobile-responsive, SEO-ready, built to convert visitors into leads. No monthly fees, no lock-in."
         canonical="https://www.clickadmedia.com/pricing"
-        keywords="AI website pricing, growth system cost, web design packages, Calgary website pricing"
+        keywords="AI website 48 hours, $997 website, fast web design, Calgary website pricing"
         schemas={schemas}
       />
       <PremiumHeader />
