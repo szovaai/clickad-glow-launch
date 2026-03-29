@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Menu, ChevronDown, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -11,9 +11,17 @@ import {
 } from "@/components/ui/dropdown-menu";
 import logo from "@/assets/logo-clickad.png";
 import { scrollToSection } from "@/lib/navigation";
+import { cn } from "@/lib/utils";
 
 export const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 32);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const navLinks = [
     { href: "/services", label: "Services", isRoute: true },
@@ -33,20 +41,27 @@ export const Navigation = () => {
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
       <div className="mx-auto max-w-7xl px-4 py-3">
-        <div className="flex items-center justify-between rounded-2xl border border-border bg-background/40 px-4 py-2 backdrop-blur-xl shadow-lg">
+        <div
+          className={cn(
+            "flex items-center justify-between rounded-2xl px-5 py-2.5 transition-all duration-300",
+            scrolled
+              ? "border border-[hsl(0_0%_100%/0.08)] bg-[hsl(228_27%_5%/0.85)] backdrop-blur-xl shadow-lg"
+              : "border border-transparent bg-transparent"
+          )}
+        >
           <div className="flex items-center gap-3">
             <Link to="/">
-              <img src={logo} alt="ClickAd Media" className="h-12 w-auto" />
+              <img src={logo} alt="ClickAd Media" className="h-10 w-auto" />
             </Link>
           </div>
 
-          <div className="hidden items-center gap-6 md:flex">
+          <div className="hidden items-center gap-7 md:flex">
             {navLinks.map((link) =>
               link.isRoute ? (
                 <Link
                   key={link.href}
                   to={link.href}
-                  className="text-sm font-medium transition-colors hover:text-primary"
+                  className="text-sm font-medium text-foreground/70 transition-colors hover:text-foreground"
                 >
                   {link.label}
                 </Link>
@@ -56,22 +71,21 @@ export const Navigation = () => {
                   href={link.href}
                   onClick={(e) => {
                     e.preventDefault();
-                    const hash = link.href.replace('#', '');
-                    scrollToSection(hash);
+                    scrollToSection(link.href.replace('#', ''));
                   }}
-                  className="text-sm font-medium transition-colors hover:text-primary cursor-pointer"
+                  className="text-sm font-medium text-foreground/70 transition-colors hover:text-foreground cursor-pointer"
                 >
                   {link.label}
                 </a>
               )
             )}
-            
+
             <DropdownMenu>
-              <DropdownMenuTrigger className="flex items-center gap-1 text-sm font-medium transition-colors hover:text-primary outline-none">
+              <DropdownMenuTrigger className="flex items-center gap-1 text-sm font-medium text-foreground/70 transition-colors hover:text-foreground outline-none">
                 Company
-                <ChevronDown className="h-4 w-4" />
+                <ChevronDown className="h-3.5 w-3.5" />
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="bg-background border-border z-50">
+              <DropdownMenuContent className="bg-popover border-[hsl(0_0%_100%/0.08)] z-50">
                 {companyLinks.map((link) => (
                   <DropdownMenuItem key={link.href} asChild>
                     <Link to={link.href} className="cursor-pointer">
@@ -86,22 +100,22 @@ export const Navigation = () => {
           <div className="flex items-center gap-4">
             <a
               href="tel:+18254518117"
-              className="hidden md:flex items-center gap-1.5 text-sm font-medium text-primary hover:text-primary/80 transition-colors"
+              className="hidden md:flex items-center gap-1.5 text-sm font-medium text-foreground/60 hover:text-foreground transition-colors"
             >
-              <Phone className="w-4 h-4" />
+              <Phone className="w-3.5 h-3.5" />
               (825) 451-8117
             </a>
-            <Button variant="glow" size="sm" asChild className="hidden md:flex">
+            <Button variant="default" size="sm" asChild className="hidden md:flex">
               <Link to="/audit">Book Strategy Call</Link>
             </Button>
 
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
               <SheetTrigger asChild className="md:hidden">
                 <Button variant="ghost" size="icon">
-                  <Menu className="h-6 w-6" />
+                  <Menu className="h-5 w-5" />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right">
+              <SheetContent side="right" className="bg-popover border-[hsl(0_0%_100%/0.06)]">
                 <nav className="flex flex-col gap-4 mt-8">
                   {navLinks.map((link) =>
                     link.isRoute ? (
@@ -109,7 +123,7 @@ export const Navigation = () => {
                         key={link.href}
                         to={link.href}
                         onClick={() => setIsOpen(false)}
-                        className="text-lg font-medium hover:text-primary transition-colors"
+                        className="text-lg font-medium text-foreground/80 hover:text-foreground transition-colors"
                       >
                         {link.label}
                       </Link>
@@ -119,11 +133,10 @@ export const Navigation = () => {
                         href={link.href}
                         onClick={(e) => {
                           e.preventDefault();
-                          const hash = link.href.replace('#', '');
-                          scrollToSection(hash);
+                          scrollToSection(link.href.replace('#', ''));
                           setIsOpen(false);
                         }}
-                        className="text-lg font-medium hover:text-primary transition-colors cursor-pointer"
+                        className="text-lg font-medium text-foreground/80 hover:text-foreground transition-colors cursor-pointer"
                       >
                         {link.label}
                       </a>
@@ -134,12 +147,12 @@ export const Navigation = () => {
                       key={link.href}
                       to={link.href}
                       onClick={() => setIsOpen(false)}
-                      className="text-lg font-medium text-muted-foreground hover:text-primary transition-colors"
+                      className="text-lg font-medium text-muted-foreground hover:text-foreground transition-colors"
                     >
                       {link.label}
                     </Link>
                   ))}
-                  <Button variant="glow" asChild className="w-full mt-4">
+                  <Button variant="default" asChild className="w-full mt-4">
                     <Link to="/audit" onClick={() => setIsOpen(false)}>
                       Book Strategy Call
                     </Link>

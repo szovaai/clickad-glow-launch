@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import {
   Accordion,
   AccordionContent,
@@ -39,47 +38,35 @@ export const suiteFAQs = [
 
 export const SuiteFAQ = () => {
   return (
-    <section id="faq" className="py-20 md:py-32 bg-gradient-to-b from-background/50 to-background">
+    <section id="faq" className="section-padding">
       <div className="container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Frequently Asked <span className="glow-text">Questions</span>
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Everything you need to know about our AI website and growth systems
+        <div className="text-center mb-20">
+          <p className="text-sm font-medium tracking-wide uppercase text-muted-foreground mb-4">
+            Common questions
           </p>
-        </motion.div>
+          <h2 className="text-3xl md:text-5xl font-heading font-bold mb-4">
+            Frequently Asked <span className="text-gradient-warm">Questions</span>
+          </h2>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="max-w-3xl mx-auto"
-        >
-          <Accordion type="single" collapsible className="space-y-4">
+        <div className="max-w-3xl mx-auto">
+          <Accordion type="single" collapsible className="space-y-3">
             {suiteFAQs.map((faq, index) => (
               <AccordionItem
                 key={index}
                 value={`item-${index}`}
-                className="glass border border-primary/20 rounded-lg px-6"
+                className="rounded-xl border border-[hsl(0_0%_100%/0.06)] bg-secondary/30 px-6 py-1 data-[state=open]:bg-card transition-colors duration-200"
               >
-                <AccordionTrigger className="text-left hover:text-primary transition-colors">
+                <AccordionTrigger className="text-left text-sm font-heading font-semibold hover:text-foreground transition-colors py-5 [&[data-state=open]]:text-primary">
                   {faq.question}
                 </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground leading-relaxed">
+                <AccordionContent className="text-sm text-muted-foreground leading-relaxed pb-5">
                   {faq.answer}
                 </AccordionContent>
               </AccordionItem>
             ))}
           </Accordion>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
