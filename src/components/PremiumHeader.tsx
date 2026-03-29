@@ -1,10 +1,9 @@
 import React from "react";
-import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { ArrowRight, Phone, Bot, MessageSquare, CalendarCheck, Zap } from "lucide-react";
+import { ArrowRight, Phone, Bot, MessageSquare, CalendarCheck } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -47,105 +46,69 @@ export default function PremiumHeader() {
     <div className="relative overflow-hidden">
       {/* Backdrop */}
       <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(59,130,246,0.15),transparent_55%),radial-gradient(ellipse_at_bottom,rgba(99,102,241,0.12),transparent_55%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(224_100%_65%/0.08),transparent_55%)]" />
         <GridGlow />
-        <Noise />
       </div>
 
       <Navigation />
 
       <section className="relative mx-auto max-w-6xl px-4 pt-8 md:pt-8 pb-16">
-        <div className="grid items-center gap-10 md:grid-cols-[1.1fr_0.9fr]">
+        <div className="grid items-center gap-12 md:grid-cols-[1.1fr_0.9fr]">
           <div>
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/80 backdrop-blur"
-            >
-              <Sparkles className="h-3.5 w-3.5" />
+            <div className="inline-flex items-center gap-2 rounded-full border border-[hsl(0_0%_100%/0.06)] bg-secondary/50 px-3 py-1 text-xs text-muted-foreground">
+              <Sparkles className="h-3.5 w-3.5 text-primary" />
               AI Sales Infrastructure for Service Businesses
-            </motion.div>
+            </div>
 
-            <motion.h1
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.05, duration: 0.6 }}
-              className="mt-4 text-3xl font-bold leading-[1.05] tracking-[-0.02em] text-foreground sm:text-5xl md:text-6xl"
-            >
+            <h1 className="mt-5 text-3xl font-heading font-bold leading-[0.96] tracking-[-0.03em] text-foreground sm:text-5xl md:text-6xl">
               Turn Missed Calls Into{" "}
-              <span className="text-primary glow-text">Booked Jobs</span>
-              —Automatically
-            </motion.h1>
+              <span className="glow-text">Booked Jobs</span>
+              <span className="text-muted-foreground"> — Automatically</span>
+            </h1>
 
-            <motion.p
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1, duration: 0.6 }}
-              className="mt-5 max-w-xl text-balance text-lg text-foreground/70"
-            >
-              We install an AI Sales System that answers calls, qualifies leads, and books appointments 24/7—so you never lose another customer to a missed call.
-            </motion.p>
+            <p className="mt-5 max-w-xl text-balance text-lg text-muted-foreground leading-relaxed">
+              We install an AI Sales System that answers calls, qualifies leads, and books appointments 24/7 — so you never lose another customer to a missed call.
+            </p>
 
-            {/* Stat Badges */}
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.12, duration: 0.6 }}
-              className="mt-6 flex flex-wrap gap-3"
-            >
+            {/* Proof chips */}
+            <div className="mt-6 flex flex-wrap gap-3">
               {[
                 { icon: Phone, label: "AI answers in <2 rings" },
                 { icon: MessageSquare, label: "Texts back missed calls" },
                 { icon: CalendarCheck, label: "Books 24/7 on autopilot" },
               ].map((stat, i) => (
-                <div key={i} className="inline-flex items-center gap-2 rounded-lg border border-border bg-card/50 px-3 py-2 text-sm backdrop-blur">
-                  <stat.icon className="h-4 w-4 text-primary" />
-                  <span className="text-foreground/80">{stat.label}</span>
+                <div key={i} className="inline-flex items-center gap-2 rounded-full border border-[hsl(0_0%_100%/0.06)] bg-secondary/50 px-3 py-1.5 text-sm text-muted-foreground">
+                  <stat.icon className="h-3.5 w-3.5 text-primary" />
+                  <span>{stat.label}</span>
                 </div>
               ))}
-            </motion.div>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.15, duration: 0.6 }}
-              className="mt-8 flex flex-wrap items-center gap-3"
-            >
+            <div className="mt-8 flex flex-wrap items-center gap-3">
               <QuoteCta asChild>
-                <Button variant="glow" size="lg" className="h-12 gap-2 rounded-xl px-6 text-base">
+                <Button size="lg" className="gap-2">
                   Book a 10-Min Demo <ArrowRight className="h-4 w-4" />
                 </Button>
               </QuoteCta>
               <button
                 onClick={() => document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' })}
-                className="inline-flex h-12 items-center rounded-xl border border-border bg-card/50 px-5 text-sm text-foreground backdrop-blur transition hover:bg-card cursor-pointer"
+                className="inline-flex h-12 items-center rounded-xl border border-[hsl(0_0%_100%/0.08)] bg-secondary/50 px-5 text-sm text-foreground/70 transition hover:text-foreground hover:bg-secondary cursor-pointer"
               >
                 See how it works
               </button>
-            </motion.div>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.3, duration: 0.6 }}
-              className="mt-6 flex items-center gap-1 text-foreground/60"
-            >
+            <div className="mt-6 flex items-center gap-1 text-muted-foreground">
               {[...Array(5)].map((_, i) => (
                 <Star key={i} className="h-4 w-4 fill-primary text-primary" />
               ))}
-              <span className="ml-1 text-xs">Trusted by Calgary trades & service businesses</span>
-            </motion.div>
+              <span className="ml-1.5 text-xs">Trusted by Calgary trades & service businesses</span>
+            </div>
           </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.6 }}
-            className="relative"
-          >
+          <div className="relative">
             <HeroLeadForm />
-          </motion.div>
+          </div>
         </div>
       </section>
     </div>
@@ -157,9 +120,9 @@ export function QuoteCta({ children, asChild = false }: { children: React.ReactN
   return (
     <Sheet>
       <SheetTrigger asChild={asChild}>{children}</SheetTrigger>
-      <SheetContent side="right" className="w-full overflow-y-auto border-l border-border bg-background sm:max-w-md">
+      <SheetContent side="right" className="w-full overflow-y-auto border-l border-[hsl(0_0%_100%/0.06)] bg-popover sm:max-w-md">
         <SheetHeader className="text-left">
-          <SheetTitle>Book Your AI Sales Demo</SheetTitle>
+          <SheetTitle className="font-heading">Book Your AI Sales Demo</SheetTitle>
           <SheetDescription>
             Tell us about your business. We'll show you exactly how AI can answer and book for you.
           </SheetDescription>
@@ -277,30 +240,30 @@ function QuoteForm() {
     <form onSubmit={onSubmit} className="mt-6 space-y-4">
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
-          <Label htmlFor="name">Full name</Label>
-          <Input id="name" name="name" required placeholder="Jane Smith" className="mt-1" />
+          <Label htmlFor="name" className="text-sm text-muted-foreground">Full name</Label>
+          <Input id="name" name="name" required placeholder="Jane Smith" className="mt-1 bg-secondary/50 border-[hsl(0_0%_100%/0.06)]" />
         </div>
         <div>
-          <Label htmlFor="company">Company</Label>
-          <Input id="company" name="company" placeholder="Acme Electrical" className="mt-1" />
+          <Label htmlFor="company" className="text-sm text-muted-foreground">Company</Label>
+          <Input id="company" name="company" placeholder="Acme Electrical" className="mt-1 bg-secondary/50 border-[hsl(0_0%_100%/0.06)]" />
         </div>
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
-          <Label htmlFor="email">Email</Label>
-          <Input id="email" type="email" name="email" required placeholder="you@company.com" className="mt-1" />
+          <Label htmlFor="email" className="text-sm text-muted-foreground">Email</Label>
+          <Input id="email" type="email" name="email" required placeholder="you@company.com" className="mt-1 bg-secondary/50 border-[hsl(0_0%_100%/0.06)]" />
         </div>
         <div>
-          <Label htmlFor="phone">Phone</Label>
-          <Input id="phone" name="phone" placeholder="(555) 555‑5555" className="mt-1" />
+          <Label htmlFor="phone" className="text-sm text-muted-foreground">Phone</Label>
+          <Input id="phone" name="phone" placeholder="(555) 555‑5555" className="mt-1 bg-secondary/50 border-[hsl(0_0%_100%/0.06)]" />
         </div>
       </div>
 
       <div>
-        <Label>How many calls/leads per month?</Label>
+        <Label className="text-sm text-muted-foreground">How many calls/leads per month?</Label>
         <Select name="monthly_calls" defaultValue="20-50">
-          <SelectTrigger className="mt-1">
+          <SelectTrigger className="mt-1 bg-secondary/50 border-[hsl(0_0%_100%/0.06)]">
             <SelectValue placeholder="Select range" />
           </SelectTrigger>
           <SelectContent>
@@ -313,12 +276,12 @@ function QuoteForm() {
       </div>
 
       <div>
-        <Label>What do you need?</Label>
+        <Label className="text-sm text-muted-foreground">What do you need?</Label>
         <div className="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-2">
           {services.map((s) => (
             <label key={s} className={cn(
-              "group flex items-center gap-2 rounded-xl border border-border bg-card p-3 text-sm cursor-pointer transition-all",
-              selected.includes(s) && "border-primary/40 bg-primary/10 ring-1 ring-primary/20"
+              "group flex items-center gap-2 rounded-xl border border-[hsl(0_0%_100%/0.06)] bg-secondary/50 p-3 text-sm cursor-pointer transition-all",
+              selected.includes(s) && "border-primary/30 bg-[hsl(var(--cobalt-soft))]"
             )}>
               <Checkbox
                 checked={selected.includes(s)}
@@ -331,13 +294,13 @@ function QuoteForm() {
       </div>
 
       <div>
-        <Label htmlFor="message">Anything else?</Label>
-        <Textarea id="message" name="message" placeholder="Tell us about your biggest challenge with leads..." className="mt-1 h-28" />
+        <Label htmlFor="message" className="text-sm text-muted-foreground">Anything else?</Label>
+        <Textarea id="message" name="message" placeholder="Tell us about your biggest challenge with leads..." className="mt-1 h-28 bg-secondary/50 border-[hsl(0_0%_100%/0.06)]" />
       </div>
 
       <div className="flex items-center justify-between pt-2">
         <p className="text-xs text-muted-foreground">No spam. No pressure. Real answers.</p>
-        <Button type="submit" variant="glow" className="rounded-xl" disabled={isSubmitting}>
+        <Button type="submit" className="rounded-xl" disabled={isSubmitting}>
           {isSubmitting ? "Sending..." : "Get My AI Plan"}
         </Button>
       </div>
@@ -480,24 +443,18 @@ function HeroLeadForm() {
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.5, delay: 0.7 }}
-      className="glass rounded-2xl p-8 border border-primary/20 shadow-premium"
-    >
+    <div className="premium-card p-8">
       <div className="mb-6">
-        <h3 className="text-2xl font-bold text-foreground mb-3 glow-text">
+        <h3 className="text-xl font-heading font-bold mb-2">
           Get Your Custom AI Sales Plan
         </h3>
         <p className="text-sm text-muted-foreground mb-4">
-          See exactly how AI can answer, qualify, and book for your business—free consultation included.
+          See exactly how AI can answer, qualify, and book for your business — free consultation included.
         </p>
-        
-        {/* Social Proof */}
-        <div className="flex items-center gap-3 p-3 rounded-lg bg-primary/5 border border-primary/10">
-          <Bot className="h-5 w-5 text-primary flex-shrink-0" />
-          <p className="text-xs text-foreground/70">
+
+        <div className="flex items-center gap-3 p-3 rounded-xl bg-[hsl(var(--cobalt-soft))] border border-primary/10">
+          <Bot className="h-4 w-4 text-primary flex-shrink-0" />
+          <p className="text-xs text-muted-foreground">
             <span className="font-semibold text-primary">AI never sleeps.</span> Your system answers calls, texts, and chats 24/7/365.
           </p>
         </div>
@@ -505,40 +462,40 @@ function HeroLeadForm() {
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4" onFocus={handleFormStart}>
         <div>
-          <Label htmlFor="hero-name" className="text-sm font-medium">Your Name *</Label>
+          <Label htmlFor="hero-name" className="text-sm text-muted-foreground">Your Name *</Label>
           <Input
             id="hero-name"
             {...register("name")}
             placeholder="Jane Smith"
-            className="mt-1.5"
+            className="mt-1.5 bg-secondary/50 border-[hsl(0_0%_100%/0.06)]"
           />
           {errors.name && <p className="text-xs text-destructive mt-1">{errors.name.message}</p>}
         </div>
 
         <div>
-          <Label htmlFor="hero-email" className="text-sm font-medium">Email *</Label>
+          <Label htmlFor="hero-email" className="text-sm text-muted-foreground">Email *</Label>
           <Input
             id="hero-email"
             type="email"
             {...register("email")}
             placeholder="you@company.com"
-            className="mt-1.5"
+            className="mt-1.5 bg-secondary/50 border-[hsl(0_0%_100%/0.06)]"
           />
           {errors.email && <p className="text-xs text-destructive mt-1">{errors.email.message}</p>}
         </div>
 
         <div>
-          <Label htmlFor="hero-details" className="text-sm font-medium">What's your biggest lead challenge? (optional)</Label>
+          <Label htmlFor="hero-details" className="text-sm text-muted-foreground">What's your biggest lead challenge? (optional)</Label>
           <Input
             id="hero-details"
             {...register("projectDetails")}
             placeholder="e.g. Missing calls after hours"
-            className="mt-1.5"
+            className="mt-1.5 bg-secondary/50 border-[hsl(0_0%_100%/0.06)]"
           />
         </div>
 
         <div>
-          <Label className="text-sm font-medium">Monthly investment range *</Label>
+          <Label className="text-sm text-muted-foreground">Monthly investment range *</Label>
           <div className="grid grid-cols-3 gap-2 mt-1.5">
             {[
               { value: "<1500", label: "Under $1.5k" },
@@ -550,10 +507,10 @@ function HeroLeadForm() {
                 type="button"
                 onClick={() => setValue("budget", option.value, { shouldValidate: true })}
                 className={cn(
-                  "rounded-lg border px-3 py-2.5 text-sm font-medium transition-all",
+                  "rounded-xl border px-3 py-2.5 text-sm font-medium transition-all duration-200",
                   budget === option.value
-                    ? "border-primary bg-primary/10 text-primary ring-1 ring-primary/20"
-                    : "border-border bg-card/50 text-foreground/70 hover:border-primary/30"
+                    ? "border-primary/30 bg-[hsl(var(--cobalt-soft))] text-primary"
+                    : "border-[hsl(0_0%_100%/0.06)] bg-secondary/50 text-muted-foreground hover:border-[hsl(0_0%_100%/0.1)]"
                 )}
               >
                 {option.label}
@@ -565,45 +522,31 @@ function HeroLeadForm() {
 
         <Button
           type="submit"
-          variant="glow"
           size="lg"
-          className="w-full text-base font-semibold"
+          className="w-full text-sm font-semibold"
           disabled={isSubmitting}
         >
           {isSubmitting ? "Sending..." : "Get My AI Sales Plan →"}
         </Button>
 
         <p className="text-center text-xs text-muted-foreground">
-          Free consultation • No obligation • Response within 24h
+          Free consultation · No obligation · Response within 24h
         </p>
       </form>
-    </motion.div>
+    </div>
   );
 }
 
 /* ── decorative helpers ── */
 function GridGlow() {
   return (
-    <svg className="pointer-events-none absolute inset-0 h-full w-full opacity-[0.03]">
+    <svg className="pointer-events-none absolute inset-0 h-full w-full opacity-[0.02]">
       <defs>
-        <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-          <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" strokeWidth="0.5" />
+        <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+          <path d="M 60 0 L 0 0 0 60" fill="none" stroke="currentColor" strokeWidth="0.3" />
         </pattern>
       </defs>
       <rect width="100%" height="100%" fill="url(#grid)" />
     </svg>
-  );
-}
-
-function Noise() {
-  return (
-    <div
-      className="pointer-events-none absolute inset-0 mix-blend-soft-light opacity-[0.03]"
-      style={{
-        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E")`,
-        backgroundRepeat: "repeat",
-        backgroundSize: "200px 200px",
-      }}
-    />
   );
 }

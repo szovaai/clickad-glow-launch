@@ -4,45 +4,39 @@ import { Link } from "react-router-dom";
 
 export const CTA = () => {
   return (
-    <section className="py-20 md:py-32 relative overflow-hidden">
-      <div className="absolute inset-0 bg-radial-glow opacity-30 blur-3xl pointer-events-none" />
-      
+    <section className="py-32 md:py-44 relative overflow-hidden">
+      {/* Soft background bloom */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_hsl(224_100%_65%/0.06),_transparent_60%)]" />
+
       <div className="container px-6 relative z-10">
-        <div className="max-w-4xl mx-auto text-center space-y-8">
-          <div className="inline-block px-4 py-2 bg-primary/10 border border-primary/30 rounded-full text-primary text-sm font-semibold mb-4">
-            Limited Setup Slots Available
-          </div>
-          
-          <h2 className="text-4xl md:text-6xl font-heading font-bold leading-tight">
-            Ready to Turn Your Website Into a{" "}
-            <span className="text-primary glow-text">Growth Engine</span>?
+        <div className="max-w-3xl mx-auto text-center space-y-8">
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-heading font-bold leading-[0.96] tracking-tight">
+            Ready to Replace Your Website With a{" "}
+            <span className="text-gradient-warm">Growth System</span>?
           </h2>
-          
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Book a free strategy call and see exactly how an AI-powered website and growth system will work for your business. 
-            No fluff. No pressure. Just a clear plan.
+
+          <p className="text-lg text-muted-foreground max-w-xl mx-auto leading-relaxed">
+            Book a free strategy call and see exactly how a conversion-focused website will work for your business.
           </p>
-          
-          <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
-            <Button variant="glow" size="lg" className="group" asChild>
+
+          <div className="flex flex-col sm:flex-row gap-3 justify-center pt-4">
+            <Button size="lg" className="group" asChild>
               <Link to="/audit">
-                <Calendar className="mr-2" />
+                <Calendar className="mr-2 h-4 w-4" />
                 Book Strategy Call
-                <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-0.5 transition-transform" />
               </Link>
             </Button>
             <Button variant="outline" size="lg" asChild>
               <a href="#pricing">See Pricing</a>
             </Button>
           </div>
-          
+
           <div className="pt-8 flex flex-wrap justify-center gap-6 text-sm">
             {["Live in 48 Hours", "No Monthly Fees", "Satisfaction Guaranteed"].map((text) => (
               <div key={text} className="flex items-center gap-2 text-muted-foreground">
-                <div className="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center">
-                  <div className="w-2 h-2 bg-primary rounded-full" />
-                </div>
-                <span>{text}</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+                <span className="text-xs">{text}</span>
               </div>
             ))}
           </div>

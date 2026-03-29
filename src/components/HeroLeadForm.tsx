@@ -31,14 +31,14 @@ type LeadFormData = z.infer<typeof leadSchema>;
 
 export const HeroLeadForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  
+
   const { register, handleSubmit, formState: { errors }, reset, setValue } = useForm<LeadFormData>({
     resolver: zodResolver(leadSchema),
   });
 
   const onSubmit = async (data: LeadFormData) => {
     setIsSubmitting(true);
-    
+
     try {
       const { error } = await supabase.functions.invoke('send-hero-lead', {
         body: data,
@@ -62,22 +62,22 @@ export const HeroLeadForm = () => {
   };
 
   return (
-    <div className="bg-card/50 backdrop-blur-sm border border-border/50 rounded-lg p-6 shadow-xl">
-      <div className="mb-4">
-        <h3 className="text-xl font-semibold mb-1">Get Your Free AI Website Audit</h3>
+    <div className="premium-card p-8 md:p-10">
+      <div className="mb-6">
+        <h3 className="text-xl font-heading font-bold mb-1.5">Strategy Intake</h3>
         <p className="text-sm text-muted-foreground">
-          See exactly how an AI-powered website will grow your business
+          See exactly how a conversion-focused website will grow your business.
         </p>
       </div>
-      
+
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div>
-          <Label htmlFor="name">Name *</Label>
+          <Label htmlFor="name" className="text-sm text-muted-foreground">Name *</Label>
           <Input
             id="name"
             {...register("name")}
             placeholder="Your name"
-            className="mt-1.5"
+            className="mt-1.5 bg-secondary/50 border-[hsl(0_0%_100%/0.06)]"
           />
           {errors.name && (
             <p className="text-sm text-destructive mt-1">{errors.name.message}</p>
@@ -85,12 +85,12 @@ export const HeroLeadForm = () => {
         </div>
 
         <div>
-          <Label htmlFor="business">Business Name *</Label>
+          <Label htmlFor="business" className="text-sm text-muted-foreground">Business Name *</Label>
           <Input
             id="business"
             {...register("business")}
             placeholder="Your company"
-            className="mt-1.5"
+            className="mt-1.5 bg-secondary/50 border-[hsl(0_0%_100%/0.06)]"
           />
           {errors.business && (
             <p className="text-sm text-destructive mt-1">{errors.business.message}</p>
@@ -98,13 +98,13 @@ export const HeroLeadForm = () => {
         </div>
 
         <div>
-          <Label htmlFor="phone">Phone *</Label>
+          <Label htmlFor="phone" className="text-sm text-muted-foreground">Phone *</Label>
           <Input
             id="phone"
             type="tel"
             {...register("phone")}
             placeholder="(123) 456-7890"
-            className="mt-1.5"
+            className="mt-1.5 bg-secondary/50 border-[hsl(0_0%_100%/0.06)]"
           />
           {errors.phone && (
             <p className="text-sm text-destructive mt-1">{errors.phone.message}</p>
@@ -112,19 +112,19 @@ export const HeroLeadForm = () => {
         </div>
 
         <div>
-          <Label htmlFor="website">Website (optional)</Label>
+          <Label htmlFor="website" className="text-sm text-muted-foreground">Website (optional)</Label>
           <Input
             id="website"
             {...register("website")}
             placeholder="https://yoursite.com"
-            className="mt-1.5"
+            className="mt-1.5 bg-secondary/50 border-[hsl(0_0%_100%/0.06)]"
           />
         </div>
 
         <div>
-          <Label>Monthly Revenue Range</Label>
+          <Label className="text-sm text-muted-foreground">Monthly Revenue Range</Label>
           <Select onValueChange={(value) => setValue("revenue_range", value)}>
-            <SelectTrigger className="mt-1.5">
+            <SelectTrigger className="mt-1.5 bg-secondary/50 border-[hsl(0_0%_100%/0.06)]">
               <SelectValue placeholder="Select range" />
             </SelectTrigger>
             <SelectContent>
@@ -137,20 +137,20 @@ export const HeroLeadForm = () => {
         </div>
 
         <div>
-          <Label htmlFor="challenge">Biggest Growth Challenge</Label>
+          <Label htmlFor="challenge" className="text-sm text-muted-foreground">Biggest Growth Challenge</Label>
           <Textarea
             id="challenge"
             {...register("challenge")}
             placeholder="What's holding your business back?"
-            className="mt-1.5 resize-none"
+            className="mt-1.5 resize-none bg-secondary/50 border-[hsl(0_0%_100%/0.06)]"
             rows={3}
           />
         </div>
 
-        <Button 
-          type="submit" 
-          variant="glow" 
+        <Button
+          type="submit"
           className="w-full"
+          size="lg"
           disabled={isSubmitting}
         >
           {isSubmitting ? (
@@ -162,9 +162,9 @@ export const HeroLeadForm = () => {
             'Get My Free Audit'
           )}
         </Button>
-        
+
         <p className="text-xs text-muted-foreground text-center">
-          No spam. We'll review your site and send a custom growth plan within 24 hours.
+          Average response within one business day.
         </p>
       </form>
     </div>

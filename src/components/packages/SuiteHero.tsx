@@ -1,101 +1,71 @@
-import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Bot, Search, CalendarCheck, Sparkles } from "lucide-react";
+import { Bot, Search, CalendarCheck } from "lucide-react";
 import { HeroLeadForm } from "@/components/HeroLeadForm";
 
 export const SuiteHero = () => {
   return (
     <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden pt-8 md:pt-8">
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-background/95 to-background" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/20 via-background to-background" />
-      <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:60px_60px]" />
-      
-      <div className="relative z-10 container mx-auto px-4 py-20 md:py-28">
-        <div className="grid lg:grid-cols-2 gap-12 items-center max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-left"
-          >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="inline-block mb-6"
-            >
-              <Badge className="px-4 py-2 text-sm bg-primary/10 border-primary/30 text-primary backdrop-blur-sm">
-                <Sparkles className="w-4 h-4 mr-2" />
-                AI-Powered Growth Systems • Calgary
-              </Badge>
-            </motion.div>
+      {/* Atmospheric background */}
+      <div className="absolute inset-0 bg-background" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_hsl(224_100%_65%/0.08),_transparent_60%)]" />
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.02]"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M60 0H0v60' fill='none' stroke='white' stroke-width='0.3'/%3E%3C/svg%3E")`,
+          backgroundSize: '60px 60px',
+        }}
+      />
 
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-5xl md:text-7xl font-bold mb-6 mt-0"
-            >
-              Your Website Should Work Like a
-              <br />
-              <span className="glow-text">Sales Rep</span>
-              <br />
-              — Not a Brochure.
-            </motion.h1>
+      <div className="relative z-10 container mx-auto px-4 py-24 md:py-32">
+        <div className="grid lg:grid-cols-2 gap-16 items-center max-w-7xl mx-auto">
+          {/* Left — Editorial text */}
+          <div className="text-left">
+            <p className="text-sm font-medium tracking-wide uppercase text-muted-foreground mb-6">
+              Revenue-focused websites for service brands
+            </p>
 
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="text-xl md:text-2xl text-muted-foreground mb-6 max-w-3xl leading-relaxed"
-            >
-              AI-powered websites, smart chatbots, and SEO systems that bring you consistent leads — automatically.
-            </motion.p>
+            <h1 className="text-4xl sm:text-5xl md:text-[4rem] lg:text-[4.5rem] font-heading font-bold leading-[0.96] tracking-[-0.03em] mb-6">
+              Your Website Should Feel Like Your Best{" "}
+              <span className="glow-text">Salesperson</span>
+              <span className="text-muted-foreground"> — Not a Placeholder.</span>
+            </h1>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="flex flex-col sm:flex-row gap-4 mb-10"
-            >
-              <Button asChild variant="glow" size="lg">
-                <a href="/audit">Book Strategy Call</a>
+            <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-xl leading-relaxed prose-body">
+              High-conversion, fast-launch websites designed to increase trust, qualify leads, and turn attention into booked calls.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-3 mb-10">
+              <Button asChild size="lg">
+                <a href="/audit">Book a Strategy Call</a>
               </Button>
               <Button asChild variant="outline" size="lg">
-                <a href="#included">Get Free AI Website Audit</a>
+                <a href="#process">See How It Works</a>
               </Button>
-            </motion.div>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-              className="flex flex-col sm:flex-row gap-6 items-start sm:items-center text-sm"
-            >
-              <div className="flex items-center gap-2">
-                <Bot className="w-5 h-5 text-primary" />
-                <span className="text-muted-foreground">AI Chatbot Included</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Search className="w-5 h-5 text-primary" />
-                <span className="text-muted-foreground">SEO Built-In</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CalendarCheck className="w-5 h-5 text-primary" />
-                <span className="text-muted-foreground">Books Appointments 24/7</span>
-              </div>
-            </motion.div>
-          </motion.div>
+            {/* Proof chips */}
+            <div className="flex flex-wrap gap-3 items-center">
+              {[
+                { icon: Bot, label: "Built for service brands" },
+                { icon: Search, label: "Conversion-first UX" },
+                { icon: CalendarCheck, label: "Fast launch process" },
+              ].map((chip) => (
+                <div
+                  key={chip.label}
+                  className="inline-flex items-center gap-2 rounded-full border border-[hsl(0_0%_100%/0.06)] bg-secondary/50 px-3 py-1.5 text-sm text-muted-foreground"
+                >
+                  <chip.icon className="w-3.5 h-3.5 text-primary" />
+                  {chip.label}
+                </div>
+              ))}
+            </div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="lg:sticky lg:top-24"
-          >
+          {/* Right — Strategy Intake Card */}
+          <div className="lg:sticky lg:top-28">
             <HeroLeadForm />
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>
